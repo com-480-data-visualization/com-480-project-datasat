@@ -19,33 +19,33 @@ The source of the dataset comes from [Beer Advocate](https://www.beeradvocate.co
 It contains information about various craft beers from all around the world. The dataset is composed of three CSV files : beers.csv, breweries.csv and reviews.csv.
 
 The beers.csv file contains information about around 358'000 craft beers : 
-    * its name
-    * its brewery
-    * its state
-    * its country
-    * its availability
-    * its alcohol per volume measurement
-    * its style
-    * some notes about it
-    * whether the beer is still for sale
+* its name
+* its brewery
+* its state
+* its country
+* its availability
+* its alcohol per volume measurement
+* its style
+* some notes about it
+* whether the beer is still for sale
 
 The breweries.csv file contains information about 50'000 breweries :
-    * its city
-    * state 
-    * country of origin
-    * type of brewery ( bar, shop, eatery...)
+* its city
+* state 
+* country of origin
+* type of brewery ( bar, shop, eatery...)
 
 The reviews.csv file contains around 9 000 000 reviews from users: 
-    * 'beer_id'
-    * 'username'
-    *  'date'
-    * 'text' reviews from the user
-    * 'look'  (from 0 to 5)
-    * 'smell'
-    * 'taste'
-    * 'feel',
-    * 'overall'
-    * 'score' (average of all scores)
+* 'beer_id'
+* 'username'
+*  'date'
+* 'text' reviews from the user
+* 'look'  (from 0 to 5)
+* 'smell'
+* 'taste'
+* 'feel',
+* 'overall'
+* 'score' (average of all scores)
 
 **Preprocessing needed :**
 
