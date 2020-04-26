@@ -1,3 +1,7 @@
+/*
+ NOT USED RN
+ */
+
 
 function whenDocumentLoaded(action) {
     if (document.readyState === "loading") {
