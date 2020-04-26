@@ -1,0 +1,185 @@
+
+
+/*
+ Color palette here!!!
+
+ How to use:
+ 	bg-color: var(--color-p0);
+ */
+
+:root {
+	--color-p0:#FAFAEA;
+	--color-p1:#FFF897;
+	--color-p2:#F6C101;
+	--color-p3:#DF8D03;
+	--color-p4:#C96E12;
+	--color-p5:#A94E02;
+	--color-p6:#604000;
+}
+
+
+
+* {
+	box-sizing: border-box;
+}
+
+/*
+Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
+*/
+html, body, figure {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+/* Default font and size */
+body {
+	font-family: Helvetica;
+	font-size: 1.1rem;
+}
+
+/*
+It is easier to read if the text is not too wide, so we limit the width.
+We use the class selector ".", so this style will be applied to elements with class="width-limited"
+
+The various units of measurement available in CSS:
+	https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units
+*/
+.width-limited {
+	max-width: 75%;
+
+	/* Center horizontally: */
+	margin-left: auto;
+	margin-right: auto;
+}
+/*
+
+
+ */
+.backgd{
+	background-image:linear-gradient(var(--color-p1),var(--color-p2));
+	background-repeat: repeat;
+	background-position: center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	height: 100%;
+}
+
+
+/* Links: apply our theme color and remove underline */
+a {
+	color: var(--color-p1);
+	text-decoration: none;
+}
+
+/* Justify paragraphs */
+p {
+	text-align: justify;
+	color: var(--color-p6);
+}
+
+/* Titles: set color and sizes */
+h1, h2, h3, h4, h5, h6
+{
+	color: var(--color-p5);
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.25rem; }
+
+/* Top navigation bar */
+nav {
+	width: 100%;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	background-color: var(--color-p5);
+}
+
+/* Make the links in the navbar bold */
+nav a {
+	font-weight: bold;
+}
+
+/* Style of the list of links in the navbar */
+nav ul {
+	/* Clear defaults */
+	margin: 0;
+	padding: 0;
+
+	/* Remove list bullet points */
+	list-style-type: none;
+
+	/*
+	Flexbox is a modern mechanism for arranging elements
+		https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+	This will arrange the elements in a row
+	*/
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+}
+
+/* Space between links */
+nav li {
+	margin-right: 3rem;
+}
+
+
+/* The box with a dark background and our site's title */
+.title-row {
+	width: 100%;
+
+	/* Space above and below the title */
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+
+
+	background-color: var(--color-p5);
+	/*background-image: linear-gradient(red, black);*/
+	background-image: url("images/beer_background.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	/* Center the title using flexbox */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Style of the title inside the box */
+.title-row h1 {
+	font-size: 4.5rem;
+	color:var(--color-p1);
+	text-shadow: 5px 3px 2px black;
+	font-variant: small-caps;
+}
+
+
+main ul{
+	list-style-type: none;
+}
+
+.team-member{
+	padding-bottom: 1rem;
+	padding-top: 1rem;
+	font-size: 24px;
+	font-weight: bold;
+	color:var(--color-p4);
+}
+.team-member address{
+	color:black;
+	font-size: 20px;
+	font-weight: normal;
+	margin-top: 1rem;
+	margin-left: 40px;
+}
