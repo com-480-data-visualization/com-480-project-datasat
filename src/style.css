@@ -1,4 +1,8 @@
 
+/*	=============================================================
+						GENERAL
+	================================================================
+ */
 
 /*
  Color palette here!!!
@@ -6,7 +10,6 @@
  How to use:
  	bg-color: var(--color-p0);
  */
-
 :root {
 	--color-p0:#FAFAEA;
 	--color-p1:#FFF897;
@@ -17,11 +20,6 @@
 	--color-p6:#604000;
 }
 
-
-
-* {
-	box-sizing: border-box;
-}
 
 /*
 Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
@@ -40,13 +38,6 @@ body {
 	font-size: 1.1rem;
 }
 
-/*
-It is easier to read if the text is not too wide, so we limit the width.
-We use the class selector ".", so this style will be applied to elements with class="width-limited"
-
-The various units of measurement available in CSS:
-	https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Values_and_units
-*/
 .width-limited {
 	max-width: 75%;
 
@@ -54,45 +45,11 @@ The various units of measurement available in CSS:
 	margin-left: auto;
 	margin-right: auto;
 }
-/*
 
-
+/*	=============================================================
+						Navigation Bar
+	================================================================
  */
-.backgd{
-	background-image:linear-gradient(var(--color-p1),var(--color-p2));
-	background-repeat: repeat;
-	background-position: center;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-
-	height: 100%;
-}
-
-
-/* Links: apply our theme color and remove underline */
-a {
-	color: var(--color-p1);
-	text-decoration: none;
-}
-
-/* Justify paragraphs */
-p {
-	text-align: justify;
-	color: var(--color-p6);
-}
-
-/* Titles: set color and sizes */
-h1, h2, h3, h4, h5, h6
-{
-	color: var(--color-p5);
-}
-h1 { font-size: 2rem; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.75rem; }
-h4 { font-size: 1.25rem; }
-
 /* Top navigation bar */
 nav {
 	width: 100%;
@@ -129,6 +86,50 @@ nav ul {
 nav li {
 	margin-right: 3rem;
 }
+
+/* Links: apply our theme color and remove underline */
+a {
+	color: var(--color-p1);
+	text-decoration: none;
+}
+
+
+/*	=============================================================
+						INDEX / HOME
+	================================================================
+ */
+.backgd{
+	background-image:linear-gradient(var(--color-p1),var(--color-p2));
+	background-repeat: repeat;
+	background-position: center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	height: 100%;
+}
+
+
+
+
+/* Justify paragraphs */
+p {
+	text-align: justify;
+	color: var(--color-p6);
+}
+
+/* Titles: set color and sizes */
+h1, h2, h3, h4, h5, h6
+{
+	color: var(--color-p5);
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.25rem; }
+
+
 
 
 /* The box with a dark background and our site's title */
@@ -169,6 +170,10 @@ main ul{
 	list-style-type: none;
 }
 
+/*	=============================================================
+						TEAM.HTML
+	================================================================
+ */
 .team-member{
 	padding-bottom: 1rem;
 	padding-top: 1rem;
@@ -182,4 +187,14 @@ main ul{
 	font-weight: normal;
 	margin-top: 1rem;
 	margin-left: 40px;
+}
+
+/*	=============================================================
+						MAP.HTML
+	================================================================
+ */
+
+#map{
+	width: 100%;
+	height: 100%;
 }
