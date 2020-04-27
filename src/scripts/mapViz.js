@@ -1,11 +1,15 @@
-
+var geojson = new L.GeoJSON.AJAX("../data/countries.geojson");
 
 L.mapbox.accessToken = 'pk.eyJ1IjoibG92aXRhbmEiLCJhIjoiY2s5aGM4MWU2MGFmZDNubW5hZzhvYzUwcSJ9.fxbhUaa-uvN57kEkyKAALA';
 var map = L.mapbox.map('map')
     .setView([37.8, -20], 3)
     .addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
 
-L.geoJson(statesData).addTo(map);
+//L.geoJson(geojson).addTo(map);
+
+geojson.on('data:loaded', function(){
+geojson.addTo(map);
+});
 
 
 /*
