@@ -1,6 +1,17 @@
+
+
+L.mapbox.accessToken = 'pk.eyJ1IjoibG92aXRhbmEiLCJhIjoiY2s5aGM4MWU2MGFmZDNubW5hZzhvYzUwcSJ9.fxbhUaa-uvN57kEkyKAALA';
+var map = L.mapbox.map('map')
+    .setView([37.8, -20], 3)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
+
+L.geoJson(statesData).addTo(map);
+
+
 /*
  NOT USED RN
  */
+/*
 
 
 function whenDocumentLoaded(action) {
@@ -36,4 +47,4 @@ L.tileLayer('https://api.mapbox.com/styles/lovitana/ck9hcar40128e1in25eib56gd?ac
     tileSize: 512,
     zoomOffset: -1
 }).addTo(map);
-
+*/
