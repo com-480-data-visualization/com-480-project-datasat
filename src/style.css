@@ -30,12 +30,14 @@ html, body, figure {
 	padding: 0;
 	margin: 0;
 	border: 0;
+
 }
 
 /* Default font and size */
 body {
 	font-family: Helvetica;
 	font-size: 1.1rem;
+	overflow:hidden;
 }
 
 .width-limited {
@@ -64,19 +66,14 @@ nav a {
 }
 
 /* Style of the list of links in the navbar */
+
 nav ul {
-	/* Clear defaults */
 	margin: 0;
 	padding: 0;
 
-	/* Remove list bullet points */
 	list-style-type: none;
 
-	/*
-	Flexbox is a modern mechanism for arranging elements
-		https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-	This will arrange the elements in a row
-	*/
+
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
@@ -90,6 +87,10 @@ nav li {
 /* Links: apply our theme color and remove underline */
 a {
 	color: var(--color-p1);
+	text-decoration: none;
+}
+a:hover{
+	color: var(--color-p3);
 	text-decoration: none;
 }
 
@@ -197,4 +198,43 @@ main ul{
 #map{
 	width: 100%;
 	height: 100%;
+	position:absolute;
+	z-index: 0;
+}
+
+#hovertool{
+	text-align: left;
+  padding: 16px;
+  background-color: lightsalmon;
+  border: 1px solid black;
+  width: auto;
+  opacity: 0;
+  color: black;
+  position: relative;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.btn-group{
+	position:absolute;
+	margin-left: 100px;
+	margin-top: 30px;
+	z-index: 1;
+}
+.myform {
+	position:absolute;
+	margin-left: 275px;
+	margin-top: 26px;
+	z-index: 1;
 }
