@@ -196,10 +196,19 @@ main ul{
  */
 
 #map{
-	width: 100%;
+	width: 75%;
 	height: 100%;
 	position:absolute;
 	z-index: 1;
+}
+
+.info-card {
+	background-color: white;
+	border-left: 1px solid black;
+	width:25%;
+	height: 100%;
+	z-index: 1;
+	float:right;
 }
 
 #hovertool{

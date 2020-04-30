@@ -28,22 +28,49 @@
 		const default_color = "grey";
 		const selected_color = "#F6C101";
 		document.addEventListener("DOMContentLoaded", function(event) {
-    	document.getElementById("beer-btn").click();
- 		});
+			document.getElementById("beer-btn").click();
+			displayDefaultData();
+		});
+
+		function displayDefaultData() {
+			var e = document.getElementById("infos");
+			e.innerHTML = "Total Number of beers : 358'000 <br> Total Number of breweries : 50'000 <br> Total Number of reviews : 9'000'000";
+			var infos = Array.from(document.getElementById("specific-infos").getElementsByTagName("span"));
+			infos.forEach((span) => span.innerHTML = "");
+		}
+
 		function selectBeers() {
 			var beer_btn = document.getElementById("beer-btn");
 			var breweries_btn = document.getElementById("breweries-btn");
 			breweries_btn.style.background = default_color;
 			beer_btn.style.background = selected_color;
 		}
+
 		function selectBreweries() {
 			var beer_btn = document.getElementById("beer-btn");
 			var breweries_btn = document.getElementById("breweries-btn");
 			beer_btn.style.background = default_color;
 			breweries_btn.style.background = selected_color;
 		}
+
+		function getBeerSelection() {
+			var e = document.getElementById("beerSelection");
+			var beerChoice = e.options[e.selectedIndex].value;
+			if (beerChoice != "Beer Type") {
+				document.getElementById("infos").innerHTML = "";
+				var dataTypeSelection = document.getElementById("dataSelection");
+				var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
+				if (dataType != "Data") {
+					document.getElementById("most-pop-beers").innerHTML = beerChoice + " having the highest " + dataType + " in the world : ";
+				}else {
+					document.getElementById("most-pop-beers").innerHTML = "There are XXX " + beerChoice + " in our database !";
+				}
+			} else {
+				displayDefaultData();
+			}
+		}
 	</script>
-<!--
+	<!--
 <nav>
 
 	<ul class="width-limited">
@@ -56,34 +83,34 @@
 	</ul>
 </nav>
 -->
-<nav class="navbar navbar-expand-lg ">
-  <a class="navbar-brand" href="index.html">
-		<img src="images/beer_logo2.png" width="30" height="30" class="d-inline-block align-top" alt="">
-	</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="index.html">Home</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="map.html">Map</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="stats.html">Statistics</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="data.html">Data</a>
-      </li>
-			<li class="nav-item">
-        <a class="nav-link" href="team.html">Team</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<!--
+	<nav class="navbar navbar-expand-lg ">
+		<a class="navbar-brand" href="index.html">
+			<img src="images/beer_logo2.png" width="30" height="30" class="d-inline-block align-top" alt="">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="index.html">Home</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="map.html">Map</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="stats.html">Statistics</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="data.html">Data</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="team.html">Team</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!--
 <nav class="navbar">
   <a class="navbar-brand" href="index.html">
     <img src="images/beer_logo2.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -98,50 +125,56 @@
 	</ul>
 </nav>
 -->
-<div id="map">
-	<div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">Beers</button>
-  <button type="button" class="btn btn-secondary" id="breweries-btn" onclick="javascript: selectBreweries()">Breweries</button>
-</div>
+	<div id="map">
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<button type="button" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">Beers</button>
+			<button type="button" class="btn btn-secondary" id="breweries-btn" onclick="javascript: selectBreweries()">Breweries</button>
+		</div>
+		<form class="myform">
+			<div class="form-row align-items-center">
+				<div class="col-auto my-1">
+					<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+					<select class="custom-select mr-sm-2" id="beerSelection" onchange="javascript: getBeerSelection()">
+						<option selected>Beer Type</option>
+						<option value="Indian Pale Ale" onclick="">Indian Pale Ale</option>
+						<option value="Stout">Stout</option>
+						<option value="White Beer">White Beer</option>
+						<option value="Lager">Lager</option>
+						<option value="Trappist">Trappist </option>
 
-<form class="myform">
-  <div class="form-row align-items-center">
-    <div class="col-auto my-1">
-      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-        <option selected>Beer Type</option>
-        <option value="1" onclick="">Indian Pale Ale</option>
-        <option value="2">Stout</option>
-		<option value="3">White Beer</option>
-		<option value="4">Lager</option>
-		<option value="5">Trappist </option>
+					</select>
+				</div>
 
-      </select>
-    </div>
+			</div>
+		</form>
+		<form class="myform_data">
+			<div class="form-row align-items-center">
+				<div class="col-auto my-1">
+					<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Data</label>
+					<select class="custom-select mr-sm-2" id="dataSelection" onchange="javascript: getBeerSelection()">
+						<option selected>Data</option>
+						<option value="Popularity (number of reviews)" onclick="">Popularity (number of reviews)</option>
+						<option value="Quality (rating)">Quality (rating)</option>
+						<option value="IBU">IBU</option>
+						<option value="Alcohol level">Alcohol level</option>
+					</select>
+				</div>
 
-  </div>
-</form>
-<form class="myform_data">
-	<div class="form-row align-items-center">
-	  <div class="col-auto my-1">
-		<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Data</label>
-		<select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-			<option selected>Data</option>
-		  <option value="1" onclick="">Popularity (number of reviews)</option>
-		  <option value="2">Quality (rating)</option>
-		  <option value="3">IBU</option>
-		  <option value="4">Alcohol level</option>  
-		</select>
-	  </div>
-  
+			</div>
+		</form>
 	</div>
-  </form>
-</div>
+	<div class="info-card">
+		<div id="specific-infos">
+			<span id="most-pop-beers"></span>
+		</div>
+		<span id="infos"></span>
 
+	</div>
 
-<div id="hovertool"></div>
-<script type="text/javascript" src="scripts/countries.js"></script>
-<script type="text/javascript" src="scripts/mapViz.js"></script>
+	<div id="hovertool"></div>
+	<script type="text/javascript" src="scripts/countries.js"></script>
+	<script type="text/javascript" src="scripts/mapViz.js"></script>
 
 </body>
+
 </html>
