@@ -76,7 +76,7 @@ function onMouseClick(e) {
 }
 
 function onEachFeature(feature, layer) {
-  var popupContent = "Top rated beers in " + feature.properties.ADMIN + " :<br> - Feld <br> - Heineken"//feature.properties.ADMIN;
+  var popupContent = "<b>" + feature.properties.ADMIN+"</b><br>Top rated beers"  + " :<br> - Feld <br> - Heineken <br>Most Popular Beer: <br> Kronenbourg (12450 reviews)"//feature.properties.ADMIN;
   /*layer.on({
     mouseover: highlightFeature,
     mousemove: function(e) {
