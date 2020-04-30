@@ -238,3 +238,9 @@ main ul{
 	margin-top: 26px;
 	z-index: 2;
 }
+.myform_data {
+	position:absolute;
+	margin-left: 450px;
+	margin-top: 26px;
+	z-index: 2;
+}
