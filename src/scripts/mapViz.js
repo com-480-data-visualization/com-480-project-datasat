@@ -17,10 +17,10 @@ L.mapbox.accessToken = 'pk.eyJ1IjoibG92aXRhbmEiLCJhIjoiY2s5aGM4MWU2MGFmZDNubW5hZ
 var map = L.mapbox.map('map')
     .setView([37.8, -20], 3)
     .addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
-map.options.zoomDelta = 0.5;
-map.options.minZoom = 2.5;
+//map.options.zoomDelta = 0.5;
+map.options.minZoom = 2.3;
 map.options.maxZoom = 7;
-map.setMaxBounds(map.getBounds());
+map.setMaxBounds([-58.9, -175.7], [75.9, 180]);
 map.options.maxBoundsViscosity = 1.0;
 //L.geoJson(geojson).addTo(map);
 geojson.on('data:loaded', function(){

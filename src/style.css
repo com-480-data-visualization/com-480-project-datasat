@@ -199,7 +199,7 @@ main ul{
 	width: 100%;
 	height: 100%;
 	position:absolute;
-	z-index: 0;
+	z-index: 1;
 }
 
 #hovertool{
@@ -230,11 +230,11 @@ main ul{
 	position:absolute;
 	margin-left: 100px;
 	margin-top: 30px;
-	z-index: 1;
+	z-index: 2;
 }
 .myform {
 	position:absolute;
 	margin-left: 275px;
 	margin-top: 26px;
-	z-index: 1;
+	z-index: 2;
 }
