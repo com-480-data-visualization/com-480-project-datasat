@@ -42,7 +42,7 @@ body {
 
 .width-limited {
 	max-width: 75%;
-
+	margin-top: 10px;
 	/* Center horizontally: */
 	margin-left: auto;
 	margin-right: auto;
