@@ -17,12 +17,12 @@ const hide = {
 };
 
 var world = true;
-var countrie = "";
+var country = "";
 function style(feature) {
     if(world){
         return defaultStyle;
     }else{
-        if(countrie === feature.properties.ADMIN){
+        if(country === feature.properties.ADMIN){
             return hilight;
         }
         return hide;
@@ -38,24 +38,27 @@ L.mapbox.accessToken = 'pk.eyJ1IjoibG92aXRhbmEiLCJhIjoiY2s5aGM4MWU2MGFmZDNubW5hZ
 var map = L.mapbox.map('map')
     .setView([37.8, -20], 3)
     .addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
-//map.options.zoomDelta = 0.5;
 map.options.minZoom = 2.3;
 map.options.maxZoom = 7;
 map.setMaxBounds(new L.LatLngBounds([-58.9, -175.7], [75.9, 180]));
 map.options.maxBoundsViscosity = 1.0;
-//L.geoJson(geojson).addTo(map);
 geojson.on('data:loaded', function(){
 geojson.addTo(map);
 });
 
 function returnToWorld(){
     world = true;
-    geojson.setStyle(style)
+    document.getElementById('closeCountry').style.display = 'none';
+    map.setView([37.8, -20], 3);
+    geojson.setStyle(style);
+    getBeerSelection();
 }
 
 function selectCountry(e){
     world=false;
-    countrie = e.target.feature.properties.ADMIN;
+    document.getElementById('closeCountry').style.display = 'block';
+    country = e.target.feature.properties.ADMIN;
+    getBeerSelection();
 
     geojson.setStyle(hide);
     e.target.setStyle(hilight);
@@ -65,45 +68,17 @@ function zoomToFeature(e) {
     selectCountry(e);
     map.fitBounds(e.target.getBounds());
 }
-/*
-var info = L.control();
 
-info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-    this.update();
-    return this._div;
-};
 
-info.update = function (props) {
-    this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-        '<b>' + props.ADMIN + '</b><br />'
-        : 'Hover over a state');
-};
-
-info.addTo(map);
-*/
 function highlightFeature(e, popupContent) {
   var layer = e.target;
   layer.setStyle(hilight);
-
-  //var mouseX = window.event.clientX;
-  //var mouseY = window.event.clientY;
-  //d3.select("#hovertool").style("left", mouseX + "px").style("top", mouseY + 'px').style("opacity", .5);
-/*
-  var mouseX = window.event.clientX;
-  var mouseY = window.event.clientY;
-  var hovertool = document.getElementById("hovertool");
-  hovertool.style.opacity=1;
-  hovertool.style.left = mouseX + 'px';
-  hovertool.style.top = mouseY + 'px';
-*/
-
 }
+
 function mouseOut(e) {
   var layer = e.target;
   layer.setStyle(style(e.target.feature));
   map.closePopup();
-  //info.update();
 }
 
 function onMouseClick(e) {
@@ -111,30 +86,22 @@ function onMouseClick(e) {
 }
 
 function onEachFeature(feature, layer) {
-
-
-  /*layer.on({
-    mouseover: highlightFeature,
-    mousemove: function(e) {
-      var popup  = L.popup({closeButton:false}).setLatLng(e.latlng).setContent(popupContent).openOn(map);
-    },
-    mouseout: mouseOut
-  }, {passive:true}); */
     layer.addEventListener("click",zoomToFeature,{passive:true});
-  layer.addEventListener("mouseover", highlightFeature, {passive:true});
-  layer.addEventListener("mousemove", function(e) {
-    //highlightFeature(e);
-    var beerSelection = document.getElementById("beerSelection");
-    var beerChoice = beerSelection.options[beerSelection.selectedIndex].value;
-    var dataTypeSelection = document.getElementById("dataSelection");
-    var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
-    if (beerChoice == "All Beer Types") {
-       beerChoice = "Beers";
-    }
-    var popupContent = "<b>" + feature.properties.ADMIN + " </b><br> " + beerChoice + " having the highest " + dataType +" : <br> - Feld <br> - Heineken";
-    var popup  = L.popup({closeButton:false}).setLatLng(e.latlng).setContent(popupContent).openOn(map);
+    layer.addEventListener("mouseover", highlightFeature, {passive:true});
+    layer.addEventListener("mousemove", function(e) {
+        if (world){
+            var beerSelection = document.getElementById("beerSelection");
+            var beerChoice = beerSelection.options[beerSelection.selectedIndex].value;
+            var dataTypeSelection = document.getElementById("dataSelection");
+            var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
+            if (beerChoice == "All Beer Types") {
+                beerChoice = "Beers";
+            }
+            var popupContent = "<b>" + feature.properties.ADMIN + " </b><br> " + beerChoice + " having the highest " + dataType +" : <br> - Feld <br> - Heineken";
 
-  }, {passive:true});
+            var popup  = L.popup({closeButton:false}).setLatLng(e.latlng).setContent(popupContent).openOn(map);
+        }
+  },{passive:true});
   layer.addEventListener("mouseout", mouseOut, {passive:true});
 }
 

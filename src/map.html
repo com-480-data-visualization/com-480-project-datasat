@@ -32,6 +32,8 @@
 			var dataTypeSelection = document.getElementById("dataSelection");
 			var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
 			document.getElementById("most-pop-beers").innerHTML = "Beers with the highest " + dataType + " in the world : ";
+			var buttonWorld = document.getElementById('closeCountry');
+			buttonWorld.style.display = 'none';
 		});
 
 		function selectBeers() {
@@ -53,11 +55,18 @@
 			var beerChoice = e.options[e.selectedIndex].value;
 			var dataTypeSelection = document.getElementById("dataSelection");
 			var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
+			var location = ""
+			if(world){
+				location= "in the world";
+			}else{
+				location = country;
+			}
+
 			if (beerChoice != "All Beer Type") {
 				document.getElementById("infos").innerHTML = "";
-				document.getElementById("most-pop-beers").innerHTML = beerChoice + " having the highest " + dataType + " in the world : ";
+				document.getElementById("most-pop-beers").innerHTML = beerChoice + " having the highest " + dataType + " in "+location+" : ";
 			} else {
-					document.getElementById("most-pop-beers").innerHTML = "Beers with the highest " + dataType + " in the world : ";
+					document.getElementById("most-pop-beers").innerHTML = "Beers with the highest " + dataType + " in "+location+" : ";
 			}
 		}
 	</script>
@@ -152,6 +161,10 @@
 
 			</div>
 		</form>
+
+		<button type="button" class="btn btn-secondary" id="closeCountry" onclick="returnToWorld()">Return to world view</button>
+
+
 	</div>
 	<div class="info-card">
 		<div id="specific-infos">
