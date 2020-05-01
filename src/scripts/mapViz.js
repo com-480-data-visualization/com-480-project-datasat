@@ -76,7 +76,8 @@ function onMouseClick(e) {
 }
 
 function onEachFeature(feature, layer) {
-  var popupContent = "<b>" + feature.properties.ADMIN+"</b><br>Top rated beers"  + " :<br> - Feld <br> - Heineken <br>Most Popular Beer: <br> Kronenbourg (12450 reviews)"//feature.properties.ADMIN;
+
+
   /*layer.on({
     mouseover: highlightFeature,
     mousemove: function(e) {
@@ -87,6 +88,14 @@ function onEachFeature(feature, layer) {
   layer.addEventListener("mouseover", highlightFeature, {passive:true});
   layer.addEventListener("mousemove", function(e) {
     //highlightFeature(e);
+    var beerSelection = document.getElementById("beerSelection");
+    var beerChoice = beerSelection.options[beerSelection.selectedIndex].value;
+    var dataTypeSelection = document.getElementById("dataSelection");
+    var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
+    if (beerChoice == "All Beer Types") {
+       beerChoice = "Beers";
+    }
+    var popupContent = "<b>" + feature.properties.ADMIN + " </b><br> " + beerChoice + " having the highest " + dataType +" : <br> - Feld <br> - Heineken";
     var popup  = L.popup({closeButton:false}).setLatLng(e.latlng).setContent(popupContent).openOn(map);
 
   }, {passive:true});

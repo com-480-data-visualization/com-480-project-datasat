@@ -29,15 +29,10 @@
 		const selected_color = "#F6C101";
 		document.addEventListener("DOMContentLoaded", function(event) {
 			document.getElementById("beer-btn").click();
-			displayDefaultData();
+			var dataTypeSelection = document.getElementById("dataSelection");
+			var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
+			document.getElementById("most-pop-beers").innerHTML = "Beers with the highest " + dataType + " in the world : ";
 		});
-
-		function displayDefaultData() {
-			var e = document.getElementById("infos");
-			e.innerHTML = "Total Number of beers : 358'000 <br> Total Number of breweries : 50'000 <br> Total Number of reviews : 9'000'000";
-			var infos = Array.from(document.getElementById("specific-infos").getElementsByTagName("span"));
-			infos.forEach((span) => span.innerHTML = "");
-		}
 
 		function selectBeers() {
 			var beer_btn = document.getElementById("beer-btn");
@@ -56,17 +51,13 @@
 		function getBeerSelection() {
 			var e = document.getElementById("beerSelection");
 			var beerChoice = e.options[e.selectedIndex].value;
+			var dataTypeSelection = document.getElementById("dataSelection");
+			var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
 			if (beerChoice != "All Beer Type") {
 				document.getElementById("infos").innerHTML = "";
-				var dataTypeSelection = document.getElementById("dataSelection");
-				var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
-				if (dataType != "Data") {
-					document.getElementById("most-pop-beers").innerHTML = beerChoice + " having the highest " + dataType + " in the world : ";
-				}else {
-					document.getElementById("most-pop-beers").innerHTML = "There are XXX " + beerChoice + " in our database !";
-				}
+				document.getElementById("most-pop-beers").innerHTML = beerChoice + " having the highest " + dataType + " in the world : ";
 			} else {
-				displayDefaultData();
+					document.getElementById("most-pop-beers").innerHTML = "Beers with the highest " + dataType + " in the world : ";
 			}
 		}
 	</script>
@@ -135,7 +126,7 @@
 				<div class="col-auto my-1">
 					<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
 					<select class="custom-select mr-sm-2" id="beerSelection" onchange="javascript: getBeerSelection()">
-						<option selected>All Beer Type</option>
+						<option selected>All Beer Types</option>
 						<option value="Indian Pale Ales" onclick="">Indian Pale Ale</option>
 						<option value="Stouts">Stout</option>
 						<option value="White Beers">White Beer</option>
@@ -152,8 +143,7 @@
 				<div class="col-auto my-1">
 					<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Data</label>
 					<select class="custom-select mr-sm-2" id="dataSelection" onchange="javascript: getBeerSelection()">
-						<option selected>Data</option>
-						<option value="number of reviews" onclick="">Popularity (number of reviews)</option>
+						<option selected value="number of reviews" onclick="">Popularity (number of reviews)</option>
 						<option value= "rating">Quality (rating)</option>
 						<option value="IBU">IBU (bitterness)</option>
 						<option value="alcohol level">Alcohol level</option>
