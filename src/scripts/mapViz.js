@@ -5,8 +5,29 @@ const defaultStyle = {
     color: "#604000",
     };
 
+const hilight = {   weight: 3,
+    fillColor: "#F6C101",
+    fillOpacity: 1
+};
+
+const hide = {
+    fillColor: "#FFFFFF",
+    fillOpacity: 1,
+    weight: 1
+};
+
+var world = true;
+var countrie = "";
 function style(feature) {
-  return defaultStyle;
+    if(world){
+        return defaultStyle;
+    }else{
+        if(countrie === feature.properties.ADMIN){
+            return hilight;
+        }
+        return hide;
+    }
+
 }
 
 
@@ -26,6 +47,24 @@ map.options.maxBoundsViscosity = 1.0;
 geojson.on('data:loaded', function(){
 geojson.addTo(map);
 });
+
+function returnToWorld(){
+    world = true;
+    geojson.setStyle(style)
+}
+
+function selectCountry(e){
+    world=false;
+    countrie = e.target.feature.properties.ADMIN;
+
+    geojson.setStyle(hide);
+    e.target.setStyle(hilight);
+}
+
+function zoomToFeature(e) {
+    selectCountry(e);
+    map.fitBounds(e.target.getBounds());
+}
 /*
 var info = L.control();
 
@@ -45,11 +84,7 @@ info.addTo(map);
 */
 function highlightFeature(e, popupContent) {
   var layer = e.target;
-  layer.setStyle({
-    weight: 5,
-    fillColor: "#F6C101",
-    fillOpacity: 1,
-  });
+  layer.setStyle(hilight);
 
   //var mouseX = window.event.clientX;
   //var mouseY = window.event.clientY;
@@ -66,7 +101,7 @@ function highlightFeature(e, popupContent) {
 }
 function mouseOut(e) {
   var layer = e.target;
-  layer.setStyle(defaultStyle);
+  layer.setStyle(style(e.target.feature));
   map.closePopup();
   //info.update();
 }
@@ -85,6 +120,7 @@ function onEachFeature(feature, layer) {
     },
     mouseout: mouseOut
   }, {passive:true}); */
+    layer.addEventListener("click",zoomToFeature,{passive:true});
   layer.addEventListener("mouseover", highlightFeature, {passive:true});
   layer.addEventListener("mousemove", function(e) {
     //highlightFeature(e);
