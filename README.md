@@ -94,7 +94,7 @@ This visualization is centered on the United States of America, but we would lik
 
 **10% of the final grade**
 
-
+The code for our prototype is located in the "src" folder.
 
 
 ## Milestone 3 (Thursday 28th May, 5pm)
