@@ -207,7 +207,7 @@ main ul {
 
 
 #map {
-    width: 75%;
+    width: 75.2%;
     flex-grow : 1;
     position: absolute;
     z-index: 1;
@@ -217,12 +217,12 @@ main ul {
 
 .info-card {
 
-    border-radius: 10px;
-    background-color: white;
+    background-image:linear-gradient(var(--color-p1), var(--color-p2)); ;
     border-left: 1px solid black;
+    position:relative;
 
     width: 25%;
-    height: 100%;
+    height: 95%;
     z-index: 1;
     float: right;
 }
