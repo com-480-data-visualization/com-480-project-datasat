@@ -1,4 +1,3 @@
-
 /*	=============================================================
 						GENERAL
 	================================================================
@@ -11,13 +10,13 @@
  	bg-color: var(--color-p0);
  */
 :root {
-	--color-p0:#FAFAEA;
-	--color-p1:#FFF897;
-	--color-p2:#F6C101;
-	--color-p3:#DF8D03;
-	--color-p4:#C96E12;
-	--color-p5:#A94E02;
-	--color-p6:#604000;
+    --color-p0: #FAFAEA;
+    --color-p1: #FFF897;
+    --color-p2: #F6C101;
+    --color-p3: #DF8D03;
+    --color-p4: #C96E12;
+    --color-p5: #A94E02;
+    --color-p6: #604000;
 }
 
 
@@ -25,27 +24,27 @@
 Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
 */
 html, body, figure {
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	border: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
 
 }
 
 /* Default font and size */
 body {
-	font-family: Helvetica;
-	font-size: 1.1rem;
-	overflow:hidden;
+    font-family: Helvetica;
+    font-size: 1rem;
+    overflow: hidden;
 }
 
 .width-limited {
-	max-width: 75%;
-	margin-top: 10px;
-	/* Center horizontally: */
-	margin-left: auto;
-	margin-right: auto;
+    max-width: 75%;
+    margin-top: 10px;
+    /* Center horizontally: */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*	=============================================================
@@ -54,44 +53,46 @@ body {
  */
 /* Top navigation bar */
 nav {
-	width: 100%;
-	padding-top: 1rem;
-	padding-bottom: 1rem;
-	background-color: var(--color-p5);
+    width: 100%;
+    height: 5%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: var(--color-p5);
 }
 
 /* Make the links in the navbar bold */
 nav a {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 /* Style of the list of links in the navbar */
 
 nav ul {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 
-	list-style-type: none;
+    list-style-type: none;
 
 
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
 
 /* Space between links */
 nav li {
-	margin-right: 3rem;
+    margin-right: 3rem;
 }
 
 /* Links: apply our theme color and remove underline */
 a {
-	color: var(--color-p1);
-	text-decoration: none;
+    color: var(--color-p1);
+    text-decoration: none;
 }
-a:hover{
-	color: var(--color-p3);
-	text-decoration: none;
+
+a:hover {
+    color: var(--color-p3);
+    text-decoration: none;
 }
 
 
@@ -99,95 +100,103 @@ a:hover{
 						INDEX / HOME
 	================================================================
  */
-.backgd{
-	background-image:linear-gradient(var(--color-p1),var(--color-p2));
-	background-repeat: repeat;
-	background-position: center;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+.backgd {
+    background-image: linear-gradient(var(--color-p1), var(--color-p2));
+    background-repeat: repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
-	height: 100%;
+    height: 100%;
 }
-
-
 
 
 /* Justify paragraphs */
 p {
-	text-align: justify;
-	color: var(--color-p6);
+    text-align: justify;
+    color: var(--color-p6);
 }
 
 /* Titles: set color and sizes */
-h1, h2, h3, h4, h5, h6
-{
-	color: var(--color-p5);
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-p5);
 }
-h1 { font-size: 2rem; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.75rem; }
-h4 { font-size: 1.25rem; }
 
+h1 {
+    font-size: 2rem;
+}
 
+h2 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
 
 
 /* The box with a dark background and our site's title */
 .title-row {
-	width: 100%;
+    width: 100%;
 
-	/* Space above and below the title */
-	padding-top: 5rem;
-	padding-bottom: 5rem;
+    /* Space above and below the title */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
 
 
-	background-color: var(--color-p5);
-	/*background-image: linear-gradient(red, black);*/
-	background-image: url("images/beer_background.jpg");
-	background-repeat: no-repeat;
-	background-position: center center;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+    background-color: var(--color-p5);
+    /*background-image: linear-gradient(red, black);*/
+    background-image: url("images/beer_background.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
-	/* Center the title using flexbox */
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    /* Center the title using flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Style of the title inside the box */
 .title-row h1 {
-	font-size: 4.5rem;
-	color:var(--color-p1);
-	text-shadow: 5px 3px 2px black;
-	font-variant: small-caps;
+    font-size: 4.5rem;
+    color: var(--color-p1);
+    text-shadow: 5px 3px 2px black;
+    font-variant: small-caps;
 }
 
 
-main ul{
-	list-style-type: none;
+main ul {
+    list-style-type: none;
 }
 
 /*	=============================================================
 						TEAM.HTML
 	================================================================
  */
-.team-member{
-	padding-bottom: 1rem;
-	padding-top: 1rem;
-	font-size: 24px;
-	font-weight: bold;
-	color:var(--color-p4);
+.team-member {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--color-p4);
 }
-.team-member address{
-	color:black;
-	font-size: 20px;
-	font-weight: normal;
-	margin-top: 1rem;
-	margin-left: 40px;
+
+.team-member address {
+    color: black;
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 1rem;
+    margin-left: 40px;
 }
 
 /*	=============================================================
@@ -195,75 +204,99 @@ main ul{
 	================================================================
  */
 
-#map{
-	width: 75%;
-	height: 100%;
-	position:absolute;
-	z-index: 1;
+
+
+#map {
+    width: 75%;
+    flex-grow : 1;
+    position: absolute;
+    z-index: 1;
+    height: 95%;
+    background-color: lightcyan;
 }
 
 .info-card {
-	background-color: white;
-	border-left: 1px solid black;
-	width:25%;
-	height: 100%;
-	z-index: 1;
-	float:right;
+
+    border-radius: 10px;
+    background-color: white;
+    border-left: 1px solid black;
+
+    width: 25%;
+    height: 100%;
+    z-index: 1;
+    float: right;
 }
 
-#hovertool{
-	text-align: left;
-  padding: 16px;
-  background-color: lightsalmon;
-  border: 1px solid black;
-  width: auto;
-  opacity: 0;
-  color: black;
-  position: relative;
+#hovertool {
+    text-align: left;
+    padding: 16px;
+    background-color: lightsalmon;
+    border: 1px solid black;
+    width: auto;
+    opacity: 0;
+    color: black;
+    position: relative;
 }
 
+/*
+ * Bottom left info data
+ */
 .info {
     padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    font: 20px Arial, Helvetica, sans-serif;
+    color: var(--color-p6);
+    background: rgba(255, 248, 151,0.7);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 }
-.info h4 {
+
+.info h3 {
     margin: 0 0 5px;
-    color: #777;
+    color: var(--color-p5);
 }
 
-.btn-group{
-	position:absolute;
-	margin-left: 100px;
-	margin-top: 30px;
-	z-index: 2;
+
+/*
+ * TODO Comment and classify
+ */
+.btn-group {
+    position: absolute;
+    left: 100px;
+    top: 30px;
+    z-index: 2;
 }
+
 .myform {
-	position:absolute;
-	margin-left: 275px;
-	margin-top: 26px;
-	z-index: 2;
+    position: absolute;
+    margin-left: 275px;
+    margin-top: 26px;
+    z-index: 2;
 }
+
 .myform_data {
-	position:absolute;
-	margin-left: 450px;
-	margin-top: 26px;
-	z-index: 2;
+    position: absolute;
+    margin-left: 450px;
+    margin-top: 26px;
+    z-index: 2;
 }
-.search-bar{
-	text-align: center;
-	margin:auto;
-	padding: 10px;
-	width:30%;
+
+.search-bar {
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+    width: 30%;
 }
-#closeCountry{
-text-align:center;
-position:absolute;
-z-index: 2;
-margin-left:1100px;
-margin-top:30px
+
+
+/*
+ * button on the bottom right
+ */
+#closeCountry {
+    text-align: center;
+    position: absolute;
+    left: 10px;
+    top: 90px;
+
+    z-index: 2;
 
 }

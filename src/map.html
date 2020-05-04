@@ -24,6 +24,7 @@
 
 <body>
 	<script>
+
 		const default_color = "grey";
 		const selected_color = "#F6C101";
 		document.addEventListener("DOMContentLoaded", function(event) {
@@ -38,8 +39,11 @@
 		function selectBeers() {
 			var beer_btn = document.getElementById("beer-btn");
 			var breweries_btn = document.getElementById("breweries-btn");
+			beer_btn.checked = true;
+			breweries_btn.checked = false;
 			breweries_btn.style.background = default_color;
 			beer_btn.style.background = selected_color;
+
 		}
 
 		function selectBreweries() {
@@ -47,27 +51,8 @@
 			var breweries_btn = document.getElementById("breweries-btn");
 			beer_btn.style.background = default_color;
 			breweries_btn.style.background = selected_color;
-		}
-
-		function getBeerSelection() {
-			var e = document.getElementById("beerSelection");
-			var beerChoice = e.options[e.selectedIndex].value;
-			var dataTypeSelection = document.getElementById("dataSelection");
-			var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
-			var location = ""
-			if(world){
-				location= "in the world";
-			}else{
-				location = country;
-			}
-
-			if (beerChoice != "All Beer Type") {
-				document.getElementById("infos").innerHTML = "";
-				document.getElementById("most-pop-beers").innerHTML = beerChoice + " having the highest " + dataType + " in "+location+" : ";
-			} else {
-					document.getElementById("most-pop-beers").innerHTML = "Beers with the highest " + dataType + " in "+location+" : ";
-			}
-		}
+			beer_btn.checked = false;
+			breweries_btn.checked = true;		}
 	</script>
 	<!--
 <nav>
@@ -128,8 +113,8 @@
 -->
 	<div id="map">
 		<div class="btn-group" role="group" aria-label="Basic example">
-			<button type="button" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">Beers</button>
-			<button type="button" class="btn btn-secondary" id="breweries-btn" onclick="javascript: selectBreweries()">Breweries</button>
+			<button type="checkbox" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">Beers</button>
+			<button type="checkbox" class="btn btn-secondary" id="breweries-btn" onclick="javascript: selectBreweries()">Breweries</button>
 		</div>
 		<form class="myform">
 			<div class="form-row align-items-center">
@@ -152,7 +137,7 @@
 			<div class="form-row align-items-center">
 				<div class="col-auto my-1">
 					<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Data</label>
-					<select class="custom-select mr-sm-2" id="dataSelection" onchange="javascript: getBeerSelection()">
+					<select class="custom-select mr-sm-2" id="dataSelection" >
 						<option selected value="number of reviews" onclick="">Popularity (number of reviews)</option>
 						<option value= "rating">Quality (rating)</option>
 						<option value="IBU">IBU (bitterness)</option>
@@ -171,7 +156,6 @@
 		<div id="specific-infos">
 			<span id="most-pop-beers"></span>
 		</div>
-		<span id="infos"></span>
 
 	</div>
 
