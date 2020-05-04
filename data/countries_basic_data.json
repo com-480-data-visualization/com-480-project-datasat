@@ -1,0 +1,1311 @@
+{
+  "US": {
+    "N_beer": 231940.0,
+    "avg_abv": 6.721201647,
+    "median_abv": 6.3,
+    "max_abv": 56.0,
+    "n_brewery": 7338.0
+  },
+  "NO": {
+    "N_beer": 1095.0,
+    "avg_abv": 6.4032054795,
+    "median_abv": 6.0,
+    "max_abv": 20.0,
+    "n_brewery": 77.0
+  },
+  "JP": {
+    "N_beer": 1582.0,
+    "avg_abv": 5.6823324905,
+    "median_abv": 5.0,
+    "max_abv": 15.0,
+    "n_brewery": 164.0
+  },
+  "IT": {
+    "N_beer": 2523.0,
+    "avg_abv": 6.4004597701,
+    "median_abv": 6.0,
+    "max_abv": 16.0,
+    "n_brewery": 367.0
+  },
+  "CA": {
+    "N_beer": 20053.0,
+    "avg_abv": 6.0969166708,
+    "median_abv": 5.6,
+    "max_abv": 66.0,
+    "n_brewery": 940.0
+  },
+  "AU": {
+    "N_beer": 3791.0,
+    "avg_abv": 5.6936059087,
+    "median_abv": 5.2,
+    "max_abv": 18.4,
+    "n_brewery": 361.0
+  },
+  "SE": {
+    "N_beer": 3181.0,
+    "avg_abv": 6.0295378812,
+    "median_abv": 5.5,
+    "max_abv": 19.0,
+    "n_brewery": 194.0
+  },
+  "PR": {
+    "N_beer": 70.0,
+    "avg_abv": 5.815,
+    "median_abv": 5.8,
+    "max_abv": 8.5,
+    "n_brewery": 15.0
+  },
+  "PL": {
+    "N_beer": 1775.0,
+    "avg_abv": 5.9916957746,
+    "median_abv": 5.7,
+    "max_abv": 16.0,
+    "n_brewery": 139.0
+  },
+  "CR": {
+    "N_beer": 106.0,
+    "avg_abv": 5.6358490566,
+    "median_abv": 5.2,
+    "max_abv": 11.0,
+    "n_brewery": 28.0
+  },
+  "DE": {
+    "N_beer": 6152.0,
+    "avg_abv": 5.5439694408,
+    "median_abv": 5.2,
+    "max_abv": 57.5,
+    "n_brewery": 926.0
+  },
+  "BE": {
+    "N_beer": 5097.0,
+    "avg_abv": 7.1585324701,
+    "median_abv": 7.0,
+    "max_abv": 40.0,
+    "n_brewery": 372.0
+  },
+  "BR": {
+    "N_beer": 1627.0,
+    "avg_abv": 6.111180086,
+    "median_abv": 5.5,
+    "max_abv": 18.0,
+    "n_brewery": 209.0
+  },
+  "GB": {
+    "N_beer": 13728.0,
+    "avg_abv": 5.3946416084,
+    "median_abv": 4.8,
+    "max_abv": 67.5,
+    "n_brewery": 1175.0
+  },
+  "ES": {
+    "N_beer": 2094.0,
+    "avg_abv": 6.2512320917,
+    "median_abv": 5.8,
+    "max_abv": 18.41,
+    "n_brewery": 333.0
+  },
+  "RU": {
+    "N_beer": 2661.0,
+    "avg_abv": 5.8826568959,
+    "median_abv": 5.2,
+    "max_abv": 26.0,
+    "n_brewery": 223.0
+  },
+  "IE": {
+    "N_beer": 989.0,
+    "avg_abv": 5.5672497472,
+    "median_abv": 5.0,
+    "max_abv": 13.5,
+    "n_brewery": 88.0
+  },
+  "DK": {
+    "N_beer": 3034.0,
+    "avg_abv": 7.1595978906,
+    "median_abv": 6.6,
+    "max_abv": 26.1,
+    "n_brewery": 112.0
+  },
+  "FI": {
+    "N_beer": 627.0,
+    "avg_abv": 5.4990590112,
+    "median_abv": 5.0,
+    "max_abv": 13.0,
+    "n_brewery": 57.0
+  },
+  "NL": {
+    "N_beer": 3390.0,
+    "avg_abv": 7.5320117994,
+    "median_abv": 7.0,
+    "max_abv": 60.0,
+    "n_brewery": 275.0
+  },
+  "IN": {
+    "N_beer": 136.0,
+    "avg_abv": 5.9871323529,
+    "median_abv": 5.2,
+    "max_abv": 20.0,
+    "n_brewery": 26.0
+  },
+  "FR": {
+    "N_beer": 2321.0,
+    "avg_abv": 6.1037052994,
+    "median_abv": 5.9,
+    "max_abv": 24.0,
+    "n_brewery": 351.0
+  },
+  "MX": {
+    "N_beer": 794.0,
+    "avg_abv": 5.8585768262,
+    "median_abv": 5.5,
+    "max_abv": 12.5,
+    "n_brewery": 156.0
+  },
+  "AM": {
+    "N_beer": 32.0,
+    "avg_abv": 5.0875,
+    "median_abv": 4.85,
+    "max_abv": 8.5,
+    "n_brewery": 4.0
+  },
+  "PT": {
+    "N_beer": 338.0,
+    "avg_abv": 6.4465976331,
+    "median_abv": 6.0,
+    "max_abv": 13.0,
+    "n_brewery": 50.0
+  },
+  "RO": {
+    "N_beer": 370.0,
+    "avg_abv": 5.7309459459,
+    "median_abv": 5.435,
+    "max_abv": 15.0,
+    "n_brewery": 59.0
+  },
+  "AR": {
+    "N_beer": 326.0,
+    "avg_abv": 5.983190184,
+    "median_abv": 5.5,
+    "max_abv": 14.0,
+    "n_brewery": 70.0
+  },
+  "CZ": {
+    "N_beer": 847.0,
+    "avg_abv": 5.2177567887,
+    "median_abv": 5.0,
+    "max_abv": 14.5,
+    "n_brewery": 112.0
+  },
+  "LV": {
+    "N_beer": 176.0,
+    "avg_abv": 5.4471590909,
+    "median_abv": 5.2,
+    "max_abv": 13.0,
+    "n_brewery": 29.0
+  },
+  "NZ": {
+    "N_beer": 1152.0,
+    "avg_abv": 6.0916059028,
+    "median_abv": 5.6,
+    "max_abv": 27.24,
+    "n_brewery": 101.0
+  },
+  "PY": {
+    "N_beer": 1.0,
+    "avg_abv": 5.0,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "CL": {
+    "N_beer": 220.0,
+    "avg_abv": 5.9831818182,
+    "median_abv": 5.6,
+    "max_abv": 12.1,
+    "n_brewery": 58.0
+  },
+  "CH": {
+    "N_beer": 602.0,
+    "avg_abv": 6.2791860465,
+    "median_abv": 5.5,
+    "max_abv": 19.5,
+    "n_brewery": 96.0
+  },
+  "UA": {
+    "N_beer": 342.0,
+    "avg_abv": 5.4956140351,
+    "median_abv": 5.0,
+    "max_abv": 20.0,
+    "n_brewery": 28.0
+  },
+  "CN": {
+    "N_beer": 282.0,
+    "avg_abv": 5.3840425532,
+    "median_abv": 5.0,
+    "max_abv": 13.6,
+    "n_brewery": 42.0
+  },
+  "KZ": {
+    "N_beer": 41.0,
+    "avg_abv": 4.8756097561,
+    "median_abv": 4.6,
+    "max_abv": 7.5,
+    "n_brewery": 10.0
+  },
+  "LT": {
+    "N_beer": 653.0,
+    "avg_abv": 5.5454211332,
+    "median_abv": 5.2,
+    "max_abv": 16.0,
+    "n_brewery": 54.0
+  },
+  "HU": {
+    "N_beer": 423.0,
+    "avg_abv": 5.8029550827,
+    "median_abv": 5.3,
+    "max_abv": 15.0,
+    "n_brewery": 41.0
+  },
+  "AT": {
+    "N_beer": 818.0,
+    "avg_abv": 5.6840220049,
+    "median_abv": 5.2,
+    "max_abv": 14.5,
+    "n_brewery": 101.0
+  },
+  "RS": {
+    "N_beer": 128.0,
+    "avg_abv": 5.2,
+    "median_abv": 5.2,
+    "max_abv": 10.0,
+    "n_brewery": 26.0
+  },
+  "MK": {
+    "N_beer": 18.0,
+    "avg_abv": 4.7611111111,
+    "median_abv": 4.5,
+    "max_abv": 7.0,
+    "n_brewery": 5.0
+  },
+  "ID": {
+    "N_beer": 24.0,
+    "avg_abv": 5.1483333333,
+    "median_abv": 5.0,
+    "max_abv": 12.0,
+    "n_brewery": 7.0
+  },
+  "HK": {
+    "N_beer": 94.0,
+    "avg_abv": 5.9468085106,
+    "median_abv": 5.5,
+    "max_abv": 11.5,
+    "n_brewery": 12.0
+  },
+  "PH": {
+    "N_beer": 150.0,
+    "avg_abv": 6.1276666667,
+    "median_abv": 6.0,
+    "max_abv": 10.3,
+    "n_brewery": 21.0
+  },
+  "LA": {
+    "N_beer": 14.0,
+    "avg_abv": 4.9928571429,
+    "median_abv": 5.0,
+    "max_abv": 6.5,
+    "n_brewery": 4.0
+  },
+  "RE": {
+    "N_beer": 22.0,
+    "avg_abv": 5.4818181818,
+    "median_abv": 5.1,
+    "max_abv": 8.0,
+    "n_brewery": 4.0
+  },
+  "KG": {
+    "N_beer": 15.0,
+    "avg_abv": 4.0933333333,
+    "median_abv": 4.0,
+    "max_abv": 4.8,
+    "n_brewery": 5.0
+  },
+  "ZW": {
+    "N_beer": 18.0,
+    "avg_abv": 4.65,
+    "median_abv": 4.7,
+    "max_abv": 5.5,
+    "n_brewery": 3.0
+  },
+  "MU": {
+    "N_beer": 22.0,
+    "avg_abv": 6.2818181818,
+    "median_abv": 6.0,
+    "max_abv": 12.0,
+    "n_brewery": 3.0
+  },
+  "HR": {
+    "N_beer": 101.0,
+    "avg_abv": 4.9564356436,
+    "median_abv": 5.0,
+    "max_abv": 10.1,
+    "n_brewery": 20.0
+  },
+  "EC": {
+    "N_beer": 62.0,
+    "avg_abv": 5.5951612903,
+    "median_abv": 5.2,
+    "max_abv": 10.0,
+    "n_brewery": 21.0
+  },
+  "IL": {
+    "N_beer": 165.0,
+    "avg_abv": 5.8738181818,
+    "median_abv": 5.5,
+    "max_abv": 11.0,
+    "n_brewery": 30.0
+  },
+  "GR": {
+    "N_beer": 214.0,
+    "avg_abv": 5.6799065421,
+    "median_abv": 5.0,
+    "max_abv": 15.0,
+    "n_brewery": 47.0
+  },
+  "NI": {
+    "N_beer": 33.0,
+    "avg_abv": 5.4151515152,
+    "median_abv": 5.2,
+    "max_abv": 8.0,
+    "n_brewery": 6.0
+  },
+  "GL": {
+    "N_beer": 20.0,
+    "avg_abv": 5.6295,
+    "median_abv": 5.0,
+    "max_abv": 8.3,
+    "n_brewery": 4.0
+  },
+  "MN": {
+    "N_beer": 12.0,
+    "avg_abv": 5.575,
+    "median_abv": 5.25,
+    "max_abv": 7.2,
+    "n_brewery": 4.0
+  },
+  "PE": {
+    "N_beer": 82.0,
+    "avg_abv": 6.1353658537,
+    "median_abv": 6.0,
+    "max_abv": 10.5,
+    "n_brewery": 13.0
+  },
+  "VN": {
+    "N_beer": 164.0,
+    "avg_abv": 6.0082317073,
+    "median_abv": 5.325,
+    "max_abv": 14.0,
+    "n_brewery": 25.0
+  },
+  "DO": {
+    "N_beer": 9.0,
+    "avg_abv": 4.4444444444,
+    "median_abv": 5.0,
+    "max_abv": 6.0,
+    "n_brewery": 2.0
+  },
+  "PA": {
+    "N_beer": 80.0,
+    "avg_abv": 5.665,
+    "median_abv": 5.2,
+    "max_abv": 10.0,
+    "n_brewery": 9.0
+  },
+  "EE": {
+    "N_beer": 339.0,
+    "avg_abv": 7.2604129794,
+    "median_abv": 6.5,
+    "max_abv": 22.0,
+    "n_brewery": 31.0
+  },
+  "BY": {
+    "N_beer": 95.0,
+    "avg_abv": 4.7515789474,
+    "median_abv": 4.7,
+    "max_abv": 8.0,
+    "n_brewery": 11.0
+  },
+  "ZA": {
+    "N_beer": 287.0,
+    "avg_abv": 5.2658536585,
+    "median_abv": 5.0,
+    "max_abv": 12.5,
+    "n_brewery": 52.0
+  },
+  "TR": {
+    "N_beer": 64.0,
+    "avg_abv": 5.2734375,
+    "median_abv": 5.0,
+    "max_abv": 9.0,
+    "n_brewery": 6.0
+  },
+  "KR": {
+    "N_beer": 239.0,
+    "avg_abv": 5.5036401674,
+    "median_abv": 5.3,
+    "max_abv": 11.0,
+    "n_brewery": 25.0
+  },
+  "SG": {
+    "N_beer": 115.0,
+    "avg_abv": 5.3069565217,
+    "median_abv": 5.0,
+    "max_abv": 11.8,
+    "n_brewery": 13.0
+  },
+  "LB": {
+    "N_beer": 27.0,
+    "avg_abv": 5.0266666667,
+    "median_abv": 5.0,
+    "max_abv": 11.2,
+    "n_brewery": 4.0
+  },
+  "FO": {
+    "N_beer": 20.0,
+    "avg_abv": 6.34,
+    "median_abv": 5.8,
+    "max_abv": 13.5,
+    "n_brewery": 2.0
+  },
+  "SI": {
+    "N_beer": 104.0,
+    "avg_abv": 5.4908653846,
+    "median_abv": 5.25,
+    "max_abv": 10.0,
+    "n_brewery": 13.0
+  },
+  "GE": {
+    "N_beer": 52.0,
+    "avg_abv": 4.8326923077,
+    "median_abv": 4.9,
+    "max_abv": 11.0,
+    "n_brewery": 11.0
+  },
+  "VE": {
+    "N_beer": 16.0,
+    "avg_abv": 4.8375,
+    "median_abv": 4.75,
+    "max_abv": 7.0,
+    "n_brewery": 6.0
+  },
+  "LU": {
+    "N_beer": 60.0,
+    "avg_abv": 5.5366666667,
+    "median_abv": 5.2,
+    "max_abv": 8.7,
+    "n_brewery": 13.0
+  },
+  "GF": {
+    "N_beer": 4.0,
+    "avg_abv": 5.875,
+    "median_abv": 5.5,
+    "max_abv": 8.0,
+    "n_brewery": 1.0
+  },
+  "MD": {
+    "N_beer": 41.0,
+    "avg_abv": 5.2780487805,
+    "median_abv": 5.0,
+    "max_abv": 10.0,
+    "n_brewery": 11.0
+  },
+  "VI": {
+    "N_beer": 22.0,
+    "avg_abv": 6.1545454545,
+    "median_abv": 5.85,
+    "max_abv": 9.0,
+    "n_brewery": 5.0
+  },
+  "BG": {
+    "N_beer": 124.0,
+    "avg_abv": 4.9915322581,
+    "median_abv": 5.0,
+    "max_abv": 9.1,
+    "n_brewery": 22.0
+  },
+  "UY": {
+    "N_beer": 84.0,
+    "avg_abv": 5.5702380952,
+    "median_abv": 5.45,
+    "max_abv": 12.0,
+    "n_brewery": 14.0
+  },
+  "TN": {
+    "N_beer": 9.0,
+    "avg_abv": 5.0888888889,
+    "median_abv": 5.0,
+    "max_abv": 5.5,
+    "n_brewery": 3.0
+  },
+  "IS": {
+    "N_beer": 206.0,
+    "avg_abv": 6.4650485437,
+    "median_abv": 5.6,
+    "max_abv": 21.0,
+    "n_brewery": 20.0
+  },
+  "PS": {
+    "N_beer": 13.0,
+    "avg_abv": 5.7846153846,
+    "median_abv": 6.0,
+    "max_abv": 7.0,
+    "n_brewery": 3.0
+  },
+  "CY": {
+    "N_beer": 36.0,
+    "avg_abv": 4.8861111111,
+    "median_abv": 4.5,
+    "max_abv": 10.1,
+    "n_brewery": 8.0
+  },
+  "CI": {
+    "N_beer": 2.0,
+    "avg_abv": 4.9,
+    "median_abv": 4.9,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "CO": {
+    "N_beer": 93.0,
+    "avg_abv": 4.8538709677,
+    "median_abv": 5.0,
+    "max_abv": 9.0,
+    "n_brewery": 17.0
+  },
+  "PG": {
+    "N_beer": 4.0,
+    "avg_abv": 5.65,
+    "median_abv": 5.05,
+    "max_abv": 8.0,
+    "n_brewery": 1.0
+  },
+  "TZ": {
+    "N_beer": 17.0,
+    "avg_abv": 5.3529411765,
+    "median_abv": 5.0,
+    "max_abv": 7.0,
+    "n_brewery": 3.0
+  },
+  "AZ": {
+    "N_beer": 13.0,
+    "avg_abv": 4.8615384615,
+    "median_abv": 4.8,
+    "max_abv": 7.7,
+    "n_brewery": 2.0
+  },
+  "SK": {
+    "N_beer": 86.0,
+    "avg_abv": 5.1313953488,
+    "median_abv": 5.0,
+    "max_abv": 10.5,
+    "n_brewery": 21.0
+  },
+  "GT": {
+    "N_beer": 36.0,
+    "avg_abv": 4.9833333333,
+    "median_abv": 5.0,
+    "max_abv": 7.0,
+    "n_brewery": 6.0
+  },
+  "JO": {
+    "N_beer": 16.0,
+    "avg_abv": 6.559375,
+    "median_abv": 6.35,
+    "max_abv": 10.5,
+    "n_brewery": 2.0
+  },
+  "null": {
+    "N_beer": null,
+    "avg_abv": null,
+    "median_abv": null,
+    "max_abv": null,
+    "n_brewery": null
+  },
+  "TH": {
+    "N_beer": 55.0,
+    "avg_abv": 5.2018181818,
+    "median_abv": 5.0,
+    "max_abv": 8.6,
+    "n_brewery": 14.0
+  },
+  "HN": {
+    "N_beer": 11.0,
+    "avg_abv": 5.2818181818,
+    "median_abv": 4.9,
+    "max_abv": 10.0,
+    "n_brewery": 3.0
+  },
+  "BB": {
+    "N_beer": 15.0,
+    "avg_abv": 4.3933333333,
+    "median_abv": 4.8,
+    "max_abv": 7.5,
+    "n_brewery": 2.0
+  },
+  "PF": {
+    "N_beer": 5.0,
+    "avg_abv": 4.92,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "AD": {
+    "N_beer": 9.0,
+    "avg_abv": 6.1888888889,
+    "median_abv": 5.6,
+    "max_abv": 8.5,
+    "n_brewery": 1.0
+  },
+  "KP": {
+    "N_beer": 11.0,
+    "avg_abv": 4.6363636364,
+    "median_abv": 4.5,
+    "max_abv": 5.7,
+    "n_brewery": 5.0
+  },
+  "GH": {
+    "N_beer": 9.0,
+    "avg_abv": 5.6777777778,
+    "median_abv": 5.0,
+    "max_abv": 10.1,
+    "n_brewery": 2.0
+  },
+  "IM": {
+    "N_beer": 36.0,
+    "avg_abv": 4.3833333333,
+    "median_abv": 4.35,
+    "max_abv": 6.5,
+    "n_brewery": 5.0
+  },
+  "KH": {
+    "N_beer": 73.0,
+    "avg_abv": 5.7109589041,
+    "median_abv": 5.5,
+    "max_abv": 8.0,
+    "n_brewery": 11.0
+  },
+  "SV": {
+    "N_beer": 22.0,
+    "avg_abv": 4.6681818182,
+    "median_abv": 4.7,
+    "max_abv": 5.7,
+    "n_brewery": 3.0
+  },
+  "LK": {
+    "N_beer": 19.0,
+    "avg_abv": 7.1894736842,
+    "median_abv": 8.8,
+    "max_abv": 8.8,
+    "n_brewery": 3.0
+  },
+  "UZ": {
+    "N_beer": 28.0,
+    "avg_abv": 4.7107142857,
+    "median_abv": 4.5,
+    "max_abv": 8.5,
+    "n_brewery": 9.0
+  },
+  "TW": {
+    "N_beer": 76.0,
+    "avg_abv": 4.9736842105,
+    "median_abv": 5.0,
+    "max_abv": 11.0,
+    "n_brewery": 15.0
+  },
+  "NG": {
+    "N_beer": 8.0,
+    "avg_abv": 4.9125,
+    "median_abv": 5.2,
+    "max_abv": 7.5,
+    "n_brewery": 3.0
+  },
+  "KE": {
+    "N_beer": 54.0,
+    "avg_abv": 5.2222222222,
+    "median_abv": 5.2,
+    "max_abv": 8.5,
+    "n_brewery": 7.0
+  },
+  "MG": {
+    "N_beer": 12.0,
+    "avg_abv": 4.9333333333,
+    "median_abv": 5.05,
+    "max_abv": 8.0,
+    "n_brewery": 3.0
+  },
+  "BA": {
+    "N_beer": 30.0,
+    "avg_abv": 5.452,
+    "median_abv": 5.0,
+    "max_abv": 9.2,
+    "n_brewery": 8.0
+  },
+  "JE": {
+    "N_beer": 22.0,
+    "avg_abv": 4.5363636364,
+    "median_abv": 4.35,
+    "max_abv": 7.0,
+    "n_brewery": 2.0
+  },
+  "HT": {
+    "N_beer": 1.0,
+    "avg_abv": 5.6,
+    "median_abv": 5.6,
+    "max_abv": 5.6,
+    "n_brewery": 1.0
+  },
+  "EG": {
+    "N_beer": 25.0,
+    "avg_abv": 6.072,
+    "median_abv": 5.2,
+    "max_abv": 10.0,
+    "n_brewery": 3.0
+  },
+  "SC": {
+    "N_beer": 2.0,
+    "avg_abv": 5.95,
+    "median_abv": 5.95,
+    "max_abv": 7.0,
+    "n_brewery": 1.0
+  },
+  "TO": {
+    "N_beer": 1.0,
+    "avg_abv": 5.0,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "MZ": {
+    "N_beer": 7.0,
+    "avg_abv": 5.1142857143,
+    "median_abv": 5.0,
+    "max_abv": 6.5,
+    "n_brewery": 1.0
+  },
+  "BM": {
+    "N_beer": 8.0,
+    "avg_abv": 5.9,
+    "median_abv": 5.8,
+    "max_abv": 7.5,
+    "n_brewery": 2.0
+  },
+  "GD": {
+    "N_beer": 9.0,
+    "avg_abv": 5.9666666667,
+    "median_abv": 5.9,
+    "max_abv": 8.3,
+    "n_brewery": 1.0
+  },
+  "ME": {
+    "N_beer": 11.0,
+    "avg_abv": 5.0454545455,
+    "median_abv": 5.2,
+    "max_abv": 6.2,
+    "n_brewery": 2.0
+  },
+  "BS": {
+    "N_beer": 24.0,
+    "avg_abv": 5.74,
+    "median_abv": 5.6,
+    "max_abv": 10.5,
+    "n_brewery": 3.0
+  },
+  "CU": {
+    "N_beer": 11.0,
+    "avg_abv": 4.7272727273,
+    "median_abv": 5.0,
+    "max_abv": 6.5,
+    "n_brewery": 2.0
+  },
+  "GN": {
+    "N_beer": 1.0,
+    "avg_abv": 5.8,
+    "median_abv": 5.8,
+    "max_abv": 5.8,
+    "n_brewery": 1.0
+  },
+  "ET": {
+    "N_beer": 16.0,
+    "avg_abv": 4.940625,
+    "median_abv": 4.9,
+    "max_abv": 6.0,
+    "n_brewery": 8.0
+  },
+  "MT": {
+    "N_beer": 28.0,
+    "avg_abv": 4.9607142857,
+    "median_abv": 4.75,
+    "max_abv": 9.0,
+    "n_brewery": 6.0
+  },
+  "BD": {
+    "N_beer": 2.0,
+    "avg_abv": 4.9,
+    "median_abv": 4.9,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "CW": {
+    "N_beer": 4.0,
+    "avg_abv": 3.0,
+    "median_abv": 2.5,
+    "max_abv": 4.5,
+    "n_brewery": 2.0
+  },
+  "MM": {
+    "N_beer": 11.0,
+    "avg_abv": 6.3818181818,
+    "median_abv": 6.5,
+    "max_abv": 8.1,
+    "n_brewery": 4.0
+  },
+  "SM": {
+    "N_beer": 11.0,
+    "avg_abv": 5.4272727273,
+    "median_abv": 5.0,
+    "max_abv": 7.5,
+    "n_brewery": 3.0
+  },
+  "JM": {
+    "N_beer": 18.0,
+    "avg_abv": 5.9027777778,
+    "median_abv": 5.0,
+    "max_abv": 10.0,
+    "n_brewery": 2.0
+  },
+  "GU": {
+    "N_beer": 9.0,
+    "avg_abv": 5.8222222222,
+    "median_abv": 5.5,
+    "max_abv": 8.0,
+    "n_brewery": 3.0
+  },
+  "NP": {
+    "N_beer": 23.0,
+    "avg_abv": 5.8760869565,
+    "median_abv": 5.5,
+    "max_abv": 7.5,
+    "n_brewery": 7.0
+  },
+  "NC": {
+    "N_beer": 5.0,
+    "avg_abv": 5.32,
+    "median_abv": 5.0,
+    "max_abv": 5.8,
+    "n_brewery": 2.0
+  },
+  "DZ": {
+    "N_beer": 12.0,
+    "avg_abv": 5.3875,
+    "median_abv": 5.0,
+    "max_abv": 9.5,
+    "n_brewery": 5.0
+  },
+  "LC": {
+    "N_beer": 11.0,
+    "avg_abv": 5.0909090909,
+    "median_abv": 5.0,
+    "max_abv": 7.5,
+    "n_brewery": 3.0
+  },
+  "TT": {
+    "N_beer": 19.0,
+    "avg_abv": 3.8526315789,
+    "median_abv": 5.0,
+    "max_abv": 7.5,
+    "n_brewery": 2.0
+  },
+  "AG": {
+    "N_beer": 2.0,
+    "avg_abv": 5.2,
+    "median_abv": 5.2,
+    "max_abv": 5.6,
+    "n_brewery": 1.0
+  },
+  "UG": {
+    "N_beer": 11.0,
+    "avg_abv": 5.2818181818,
+    "median_abv": 5.5,
+    "max_abv": 6.5,
+    "n_brewery": 3.0
+  },
+  "MA": {
+    "N_beer": 6.0,
+    "avg_abv": 5.7,
+    "median_abv": 5.1,
+    "max_abv": 7.4,
+    "n_brewery": 1.0
+  },
+  "CV": {
+    "N_beer": 4.0,
+    "avg_abv": 6.05,
+    "median_abv": 5.5,
+    "max_abv": 8.0,
+    "n_brewery": 1.0
+  },
+  "MW": {
+    "N_beer": 3.0,
+    "avg_abv": 4.4666666667,
+    "median_abv": 4.0,
+    "max_abv": 5.7,
+    "n_brewery": 1.0
+  },
+  "GG": {
+    "N_beer": 11.0,
+    "avg_abv": 4.5454545455,
+    "median_abv": 4.7,
+    "max_abv": 5.3,
+    "n_brewery": 2.0
+  },
+  "LS": {
+    "N_beer": 1.0,
+    "avg_abv": 4.8,
+    "median_abv": 4.8,
+    "max_abv": 4.8,
+    "n_brewery": 1.0
+  },
+  "BO": {
+    "N_beer": 21.0,
+    "avg_abv": 5.0428571429,
+    "median_abv": 5.0,
+    "max_abv": 7.0,
+    "n_brewery": 6.0
+  },
+  "FJ": {
+    "N_beer": 8.0,
+    "avg_abv": 5.075,
+    "median_abv": 4.6,
+    "max_abv": 8.0,
+    "n_brewery": 2.0
+  },
+  "TC": {
+    "N_beer": 8.0,
+    "avg_abv": 5.45,
+    "median_abv": 5.5,
+    "max_abv": 6.0,
+    "n_brewery": 1.0
+  },
+  "MQ": {
+    "N_beer": 3.0,
+    "avg_abv": 4.6666666667,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 2.0
+  },
+  "WS": {
+    "N_beer": 4.0,
+    "avg_abv": 5.75,
+    "median_abv": 5.7,
+    "max_abv": 6.7,
+    "n_brewery": 2.0
+  },
+  "BJ": {
+    "N_beer": 3.0,
+    "avg_abv": 4.8,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 2.0
+  },
+  "AO": {
+    "N_beer": 2.0,
+    "avg_abv": 4.75,
+    "median_abv": 4.75,
+    "max_abv": 5.0,
+    "n_brewery": 2.0
+  },
+  "GP": {
+    "N_beer": 3.0,
+    "avg_abv": 4.8666666667,
+    "median_abv": 5.0,
+    "max_abv": 5.4,
+    "n_brewery": 2.0
+  },
+  "KY": {
+    "N_beer": 8.0,
+    "avg_abv": 5.23625,
+    "median_abv": 5.095,
+    "max_abv": 7.5,
+    "n_brewery": 2.0
+  },
+  "ER": {
+    "N_beer": 3.0,
+    "avg_abv": 4.8333333333,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 2.0
+  },
+  "MY": {
+    "N_beer": 5.0,
+    "avg_abv": 5.16,
+    "median_abv": 5.0,
+    "max_abv": 8.8,
+    "n_brewery": 2.0
+  },
+  "PK": {
+    "N_beer": 4.0,
+    "avg_abv": 6.5,
+    "median_abv": 6.75,
+    "max_abv": 8.0,
+    "n_brewery": 1.0
+  },
+  "AL": {
+    "N_beer": 14.0,
+    "avg_abv": 4.7,
+    "median_abv": 4.3,
+    "max_abv": 6.5,
+    "n_brewery": 7.0
+  },
+  "RW": {
+    "N_beer": 4.0,
+    "avg_abv": 5.525,
+    "median_abv": 5.3,
+    "max_abv": 6.5,
+    "n_brewery": 2.0
+  },
+  "BZ": {
+    "N_beer": 9.0,
+    "avg_abv": 5.0,
+    "median_abv": 4.8,
+    "max_abv": 7.0,
+    "n_brewery": 2.0
+  },
+  "SN": {
+    "N_beer": 2.0,
+    "avg_abv": 4.7,
+    "median_abv": 4.7,
+    "max_abv": 5.2,
+    "n_brewery": 1.0
+  },
+  "YT": {
+    "N_beer": 1.0,
+    "avg_abv": 5.5,
+    "median_abv": 5.5,
+    "max_abv": 5.5,
+    "n_brewery": 1.0
+  },
+  "DM": {
+    "N_beer": 1.0,
+    "avg_abv": 5.0,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "MC": {
+    "N_beer": 5.0,
+    "avg_abv": 5.28,
+    "median_abv": 5.2,
+    "max_abv": 5.8,
+    "n_brewery": 1.0
+  },
+  "GQ": {
+    "N_beer": 1.0,
+    "avg_abv": 4.6,
+    "median_abv": 4.6,
+    "max_abv": 4.6,
+    "n_brewery": 1.0
+  },
+  "CG": {
+    "N_beer": 5.0,
+    "avg_abv": 5.66,
+    "median_abv": 5.9,
+    "max_abv": 6.5,
+    "n_brewery": 3.0
+  },
+  "PW": {
+    "N_beer": 5.0,
+    "avg_abv": 6.1,
+    "median_abv": 5.0,
+    "max_abv": 10.5,
+    "n_brewery": 1.0
+  },
+  "SY": {
+    "N_beer": 2.0,
+    "avg_abv": 4.05,
+    "median_abv": 4.05,
+    "max_abv": 4.6,
+    "n_brewery": 2.0
+  },
+  "CK": {
+    "N_beer": 3.0,
+    "avg_abv": 5.1666666667,
+    "median_abv": 5.0,
+    "max_abv": 5.5,
+    "n_brewery": 1.0
+  },
+  "AW": {
+    "N_beer": 4.0,
+    "avg_abv": 5.6,
+    "median_abv": 5.0,
+    "max_abv": 7.4,
+    "n_brewery": 1.0
+  },
+  "VU": {
+    "N_beer": 7.0,
+    "avg_abv": 4.9,
+    "median_abv": 5.0,
+    "max_abv": 7.0,
+    "n_brewery": 3.0
+  },
+  "LI": {
+    "N_beer": 12.0,
+    "avg_abv": 5.1916666667,
+    "median_abv": 4.9,
+    "max_abv": 6.8,
+    "n_brewery": 2.0
+  },
+  "BW": {
+    "N_beer": 1.0,
+    "avg_abv": 3.5,
+    "median_abv": 3.5,
+    "max_abv": 3.5,
+    "n_brewery": 1.0
+  },
+  "TG": {
+    "N_beer": 3.0,
+    "avg_abv": 5.3333333333,
+    "median_abv": 5.1,
+    "max_abv": 6.2,
+    "n_brewery": 1.0
+  },
+  "TD": {
+    "N_beer": 2.0,
+    "avg_abv": 5.2,
+    "median_abv": 5.2,
+    "max_abv": 5.3,
+    "n_brewery": 1.0
+  },
+  "MO": {
+    "N_beer": 1.0,
+    "avg_abv": 4.0,
+    "median_abv": 4.0,
+    "max_abv": 4.0,
+    "n_brewery": 1.0
+  },
+  "AE": {
+    "N_beer": 1.0,
+    "avg_abv": 4.69,
+    "median_abv": 4.69,
+    "max_abv": 4.69,
+    "n_brewery": 1.0
+  },
+  "BT": {
+    "N_beer": 7.0,
+    "avg_abv": 6.0,
+    "median_abv": 5.0,
+    "max_abv": 8.0,
+    "n_brewery": 3.0
+  },
+  "SB": {
+    "N_beer": 2.0,
+    "avg_abv": 5.2,
+    "median_abv": 5.2,
+    "max_abv": 5.7,
+    "n_brewery": 1.0
+  },
+  "TJ": {
+    "N_beer": 1.0,
+    "avg_abv": 4.0,
+    "median_abv": 4.0,
+    "max_abv": 4.0,
+    "n_brewery": 1.0
+  },
+  "CM": {
+    "N_beer": 2.0,
+    "avg_abv": 5.0,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "SR": {
+    "N_beer": 4.0,
+    "avg_abv": 5.25,
+    "median_abv": 5.0,
+    "max_abv": 6.0,
+    "n_brewery": 2.0
+  },
+  "GM": {
+    "N_beer": 2.0,
+    "avg_abv": 5.1,
+    "median_abv": 5.1,
+    "max_abv": 5.5,
+    "n_brewery": 1.0
+  },
+  "SZ": {
+    "N_beer": 4.0,
+    "avg_abv": 3.65,
+    "median_abv": 4.65,
+    "max_abv": 4.8,
+    "n_brewery": 1.0
+  },
+  "ZM": {
+    "N_beer": 3.0,
+    "avg_abv": 4.3333333333,
+    "median_abv": 4.0,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "IQ": {
+    "N_beer": 2.0,
+    "avg_abv": 5.0,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  },
+  "TM": {
+    "N_beer": 3.0,
+    "avg_abv": 4.0666666667,
+    "median_abv": 3.5,
+    "max_abv": 5.5,
+    "n_brewery": 1.0
+  },
+  "VC": {
+    "N_beer": 2.0,
+    "avg_abv": 6.15,
+    "median_abv": 6.15,
+    "max_abv": 7.5,
+    "n_brewery": 1.0
+  },
+  "GW": {
+    "N_beer": 1.0,
+    "avg_abv": 5.1,
+    "median_abv": 5.1,
+    "max_abv": 5.1,
+    "n_brewery": 1.0
+  },
+  "BF": {
+    "N_beer": 2.0,
+    "avg_abv": 4.2,
+    "median_abv": 4.2,
+    "max_abv": 4.2,
+    "n_brewery": 1.0
+  },
+  "GA": {
+    "N_beer": 1.0,
+    "avg_abv": 4.5,
+    "median_abv": 4.5,
+    "max_abv": 4.5,
+    "n_brewery": 1.0
+  },
+  "CF": {
+    "N_beer": 1.0,
+    "avg_abv": 5.2,
+    "median_abv": 5.2,
+    "max_abv": 5.2,
+    "n_brewery": 1.0
+  },
+  "SS": {
+    "N_beer": 1.0,
+    "avg_abv": 5.0,
+    "median_abv": 5.0,
+    "max_abv": 5.0,
+    "n_brewery": 1.0
+  }
+}
