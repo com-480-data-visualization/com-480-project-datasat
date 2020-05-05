@@ -10,11 +10,11 @@ const defaultStyle = {
 };
 
 const hilight = {
-    weight: 3,
-    fillColor: "#F6C101",
-    fillOpacity: 1,
-    weight: 2,
-    color: "#604000",
+    //fillColor: "#F6C101",
+    fillOpacity: 0.8,
+    weight: 4,
+    opacity:1,
+    color: "#000000",
 };
 
 const selected = {
@@ -178,7 +178,6 @@ const colors = ['#800026',
     '#E31A1C',
     '#FC4E2A',
     '#FD8D3C',
-    '#FD8D3C',
     '#FEB24C',
     '#FED976'];
 var grades = []
@@ -235,12 +234,12 @@ var legend = L.control({position: 'bottomright'});
 
 legend.update = function () {
     // loop through our density intervals and generate a label with a colored square for each interval
-    this._div.innerHTML = '<i style=\"background:' + getColor(grades[0] + 1) + '\"></i> >' + grades[0]+'<br>';
+    this._div.innerHTML = '<i style=\"background:' + getColor(grades[0] + 1) + '\"></i> > ' + grades[0]+'<br>';
 
     for (let i = 0; i < grades.length; i++) {
         this._div.innerHTML +=
             '<i style="background:' + getColor(grades[i] -0.001) + '"></i> ' +
-            (grades[i+1] ? grades[i + 1]:"0") + '&ndash;' +grades[i] + '<br>';
+            (grades[i+1] ? grades[i + 1]:"0") + ' &ndash; ' +grades[i] + '<br>';
     }
 }
 
