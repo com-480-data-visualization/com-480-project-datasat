@@ -101,22 +101,6 @@ function get_data_for_C(props) {
  *  TODO decide if we want multiples methods and we change the method update dynamically
  *   or if we have one update that is general
  */
-const defaultUpdate = function (props) {
-    if (!props) {
-        this._div.innerHTML = '';
-    } else {
-        let name = '<b>' + props.ISO_A2 + "</b><br/>" + '<h3>' + props.ADMIN + '</h3>';
-
-        let content = get_data_for_C(props);
-        if(!content){
-            content="";
-        }
-
-
-
-        this._div.innerHTML = name + content;
-    }
-};
 
 /*
  * Infos popup
@@ -129,7 +113,21 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-info.update = defaultUpdate;
+info.update = function (props) {
+    if (!props) {
+        this._div.innerHTML = '';
+    } else {
+        let name = '<b>' + props.ISO_A2 + "</b><br/>" + '<h3>' + props.ADMIN + '</h3>';
+
+        let content = get_data_for_C(props);
+        if (!content) {
+            content = "";
+        }
+
+
+        this._div.innerHTML = name + content;
+    }
+};
 
 info.addTo(map);
 
@@ -158,8 +156,10 @@ function filter() {
  * What to do once the datas are loaded
  */
 function whenDataLoaded() {
-    getColor = createColorScheme();
+    legend.addTo(map);
+    updateColorScheme();
     geojson.setStyle(style);
+
     //console.log(datas);
 }
 
@@ -167,39 +167,88 @@ function whenDataLoaded() {
  *
  */
 function whenShowingChange() {
-    getColor = createColorScheme();
+    updateColorScheme();
     geojson.setStyle(style);
 }
 
 
 // get the color for a given data
-var getColor = d=>defaultStyle.fillColor;
+const colors = ['#800026',
+    '#BD0026',
+    '#E31A1C',
+    '#FC4E2A',
+    '#FD8D3C',
+    '#FD8D3C',
+    '#FEB24C',
+    '#FED976'];
+var grades = []
 
 /**
  * Create a color scheme for the data
  *  type: linear or exponential
  *  TODO  separate color in 20% of the data each
  */
-function createColorScheme() {
+function updateColorScheme() {
 
-    let array =[];
-    for(c in datas) {
-        array.push( datas[c][get_data_to_show()]);
+    let array = [];
+    for (c in datas) {
+        array.push(datas[c][get_data_to_show()]);
     }
 
-    array = array.sort((a,b)=> a-b);
+    array = array.sort((a, b) => a - b);
 
-    return function(d) {
-        return d > quartile(array,0.95) ? '#800026' :
-            d > quartile(array,0.9) ? '#BD0026' :
-                d > quartile(array,0.8) ? '#E31A1C' :
-                    d > quartile(array,0.7)? '#FC4E2A' :
-                        d > quartile(array,0.55) ? '#FD8D3C' :
-                            d > quartile(array,0.4) ? '#FEB24C' :
-                                d > quartile(array,0.2) ? '#FED976' :
-                                    '#FFEDA0';
-    };
+    grades = [
+        approximate(quartile(array, 0.95)),
+        approximate(quartile(array, 0.9)),
+        approximate(quartile(array, 0.8)),
+        approximate(quartile(array, 0.7)),
+        approximate(quartile(array, 0.55)),
+        approximate(quartile(array, 0.4)),
+        approximate(quartile(array, 0.2))
+    ];
+
+    legend.update();
 }
+
+function approximate(x){
+    if(x%1 == 0){
+        return Math.round(x);
+    }
+    return x.toFixed(2);
+}
+
+
+function getColor(d) {
+    for (let i = 0; i < grades.length; i++) {
+        if (d > grades[i]) {
+            return colors[i];
+        }
+    }
+    return '#FFEDA0';
+}
+
+/*
+ * LEGEND
+ */
+
+var legend = L.control({position: 'bottomright'});
+
+legend.update = function () {
+    // loop through our density intervals and generate a label with a colored square for each interval
+    this._div.innerHTML = '<i style=\"background:' + getColor(grades[0] + 1) + '\"></i> >' + grades[0]+'<br>';
+
+    for (let i = 0; i < grades.length; i++) {
+        this._div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] -0.001) + '"></i> ' +
+            (grades[i+1] ? grades[i + 1]:"0") + '&ndash;' +grades[i] + '<br>';
+    }
+}
+
+legend.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info legend');
+    return this._div;
+};
+
 
 /**
  * Return the quartile of an already sorted data
@@ -211,11 +260,8 @@ function quartile(data, q) {
     const pos = ((data.length) - 1) * q;
     const base = Math.floor(pos);
     const rest = pos - base;
-    if( (data[base+1]!==undefined) ) {
-        return data[base] + rest * (data[base+1] - data[base]);
-    } else {
-        return data[base];
-    }
+    return data[base];
+
 }
 
 /**
@@ -226,7 +272,7 @@ function style(feature) {
 
         let data_c = get_data_for_C(feature.properties);
 
-        if(data_c){
+        if (data_c) {
             return {
                 fillColor: getColor(data_c),
                 weight: 1,
