@@ -1,3 +1,4 @@
 **/.ipynb_checkpoints/
 data/bigData/
 .DS_Store
+data/*.json

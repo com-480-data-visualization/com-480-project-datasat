@@ -96,21 +96,6 @@
 			</ul>
 		</div>
 	</nav>
-	<!--
-<nav class="navbar">
-  <a class="navbar-brand" href="index.html">
-    <img src="images/beer_logo2.png" width="30" height="30" class="d-inline-block align-top" alt="">
-  </a>
-
-	<ul >
-		<li><a href="index.html">Home</a></li>
-		<li><a href="map.html">Map</a></li>
-		<li><a href="stats.html">Statistics</a></li>
-		<li><a href="data.html">Data</a></li>
-		<li><a href="team.html">Team</a></li>
-	</ul>
-</nav>
--->
 	<div id="map">
 		<div class="btn-group" role="group" aria-label="Basic example">
 			<button type="checkbox" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">Beers</button>
@@ -137,11 +122,12 @@
 			<div class="form-row align-items-center">
 				<div class="col-auto my-1">
 					<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Data</label>
-					<select class="custom-select mr-sm-2" id="dataSelection" >
-						<option selected value="number of reviews" onclick="">Popularity (number of reviews)</option>
-						<option value= "rating">Quality (rating)</option>
-						<option value="IBU">IBU (bitterness)</option>
-						<option value="alcohol level">Alcohol level</option>
+					<select class="custom-select mr-sm-2" id="dataSelection" onChange="whenShowingChange()" >
+						<option selected value="N_beer" onclick="">Number of Beers</option>
+						<option value= "avg_abv">Average Alcohol per volume in beer</option>
+						<option value="median_abv">Median ABV</option>
+						<option value="max_abv">Max ABV</option>
+						<option value="n_brewery">Number of Breweries</option>
 					</select>
 				</div>
 
@@ -160,7 +146,6 @@
 	</div>
 
 	<div id="hovertool"></div>
-	<script type="text/javascript" src="scripts/countries.js"></script>
 	<script type="text/javascript" src="scripts/mapViz.js"></script>
 
 </body>
