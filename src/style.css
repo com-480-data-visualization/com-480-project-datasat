@@ -304,6 +304,12 @@ main ul {
     width: 30%;
 }
 
+#chart-container {
+    position:absolute;
+    height:300px;
+    margin-top:500px;
+    z-index : 2;
+}
 
 /*
  * button on the bottom right
