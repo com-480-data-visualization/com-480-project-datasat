@@ -394,5 +394,8 @@ function onEachFeature(feature, layer) {
 
 
 
+function getDataWords(beerSelected){
+ // Load json file?!
+ return words[beerSelected]['words']
 
-
+}

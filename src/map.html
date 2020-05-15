@@ -109,11 +109,17 @@
 					<label class="mr-sm-2 sr-only">Preference</label>
 					<select class="custom-select mr-sm-2" id="beerSelection" onchange="javascript: getBeerSelection()">
 						<option selected>All Beer Types</option>
-						<option value="Indian Pale Ales" onclick="">Indian Pale Ale</option>
-						<option value="Stouts">Stout</option>
-						<option value="White Beers">White Beer</option>
-						<option value="Lagers">Lager</option>
-						<option value="Trappists">Trappist </option>
+						<option value="IPA" onclick="">Indian Pale Ale</option>
+						<option value="Stout">Stout</option>
+						<option value="Porter">Porter</option>
+						<option value="Lager">Lager</option>
+						<option value="Barleywine">Barleywine </option>
+						<option value="Ale">Ale </option>
+						<option value="Pilsner">Pilsner </option>
+						<option value="Fruit">Fruit </option>
+						<option value="Roggenbier">Roggenbier </option>
+						<option value="Herb">Herb </option>
+						<option value="Smoke">Smoke </option>
 
 					</select>
 				</div>
@@ -147,6 +153,7 @@
 		<div id="chart-container">
 			<script>
 				anychart.onDocumentReady(function() {
+				//var data = getDataWords(getBeerSelection())
 				var data = [
 					{"x": "Mandarin chinese", "value": 109000},
 					{"x": "English", "value": 98300},
