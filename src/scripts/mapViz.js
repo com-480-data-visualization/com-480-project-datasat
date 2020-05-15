@@ -76,7 +76,12 @@ function beer_or_breweries() {
  */
 function get_data_to_show() {
     const el = document.getElementById("dataSelection");
-    return el.options[el.selectedIndex].value;
+    const beer = document.getElementById("beerSelection")
+    if (beer.options[beer.selectedIndex].value != "AllBeer"){
+        return el.options[el.selectedIndex].value + '_'+ beer.options[beer.selectedIndex].value;
+    }else{
+        return el.options[el.selectedIndex].value 
+    }
 }
 
 /**
