@@ -175,7 +175,8 @@
 				// enable a color range
 				var customColorScale = anychart.scales.linearColor();
 				customColorScale.colors([ "#DF8D03","#A94E02"]);
-
+				beer = document.getElementById('beerSelection')
+				chart.title("How the beer lovers describe the "+ beer.options[beer.selectedIndex].value +'s:')
 				chart.colorScale(customColorScale);
 				chart.bounds(0,0,'100%','100%');
 				chart.angles([0])
