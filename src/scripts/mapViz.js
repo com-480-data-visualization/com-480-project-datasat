@@ -92,6 +92,11 @@ function get_filter_value() {
     return el.options[el.selectedIndex].text;
 }
 
+function get_data_text() {
+    const el = document.getElementById("dataSelection");
+    return el.options[el.selectedIndex].text;
+}
+
 
 function get_data_for_C(props) {
     let data_C = datas[props.ISO_A2];
@@ -122,15 +127,13 @@ info.update = function (props) {
     if (!props) {
         this._div.innerHTML = '';
     } else {
-        let name = '<b>' + props.ISO_A2 + "</b><br/>" + '<h3>' + props.ADMIN + '</h3>';
+        this._div.innerHTML ='<b>' + props.ISO_A2 + "</b><br/>" + '<h3>' + props.ADMIN + '</h3>';
 
         let content = get_data_for_C(props);
-        if (!content) {
-            content = "";
+        if (content) {
+            this._div.innerHTML +="<b>"+get_data_text()+": </b>";
+            this._div.innerHTML += content;
         }
-
-
-        this._div.innerHTML = name + content;
     }
 };
 
@@ -179,14 +182,26 @@ function whenShowingChange() {
 
 
 // get the color for a given data
-const colors = ['#800026',
-    '#BD0026',
-    '#E31A1C',
-    '#FC4E2A',
-    '#FD8D3C',
+const colors = ['#460000',
+    '#522c04',
+    '#6f3b03',
+    '#b46208',
+    '#ec7119',
+    '#fc8c2a',
     '#FEB24C',
-    '#FED976'];
-var grades = []
+    '#FED976',
+    '#ffe6ad'];
+
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+var max_val = 0;
+var min_val = 0;
 
 /**
  * Create a color scheme for the data
@@ -196,21 +211,23 @@ var grades = []
 function updateColorScheme() {
 
     let array = [];
+    let dat_to_show = get_data_to_show()
+    min_val = datas['CH'][dat_to_show];
+    max_val = datas['BE'][dat_to_show];
     for (c in datas) {
-        array.push(datas[c][get_data_to_show()]);
+
+        let d = datas[c][dat_to_show];
+        if(c === 'null' || !d){
+            continue;
+        }
+
+        if(d<min_val){
+            min_val = d;
+        }
+        if(max_val<d){
+            max_val = d;
+        }
     }
-
-    array = array.sort((a, b) => a - b);
-
-    grades = [
-        approximate(quartile(array, 0.95)),
-        approximate(quartile(array, 0.9)),
-        approximate(quartile(array, 0.8)),
-        approximate(quartile(array, 0.7)),
-        approximate(quartile(array, 0.55)),
-        approximate(quartile(array, 0.4)),
-        approximate(quartile(array, 0.2))
-    ];
 
     legend.update();
 }
@@ -222,14 +239,22 @@ function approximate(x){
     return x.toFixed(2);
 }
 
+function componentToHex(c) {
+    const hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
 
+const colorScale = chroma.scale(colors);
 function getColor(d) {
-    for (let i = 0; i < grades.length; i++) {
-        if (d > grades[i]) {
-            return colors[i];
-        }
-    }
-    return '#FFEDA0';
+    let x = 1.0- (d-min_val)/(max_val -min_val);
+    /*
+    let r = Math.round(x*max_color.r +(1.0-x)*min_color.r);
+    let g = Math.round(x*max_color.g +(1.0-x)*min_color.g);
+    let b = Math.round(x*max_color.b +(1.0-x)*min_color.b);
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+
+     */
+    return colorScale(x);
 }
 
 /*
@@ -240,34 +265,30 @@ var legend = L.control({position: 'bottomright'});
 
 legend.update = function () {
     // loop through our density intervals and generate a label with a colored square for each interval
-    this._div.innerHTML = '<i style=\"background:' + getColor(grades[0] + 1) + '\"></i> > ' + grades[0]+'<br>';
-
-    for (let i = 0; i < grades.length; i++) {
+    this._div.innerHTML ="<h2><b>" + get_data_text()+"</b></h2>";
+    /*for (let i = 0; i < 8; i++) {
+        let x = i/8;
+        let d = max_val *(1-x) + min_val*x;
         this._div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] -0.001) + '"></i> ' +
-            (grades[i+1] ? grades[i + 1]:"0") + ' &ndash; ' +grades[i] + '<br>';
+            '<i style="background:' + getColor(d ) + '"></i> ' +
+            Math.round(d+.05)  + '<br>';
+    }*/
+    this._div.innerHTML +="<div class='gradient'>"
+    for(let i = 100; i >= 1; i--){
+        this._div.innerHTML +="<span class='grad-step' style='background-color:"+colorScale(i/100.0)+"' ></span>"
     }
+    this._div.innerHTML +="</div><div class='grad-val'>"
+    this._div.innerHTML += "<span class='min'>"+min_val+"</span>";
+    this._div.innerHTML += "<span class='med'>"+Math.round(((min_val+ max_val) / 2 )+0.5)+"</span>";
+    this._div.innerHTML += "<span class='max'>"+Math.round(max_val+0.8)+"</span> ";
+    this._div.innerHTML += "</div>"
+
 }
 
 legend.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info legend');
     return this._div;
 };
-
-
-/**
- * Return the quartile of an already sorted data
- * @param data
- * @param q
- * @returns the quartile
- */
-function quartile(data, q) {
-    const pos = ((data.length) - 1) * q;
-    const base = Math.floor(pos);
-    const rest = pos - base;
-    return data[base];
-
-}
 
 /**
  * style of the country at the moment
@@ -418,6 +439,7 @@ function changeWordCloud(){
         
     }
 }
+
 var word_data = "";
 fetch("../data/word_cloud.json")
     .then(response => response.json())
