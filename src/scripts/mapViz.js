@@ -76,7 +76,12 @@ function beer_or_breweries() {
  */
 function get_data_to_show() {
     const el = document.getElementById("dataSelection");
-    return el.options[el.selectedIndex].value;
+    const beer = document.getElementById("beerSelection")
+    if (beer.options[beer.selectedIndex].value != "AllBeer"){
+        return el.options[el.selectedIndex].value + '_'+ beer.options[beer.selectedIndex].value;
+    }else{
+        return el.options[el.selectedIndex].value 
+    }
 }
 
 /**
@@ -168,6 +173,7 @@ function whenDataLoaded() {
  */
 function whenShowingChange() {
     updateColorScheme();
+    changeWordCloud();
     geojson.setStyle(style);
 }
 
@@ -391,8 +397,34 @@ function onEachFeature(feature, layer) {
     layer.addEventListener("mouseout", mouseOut, {passive: true});
 }
 
+function changeWordCloud(){
+    document.getElementById('chart-container').innerHTML =""
+    var beer = document.getElementById('beerSelection');
+    var selected = beer.options[beer.selectedIndex].value;
+    if( selected != "AllBeer"){
+        var chart = anychart.tagCloud(getDataWords(selected));
+    
+        // enable a color range
+        var customColorScale = anychart.scales.linearColor();
+        customColorScale.colors([ "#DF8D03","#A94E02"]);
+        chart.title("How beer lovers describe the "+ selected +'s:')
+        chart.colorScale(customColorScale);
+        chart.bounds(0,0,'100%','100%');
+        chart.angles([0])
+        chart.background().fill((255,255,255),0);
+        // set the color range length
+        chart.container("chart-container");
+        chart.draw();
+        
+    }
+}
+var word_data = "";
+fetch("../data/word_cloud.json")
+    .then(response => response.json())
+    .then(data => {
+        word_data = data;    
+    });
 
-
-
-
-
+function getDataWords(beerSelected){
+    return word_data[beerSelected]["words"]
+}   

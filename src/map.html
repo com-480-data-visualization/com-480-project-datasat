@@ -107,13 +107,19 @@
 			<div class="form-row align-items-center">
 				<div class="col-auto my-1">
 					<label class="mr-sm-2 sr-only">Preference</label>
-					<select class="custom-select mr-sm-2" id="beerSelection" onchange="javascript: getBeerSelection()">
-						<option selected>All Beer Types</option>
-						<option value="Indian Pale Ales" onclick="">Indian Pale Ale</option>
-						<option value="Stouts">Stout</option>
-						<option value="White Beers">White Beer</option>
-						<option value="Lagers">Lager</option>
-						<option value="Trappists">Trappist </option>
+					<select class="custom-select mr-sm-2" id="beerSelection" onchange="whenShowingChange()">
+						<option selected value="AllBeer">All Beer Types</option>
+						<option value="IPA" onclick="">Indian Pale Ale</option>
+						<option value="Stout">Stout</option>
+						<option value="Porter">Porter</option>
+						<option value="Lager">Lager</option>
+						<option value="Barleywine">Barleywine </option>
+						<option value="Ale">Ale </option>
+						<option value="Pilsner">Pilsner </option>
+						<option value="Fruit">Fruit </option>
+						<option value="Roggenbier">Roggenbier </option>
+						<option value="Herb">Herb </option>
+						<option value="Smoke">Smoke </option>
 
 					</select>
 				</div>
@@ -144,41 +150,7 @@
 		<div id="specific-infos">
 			<span id="most-pop-beers"></span>
 		</div>
-		<div id="chart-container">
-			<script>
-				anychart.onDocumentReady(function() {
-				var data = [
-					{"x": "Mandarin chinese", "value": 109000},
-					{"x": "English", "value": 98300},
-					{"x": "Hindustani", "value": 54400},
-					{"x": "Spanish", "value": 52700},
-					{"x": "Arabic", "value": 42200},
-					{"x": "Malay", "value": 28100},
-					{"x": "Russian", "value": 26700},
-					{"x": "Bengali", "value": 26100},
-					{"x": "Portuguese", "value": 22900},
-					{"x": "French", "value": 22900},
-					{"x": "Hausa", "value": 15000},
-					{"x": "Punjabi", "value": 14800},
-					{"x": "Japanese", "value": 12900},
-					{"x": "German", "value": 12900},
-					{"x": "Persian", "value": 12100}
-				];// create a tag (word) cloud chart
-				var chart = anychart.tagCloud(data);
-				// enable a color range
-				var customColorScale = anychart.scales.linearColor();
-				customColorScale.colors([ "#DF8D03","#A94E02"]);
-
-				chart.colorScale(customColorScale);
-				chart.bounds(0,0,'100%','100%');
-				chart.angles([0])
-				chart.background().fill((255,255,255),0);
-				// set the color range length
-				chart.container("chart-container");
-				chart.draw();
-				});
-			</script>
-			</div>
+		<div id="chart-container"></div>
 	</div>
 
 	<div id="hovertool"></div>
