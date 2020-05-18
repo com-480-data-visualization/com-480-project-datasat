@@ -77,7 +77,7 @@ function beer_or_breweries() {
 function get_data_to_show() {
     const el = document.getElementById("dataSelection");
     const beer = document.getElementById("beerSelection")
-    if (beer.options[beer.selectedIndex].value != "AllBeer"){
+    if (beer.options[beer.selectedIndex].value !== "AllBeer"){
         return el.options[el.selectedIndex].value + '_'+ beer.options[beer.selectedIndex].value;
     }else{
         return el.options[el.selectedIndex].value 
@@ -88,10 +88,11 @@ function get_data_to_show() {
 function get_data_associated_beer_index() {
     const el = document.getElementById("dataSelection");
     const beer = document.getElementById("beerSelection");
+
     if (beer.options[beer.selectedIndex].value !== "AllBeer"){
-        return el.options[el.selectedIndex].data('beer')+ '_'+ beer.options[beer.selectedIndex].value;
+        return el.options[el.selectedIndex].dataset.beer+ '_'+ beer.options[beer.selectedIndex].value;
     }else{
-        return el.options[el.selectedIndex].data('beer');
+        return el.options[el.selectedIndex].dataset.beer;
     }
 }
 /**
@@ -112,9 +113,9 @@ function get_data_associated_brewery_index() {
     const el = document.getElementById("dataSelection");
     const beer = document.getElementById("beerSelection");
     if (beer.options[beer.selectedIndex].value !== "AllBeer"){
-        return el.options[el.selectedIndex].data('brew') + '_'+ beer.options[beer.selectedIndex].value;
+        return el.options[el.selectedIndex].dataset.brew+ '_'+ beer.options[beer.selectedIndex].value;
     }else{
-        return el.options[el.selectedIndex].data('brew');
+        return el.options[el.selectedIndex].dataset.brew;
     }
 }
 /**
@@ -177,6 +178,9 @@ info.update = function (props) {
 
         let content = get_data_for_C(props);
         if (content) {
+            if(content%1 !== 0){
+                content = content.toFixed(2);
+            }
             this._div.innerHTML +="<b>"+get_data_text()+": </b>";
             this._div.innerHTML += content;
         }
@@ -185,7 +189,8 @@ info.update = function (props) {
         let brewery = get_data_associated_brewery(props);
 
         if( beer && brewery){
-
+            this._div.innerHTML +="<br><i class='fas fa-beer'></i> "+beer;
+            this._div.innerHTML +="<br><i class=' fas fa-industry'></i> "+brewery;
         }
 
     }
@@ -206,12 +211,6 @@ fetch("../data/countries_basic_data.json")
     });
 
 
-/**
- * Filter datas
- */
-function filter() {
-    //TODO change datas
-}
 
 
 /**
@@ -222,7 +221,25 @@ function whenDataLoaded() {
     updateColorScheme();
     geojson.setStyle(style);
 
-    console.log(datas["US"]);
+}
+
+
+/*
+ * Load data associated with a country
+ */
+var data_country = "";
+function load_data_country(isoCode){
+    fetch("../data/country_data/"+isoCode+".json")
+        .then(response => response.json())
+        .then(data_c=>{
+            data_country = data_c;
+            whenCountryDataLoaded();
+        });
+
+}
+
+function whenCountryDataLoaded() {
+    console.log(data_country);
 }
 
 /**
@@ -408,6 +425,8 @@ function selectCountry(target) {
     geojson.setStyle(hide);
     target.setStyle(selected);
     info.update(c_properties);
+
+    load_data_country(country);
 }
 
 /**
