@@ -84,10 +84,56 @@ function get_data_to_show() {
     }
 }
 
+
+function get_data_associated_beer_index() {
+    const el = document.getElementById("dataSelection");
+    const beer = document.getElementById("beerSelection");
+    if (beer.options[beer.selectedIndex].value !== "AllBeer"){
+        return el.options[el.selectedIndex].data('beer')+ '_'+ beer.options[beer.selectedIndex].value;
+    }else{
+        return el.options[el.selectedIndex].data('beer');
+    }
+}
+/**
+ * return the beer associated with the data if any
+ */
+function get_data_associated_beer(props) {
+    let data_C = datas[props.ISO_A2];
+    if (data_C) {
+        let beer_id = get_data_associated_beer_index();
+        if(beer_id) {
+            return data_C[beer_id];
+        }else{return  false;}
+    }
+}
+
+
+function get_data_associated_brewery_index() {
+    const el = document.getElementById("dataSelection");
+    const beer = document.getElementById("beerSelection");
+    if (beer.options[beer.selectedIndex].value !== "AllBeer"){
+        return el.options[el.selectedIndex].data('brew') + '_'+ beer.options[beer.selectedIndex].value;
+    }else{
+        return el.options[el.selectedIndex].data('brew');
+    }
+}
+/**
+ * return the brewery associated with the data if any
+ */
+function get_data_associated_brewery(props) {
+    let data_C = datas[props.ISO_A2];
+    if (data_C) {
+        let brew_id = get_data_associated_brewery_index();
+        if(brew_id) {
+            return data_C[brew_id];
+        }else{return  false;}
+    }
+}
+
 /**
  * return the value of the filter
  */
-function get_filter_value() {
+function get_filter_text() {
     const el = document.getElementById("beerSelection");
     return el.options[el.selectedIndex].text;
 }
@@ -134,6 +180,14 @@ info.update = function (props) {
             this._div.innerHTML +="<b>"+get_data_text()+": </b>";
             this._div.innerHTML += content;
         }
+
+        let beer = get_data_associated_beer(props);
+        let brewery = get_data_associated_brewery(props);
+
+        if( beer && brewery){
+
+        }
+
     }
 };
 
@@ -168,7 +222,7 @@ function whenDataLoaded() {
     updateColorScheme();
     geojson.setStyle(style);
 
-    //console.log(datas);
+    console.log(datas["US"]);
 }
 
 /**
@@ -205,15 +259,13 @@ var min_val = 0;
 
 /**
  * Create a color scheme for the data
- *  type: linear or exponential
- *  TODO  separate color in 20% of the data each
  */
 function updateColorScheme() {
 
     let array = [];
     let dat_to_show = get_data_to_show()
-    min_val = datas['CH'][dat_to_show];
-    max_val = datas['BE'][dat_to_show];
+    min_val = datas['US'][dat_to_show];
+    max_val = datas['US'][dat_to_show];
     for (c in datas) {
 
         let d = datas[c][dat_to_show];
@@ -232,28 +284,10 @@ function updateColorScheme() {
     legend.update();
 }
 
-function approximate(x){
-    if(x%1 == 0){
-        return Math.round(x);
-    }
-    return x.toFixed(2);
-}
-
-function componentToHex(c) {
-    const hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-}
 
 const colorScale = chroma.scale(colors);
 function getColor(d) {
     let x = 1.0- (d-min_val)/(max_val -min_val);
-    /*
-    let r = Math.round(x*max_color.r +(1.0-x)*min_color.r);
-    let g = Math.round(x*max_color.g +(1.0-x)*min_color.g);
-    let b = Math.round(x*max_color.b +(1.0-x)*min_color.b);
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-
-     */
     return colorScale(x);
 }
 
@@ -277,12 +311,39 @@ legend.update = function () {
     for(let i = 100; i >= 1; i--){
         this._div.innerHTML +="<span class='grad-step' style='background-color:"+colorScale(i/100.0)+"' ></span>"
     }
+    let approximation = approximate(min_val,max_val)
+    let max = approximation.max;
+    let min = approximation.min;
+    let med =approximation.med;
     this._div.innerHTML +="</div><div class='grad-val'>"
-    this._div.innerHTML += "<span class='min'>"+min_val+"</span>";
-    this._div.innerHTML += "<span class='med'>"+Math.round(((min_val+ max_val) / 2 )+0.5)+"</span>";
-    this._div.innerHTML += "<span class='max'>"+Math.round(max_val+0.8)+"</span> ";
+    this._div.innerHTML += "<span class='min'>"+min+"</span>";
+    this._div.innerHTML += "<span class='med'>"+med+"</span>";
+    this._div.innerHTML += "<span class='max'>"+max+"</span> ";
     this._div.innerHTML += "</div>"
+}
 
+function approximate(min,max){
+    let diff = max-min;
+    let med = (max + min )/2;
+    let i = 0;
+    while(diff>10){
+        i+=1;
+        diff = diff/10;
+        min = min/10;
+        max= max/10;
+        med = med/10;
+    }
+    min = (min).toFixed(1);
+    med = med.toFixed(1);
+    max = (max+0.1).toFixed(1);
+    while(i>0){
+        i-=1;
+        min = min*10;
+        max= max*10;
+        med = med*10;
+    }
+
+    return {min:min,med:med,max:max};
 }
 
 legend.onAdd = function (map) {
