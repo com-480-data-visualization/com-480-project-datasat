@@ -108,6 +108,12 @@ function get_data_associated_beer(props) {
     }
 }
 
+function get_data_unit() {
+    const el = document.getElementById("dataSelection");
+    return el.options[el.selectedIndex].dataset.unit;
+
+}
+
 
 function get_data_associated_brewery_index() {
     const el = document.getElementById("dataSelection");
@@ -182,7 +188,7 @@ info.update = function (props) {
                 content = content.toFixed(2);
             }
             this._div.innerHTML +="<b>"+get_data_text()+": </b>";
-            this._div.innerHTML += content;
+            this._div.innerHTML += content +" "+ get_data_unit();
         }
 
         let beer = get_data_associated_beer(props);
@@ -316,7 +322,7 @@ var legend = L.control({position: 'bottomright'});
 
 legend.update = function () {
     // loop through our density intervals and generate a label with a colored square for each interval
-    this._div.innerHTML ="<h2><b>" + get_data_text()+"</b></h2>";
+    this._div.innerHTML ="<h2><b>" + get_data_text()+"</b>  ("+get_data_unit()+")</h2>";
     /*for (let i = 0; i < 8; i++) {
         let x = i/8;
         let d = max_val *(1-x) + min_val*x;
@@ -479,22 +485,6 @@ function mouseOut(e) {
 function onEachFeature(feature, layer) {
     layer.addEventListener("click", zoomAndSelect, {passive: true});
     layer.addEventListener("mouseover", highlightFeature, {passive: true});
-    /*
-    FIXME erase obselete
-    layer.addEventListener("mousemove", function(e) {
-        if (world){
-            var beerSelection = document.getElementById("beerSelection");
-            var beerChoice = beerSelection.options[beerSelection.selectedIndex].value;
-            var dataTypeSelection = document.getElementById("dataSelection");
-            var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
-            if (beerChoice == "All Beer Types") {
-                beerChoice = "Beers";
-            }
-            var popupContent = "<b>" + feature.properties.ADMIN + " </b><br> " + beerChoice + " having the highest " + dataType +" : <br> - Feld <br> - Heineken";
-
-            var popup  = L.popup({closeButton:false}).setLatLng(e.latlng).setContent(popupContent).openOn(map);
-        }
-  },{passive:true});*/
     layer.addEventListener("mouseout", mouseOut, {passive: true});
 }
 

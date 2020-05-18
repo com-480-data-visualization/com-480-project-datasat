@@ -133,14 +133,14 @@
 				<div class="col-auto my-1">
 					<label class="mr-sm-2 sr-only" >Data</label>
 					<select class="custom-select mr-sm-2" id="dataSelection" onChange="whenShowingChange()" >
-						<option selected value="n_beers">Number of Beers</option>
-						<option value="avg_abv">Average Alcohol By Volume</option>
-						<option value="max_abv" data-beer="max_abv_beer" data-brew="max_abv_brewery">
+						<option selected value="n_beers" data-unit="" >Number of Beers</option>
+						<option value="avg_abv" data-unit="%">Average Alcohol By Volume</option>
+						<option value="max_abv" data-beer="max_abv_beer" data-brew="max_abv_brewery" data-unit="%">
 							Max ABV
 						</option>
-						<option value="best_beer_score" data-beer="best_beer" data-brew="best_brewery">
+						<option value="best_beer_score" data-beer="best_beer" data-brew="best_brewery" data-unit="/5">
 							Best Rating on BeerAdvocate</option>
-						<option value="popularity" data-beer="best_beer" data-brew="best_brewery">
+						<option value="popularity" data-beer="best_beer" data-brew="best_brewery" data-unit="">
 							Most popular beer (number of reviews)
 						</option>
 					</select>
