@@ -502,7 +502,18 @@ function changeWordCloud(){
         // enable a color range
         var customColorScale = anychart.scales.linearColor();
         customColorScale.colors([ "#DF8D03","#A94E02"]);
-        chart.title("How beer lovers describe the "+ selected +'s:')
+        //chart.title("How beer lovers describe the "+ selected +'s:')
+
+        var title = chart.title();
+//enables HTML tags
+        title.enabled(true);
+
+        title.useHtml(true);
+        title.text(
+    
+        "<br><a style=\"color:#460000;\">"+
+        "How beer lovers describe the "+ selected +"s:</a>"
+        );
         chart.colorScale(customColorScale);
         chart.bounds(0,0,'100%','100%');
         chart.angles([0])

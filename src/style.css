@@ -348,10 +348,10 @@ main ul {
     position:absolute;
     /*height:300px;
     margin-top:500px;*/
-    width: 75%;
-    height:25%;
+    width: 100%;
+    height:35%;
     bottom: 15px;
-    left:15%;
+    left:0%;
     z-index : 2;
 }
 
