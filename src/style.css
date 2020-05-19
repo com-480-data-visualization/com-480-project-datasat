@@ -315,21 +315,22 @@ main ul {
 .btn-group {
     position: absolute;
     left: 100px;
-    top: 30px;
+    top: 18px;
     z-index: 2;
+    display: none;
 }
 
 .myform {
     position: absolute;
-    margin-left: 275px;
-    margin-top: 26px;
+    margin-left: 410px;
+    margin-top: 14px;
     z-index: 2;
 }
 
 .myform_data {
     position: absolute;
-    margin-left: 450px;
-    margin-top: 26px;
+    margin-left: 65px;
+    margin-top: 14px;
     z-index: 2;
 }
 

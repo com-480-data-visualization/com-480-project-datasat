@@ -54,7 +54,7 @@ var geojson = new L.GeoJSON.AJAX("../data/countries.geojson", {style: style, onE
 L.mapbox.accessToken = 'pk.eyJ1IjoibG92aXRhbmEiLCJhIjoiY2s5aGM4MWU2MGFmZDNubW5hZzhvYzUwcSJ9.fxbhUaa-uvN57kEkyKAALA';
 var map = L.mapbox.map('map')
     .setView([37.8, -20], 3);
-//.addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
+    //.addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
 map.options.minZoom = 2.1;
 map.options.maxZoom = 10;
 map.setMaxBounds(new L.LatLngBounds([-58.9, -175.7], [75.9, 180]));
@@ -62,6 +62,14 @@ map.options.maxBoundsViscosity = 0.5;
 geojson.on('data:loaded', function () {
     geojson.addTo(map);
 });
+
+
+
+function projectPoint(lat, long) {
+    var point = map.latLngToLayerPoint(new L.LatLng(lat, long));
+    this.stream.point(point.x, point.y);
+}
+
 
 
 /**
@@ -80,7 +88,7 @@ function get_data_to_show() {
     if (beer.options[beer.selectedIndex].value !== "AllBeer"){
         return el.options[el.selectedIndex].value + '_'+ beer.options[beer.selectedIndex].value;
     }else{
-        return el.options[el.selectedIndex].value 
+        return el.options[el.selectedIndex].value
     }
 }
 
@@ -161,8 +169,6 @@ function get_data_for_C(props) {
 /**
  * The info method for update
  *
- *  TODO decide if we want multiples methods and we change the method update dynamically
- *   or if we have one update that is general
  */
 
 /*
@@ -233,7 +239,8 @@ function whenDataLoaded() {
 /*
  * Load data associated with a country
  */
-var data_country = "";
+var data_country = [""];
+var data_country_per_pos = [""];
 function load_data_country(isoCode){
     fetch("../data/country_data/"+isoCode+".json")
         .then(response => response.json())
@@ -245,8 +252,54 @@ function load_data_country(isoCode){
 }
 
 function whenCountryDataLoaded() {
+    data_country.forEach(d=>{d.LatLong = L.latLng([d.lat,d.long]);});
+    data_country_per_pos=groupBy(data_country,"LatLong");
     console.log(data_country);
+
+    update_breweries_on_map();
+
 }
+
+function groupBy(xs, key) {
+    return xs.reduce(function(rv, x) {
+        (rv[x[key]] = rv[x[key]] || []).push(x);
+        return rv;
+    }, {});
+}
+var markers_layout;
+
+function update_breweries_on_map(){
+    if(markers_layout) {
+        markers_layout.removeFrom(map);
+    }
+
+    let markers = data_country.map(d=>{
+        const icon=L.icon({
+            iconUrl: 'images/brew.png',
+            iconSize:     [50, 50], // size of the icon
+        })
+
+        return L.marker([d.lat,d.long],{icon:icon}).bindPopup(d.brewery);
+    })
+
+    /*for(latlong in data_country_per_pos) {
+
+        let datas = data_country[latlong];
+
+        for (d in datas) {
+            console.log(d);
+            markers.push(L.circle([d.lat, d.long], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 10000
+            }).bindPopup(d.brewery));
+        }
+    }*/
+    markers_layout = L.layerGroup(markers);
+    markers_layout.addTo(map);
+}
+
 
 /**
  *
@@ -269,14 +322,6 @@ const colors = ['#460000',
     '#FED976',
     '#ffe6ad'];
 
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : null;
-}
 var max_val = 0;
 var min_val = 0;
 
@@ -286,7 +331,7 @@ var min_val = 0;
 function updateColorScheme() {
 
     let array = [];
-    let dat_to_show = get_data_to_show()
+    let dat_to_show = get_data_to_show();
     min_val = datas['US'][dat_to_show];
     max_val = datas['US'][dat_to_show];
     for (c in datas) {
@@ -323,13 +368,6 @@ var legend = L.control({position: 'bottomright'});
 legend.update = function () {
     // loop through our density intervals and generate a label with a colored square for each interval
     this._div.innerHTML ="<h2><b>" + get_data_text()+"</b>  ("+get_data_unit()+")</h2>";
-    /*for (let i = 0; i < 8; i++) {
-        let x = i/8;
-        let d = max_val *(1-x) + min_val*x;
-        this._div.innerHTML +=
-            '<i style="background:' + getColor(d ) + '"></i> ' +
-            Math.round(d+.05)  + '<br>';
-    }*/
     this._div.innerHTML +="<div class='gradient'>"
     for(let i = 100; i >= 1; i--){
         this._div.innerHTML +="<span class='grad-step' style='background-color:"+colorScale(i/100.0)+"' ></span>"
@@ -406,8 +444,11 @@ function style(feature) {
  * Goes back to world view
  */
 function returnToWorld() {
+    data_country =[];
+    update_breweries_on_map()
     world = true;
     document.getElementById('closeCountry').style.display = 'none';
+    document.getElementById('beer-type').style.display='block';
     map.setView([37.8, -20], 3);
     geojson.setStyle(style);
     info.update();
@@ -423,6 +464,11 @@ function returnToWorld() {
 function selectCountry(target) {
     world = false;
     document.getElementById('closeCountry').style.display = 'block';
+
+    // TODO remove the 2 lines when type implemented
+    document.getElementById('beer-type').style.display='none';
+    document.getElementById("beerSelection").selectedIndex = 0;
+
 
     country = target.feature.properties.ISO_A2;
     c_properties = target.feature.properties;
@@ -494,7 +540,7 @@ function changeWordCloud(){
     var selected = beer.options[beer.selectedIndex].value;
     if( selected != "AllBeer"){
         var chart = anychart.tagCloud(getDataWords(selected));
-    
+
         // enable a color range
         var customColorScale = anychart.scales.linearColor();
         customColorScale.colors([ "#DF8D03","#A94E02"]);
@@ -506,7 +552,7 @@ function changeWordCloud(){
         // set the color range length
         chart.container("chart-container");
         chart.draw();
-        
+
     }
 }
 
@@ -514,7 +560,7 @@ var word_data = "";
 fetch("../data/word_cloud.json")
     .then(response => response.json())
     .then(data => {
-        word_data = data;    
+        word_data = data;
     });
 
 function getDataWords(beerSelected){
