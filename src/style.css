@@ -220,7 +220,6 @@ main ul {
     background-image:linear-gradient(var(--color-p1), var(--color-p2)); ;
     border-left: 1px solid black;
     position:relative;
-
     width: 25%;
     height: 95%;
     z-index: 1;
@@ -340,10 +339,19 @@ main ul {
     width: 30%;
 }
 
+.fun-fact-emph {
+    color: var(--color-p6);
+    font-weight: bold;
+}
+
 #chart-container {
     position:absolute;
-    height:300px;
-    margin-top:500px;
+    /*height:300px;
+    margin-top:500px;*/
+    width: 75%;
+    height:25%;
+    bottom: 15px;
+    left:15%;
     z-index : 2;
 }
 
@@ -357,5 +365,8 @@ main ul {
     top: 90px;
 
     z-index: 2;
+}
 
+#specific-infos {
+    padding: 10px;
 }

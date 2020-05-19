@@ -413,6 +413,7 @@ function returnToWorld() {
     info.update();
     c_properties = "";
     country = "";
+    document.getElementById("specific-infos").innerHTML = "GENERIC INFOS";
     //getBeerSelection();
 }
 
@@ -442,6 +443,9 @@ function selectCountry(target) {
 function zoomAndSelect(e) {
     selectCountry(e.target);
     map.fitBounds(e.target.getBounds());
+    layer = e.target;
+    country = layer.feature.properties.ISO_A2;
+    get_fun_fact(country);
 }
 
 /**
@@ -520,3 +524,22 @@ fetch("../data/word_cloud.json")
 function getDataWords(beerSelected){
     return word_data[beerSelected]["words"]
 }   
+
+function get_fun_fact(country) {
+    file_path = "../data/country_fun_facts/" + country + ".html";
+
+    textBox = document.getElementById("specific-infos");
+    fetch("../data/country_fun_facts/" + country + ".html")
+            .then(function(response) {
+                if (!response.ok) {
+                    return "DATA BASED INFORMATION";
+                }else {
+                    return response.text();
+                }
+            })
+            .then(data => {
+                textBox.innerHTML = data;
+            })
+            .catch((err) => alert(err));
+
+}
