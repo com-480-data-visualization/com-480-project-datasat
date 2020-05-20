@@ -47,6 +47,7 @@
 			breweries_btn.checked = false;
 			breweries_btn.style.background = default_color;
 			beer_btn.style.background = selected_color;
+			icon_layout.remove();
 
 		}
 
@@ -56,7 +57,9 @@
 			beer_btn.style.background = default_color;
 			breweries_btn.style.background = selected_color;
 			beer_btn.checked = false;
-			breweries_btn.checked = true;		}
+			breweries_btn.checked = true;
+			icon_layout.addTo(map);
+		}
 	</script>
 	<!--
 <nav>
@@ -101,10 +104,11 @@
 		</div>
 	</nav>
 	<div id="map">
-		<div class="btn-group" role="group" aria-label="Basic example">
-			<button type="checkbox" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">Beers</button>
-			<button type="checkbox" class="btn btn-secondary" id="breweries-btn" onclick="javascript: selectBreweries()">Breweries</button>
+		<div id="btn-gr" class="btn-group" role="group" aria-label="Basic example">
+			<button type="checkbox" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">None</button>
+			<button type="checkbox" class="btn btn-secondary" id="breweries-btn" onclick="javascript: selectBreweries()"><img src="images/brew.png"></button>
 		</div>
+
 
 		<form class="myform_data">
 			<div class="form-row align-items-center">

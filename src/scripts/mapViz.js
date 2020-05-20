@@ -55,7 +55,7 @@ var map = L.mapbox.map('map')
     .setView([37.8, -20], 3)
     .addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
 map.options.minZoom = 2.1;
-map.options.maxZoom = 10;
+map.options.maxZoom = 12;
 map.setMaxBounds(new L.LatLngBounds([-58.9, -175.7], [75.9, 180]));
 map.options.maxBoundsViscosity = 0.5;
 geojson.on('data:loaded', function () {
@@ -66,10 +66,10 @@ geojson.on('data:loaded', function () {
 
 
 /**
- * return true if the beer is selected, false if the brewery is selected
+ * return true if the icons need to be seen
  */
-function beer_or_breweries() {
-    return document.getElementById("beer-btn").checked;
+function show_icon() {
+    return ! document.getElementById("beer-btn").checked;
 }
 
 /**
@@ -178,7 +178,8 @@ info.onAdd = function (map) {
 info.update = function (props) {
     if (!props) {
         this._div.innerHTML = '';
-    } else {
+    } else if(world){
+
         this._div.innerHTML ='<b>' + props.ISO_A2 + "</b><br/>" + '<h3>' + props.ADMIN + '</h3>';
 
         let content = get_data_for_C(props);
@@ -196,6 +197,31 @@ info.update = function (props) {
         if( beer && brewery){
             this._div.innerHTML +="<br><i class='fas fa-beer'></i> "+beer;
             this._div.innerHTML +="<br><i class=' fas fa-industry'></i> "+brewery;
+        }
+
+    }else{
+        let breweries_data = data_country_per_pos[props._latlng];
+
+        this._div.innerHTML=""
+
+        for( b in breweries_data){
+            let dat = breweries_data[b];
+            this._div.innerHTML +='<h3><i class=\' fas fa-industry\'></i> <i>'+dat["brewery"]+"</i></h3>";
+            let content = dat[get_data_to_show()];
+            if(content) {
+                if(content%1 !== 0){
+                    content = content.toFixed(2);
+                }
+                this._div.innerHTML +="<b>"+get_data_text()+": </b>";
+                this._div.innerHTML += content +" "+ get_data_unit();
+
+            }
+            let beer = dat[get_data_associated_beer_index()];
+            if(beer){
+                this._div.innerHTML +="<br><i class='fas fa-beer'></i> "+beer;
+            }
+            this._div.innerHTML +="<br><br>";
+
         }
 
     }
@@ -297,10 +323,12 @@ function groupBy(xs, key) {
 }
 var markers_layout = L.layerGroup();
 markers_layout.addTo(map);
+var icon_layout = L.layerGroup();
 
 function update_breweries_on_map(){
     if(markers_layout) {
         markers_layout.clearLayers();
+        icon_layout.clearLayers();
         //markers_layout.remove();
         if(world){
             return;
@@ -320,13 +348,16 @@ function update_breweries_on_map(){
         if(!datas[0].lat || !datas[0].long){
             continue;
         }
-
-        markers_layout.addLayer(L.circleMarker([datas[0].lat, datas[0].long], {
+        const circle= L.circleMarker([datas[0].lat, datas[0].long], {
             color: color,
             fillColor: color,
             fillOpacity: 0.5,
             radius: 24*Math.sqrt(datas.length)
-        }));
+        });
+        circle.on('mouseover',ev=>{info.update(ev.target)});
+        circle.on('mouseout',ev=> {info.update()});
+
+        markers_layout.addLayer(circle);
     }
 
     for(latlong in data_country_per_pos) {
@@ -346,12 +377,11 @@ function update_breweries_on_map(){
         }
 
         const icon=L.icon({
-
             iconUrl: 'images/brew.png',
             iconSize:     [size, size], // size of the icon
         })
 
-        markers_layout.addLayer(L.marker([datas[0].lat, datas[0].long], {icon: icon}).bindPopup(breweries));
+        icon_layout.addLayer(L.marker([datas[0].lat, datas[0].long], {icon: icon}).bindPopup(breweries).on('mouseover',ev=>{info.update(ev.target)}));
     }
 }
 
@@ -548,6 +578,7 @@ function returnToWorld() {
     world = true;
     document.getElementById('closeCountry').style.display = 'none';
     document.getElementById('beer-type').style.display='block';
+    document.getElementById("btn-gr").style.display='none'
 
     map.setView([37.8, -20], 3);
     updateColorScheme();
@@ -571,6 +602,7 @@ function selectCountry(target) {
     // TODO remove the 2 lines when type implemented
     document.getElementById('beer-type').style.display='none';
     document.getElementById("beerSelection").selectedIndex = 0;
+    document.getElementById("btn-gr").style.display='block'
 
 
     country = target.feature.properties.ISO_A2;

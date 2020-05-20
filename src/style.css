@@ -313,7 +313,7 @@ main ul {
  */
 .btn-group {
     position: absolute;
-    left: 100px;
+    right: 10px;
     top: 18px;
     z-index: 2;
     display: none;
