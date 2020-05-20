@@ -20,13 +20,12 @@ const hilight = {
 const selected = {
     weight: 3,
     fillColor: "#FFF897",
-    fillOpacity: 1,
-    weight: 1,
+    fillOpacity: 0,
     color: "#604000",
 };
 
 const hide = {
-    fillColor: "#FFFFFF",
+    fillColor: "#FFF897",
     fillOpacity: 1,
     weight: 1,
     color: "#604000",
@@ -53,8 +52,8 @@ var geojson = new L.GeoJSON.AJAX("../data/countries.geojson", {style: style, onE
 
 L.mapbox.accessToken = 'pk.eyJ1IjoibG92aXRhbmEiLCJhIjoiY2s5aGM4MWU2MGFmZDNubW5hZzhvYzUwcSJ9.fxbhUaa-uvN57kEkyKAALA';
 var map = L.mapbox.map('map')
-    .setView([37.8, -20], 3);
-    //.addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
+    .setView([37.8, -20], 3)
+    .addLayer(L.mapbox.styleLayer('mapbox://styles/lovitana/ck9hcar40128e1in25eib56gd'));
 map.options.minZoom = 2.1;
 map.options.maxZoom = 10;
 map.setMaxBounds(new L.LatLngBounds([-58.9, -175.7], [75.9, 180]));
@@ -63,12 +62,6 @@ geojson.on('data:loaded', function () {
     geojson.addTo(map);
 });
 
-
-
-function projectPoint(lat, long) {
-    var point = map.latLngToLayerPoint(new L.LatLng(lat, long));
-    this.stream.point(point.x, point.y);
-}
 
 
 
@@ -241,23 +234,59 @@ function whenDataLoaded() {
  */
 var data_country = [""];
 var data_country_per_pos = [""];
+const MAX_SIZE=100;
 function load_data_country(isoCode){
     fetch("../data/country_data/"+isoCode+".json")
         .then(response => response.json())
         .then(data_c=>{
-            data_country = data_c;
+            data_country = getRandom(data_c,MAX_SIZE);
+            data_country.forEach(d=>{d.LatLong = L.latLng([d.lat,d.long]);});
+            data_country_per_pos=groupBy(data_country,"LatLong");
             whenCountryDataLoaded();
         });
 
 }
 
-function whenCountryDataLoaded() {
-    data_country.forEach(d=>{d.LatLong = L.latLng([d.lat,d.long]);});
-    data_country_per_pos=groupBy(data_country,"LatLong");
-    console.log(data_country);
 
+function whenCountryDataLoaded() {
+    updateColorScheme();
     update_breweries_on_map();
 
+}
+
+function combineData(datas){
+    let d_s = get_data_to_show();
+    if(d_s==="n_beers" || d_s =="avg_abv"){
+        let sum =0;
+        for( d in datas){
+            sum += datas[d][d_s];
+        }
+        return (d_s==="n_beers")? sum: sum/datas.length;
+    }
+    if(d_s==="max_abv"  || d_s==="best_beer_score" || d_s === "popularity") {
+        let max =datas[0][d_s];
+        for( d in datas){
+            if(max < datas[d][d_s]){
+                max = datas[d][d_s];
+            }
+        }
+        return max;
+    }
+    return 0.0;
+}
+
+function getRandom(arr, n) {
+    let result = new Array(n),
+        len = arr.length,
+        taken = new Array(len);
+    if (n > len)
+        return arr;
+    while (n--) {
+        let x = Math.floor(Math.random() * len);
+        result[n] = arr[x in taken ? taken[x] : x];
+        taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
 }
 
 function groupBy(xs, key) {
@@ -266,38 +295,64 @@ function groupBy(xs, key) {
         return rv;
     }, {});
 }
-var markers_layout;
+var markers_layout = L.layerGroup();
+markers_layout.addTo(map);
 
 function update_breweries_on_map(){
     if(markers_layout) {
-        markers_layout.removeFrom(map);
+        markers_layout.clearLayers();
+        //markers_layout.remove();
+        if(world){
+            return;
+        }
+
+    }
+    //let markers = [];
+    for(latlong in data_country_per_pos) {
+
+        let datas = data_country_per_pos[latlong];
+        let breweries = "";
+
+        let color = getColor(combineData(datas));
+        if(!color){
+            color = "white";
+        }
+        if(!datas[0].lat || !datas[0].long){
+            continue;
+        }
+
+        markers_layout.addLayer(L.circleMarker([datas[0].lat, datas[0].long], {
+            color: color,
+            fillColor: color,
+            fillOpacity: 0.5,
+            radius: 24*Math.sqrt(datas.length)
+        }));
     }
 
-    let markers = data_country.map(d=>{
-        const icon=L.icon({
-            iconUrl: 'images/brew.png',
-            iconSize:     [50, 50], // size of the icon
-        })
+    for(latlong in data_country_per_pos) {
 
-        return L.marker([d.lat,d.long],{icon:icon}).bindPopup(d.brewery);
-    })
-
-    /*for(latlong in data_country_per_pos) {
-
-        let datas = data_country[latlong];
+        let datas = data_country_per_pos[latlong];
+        let breweries = "";
 
         for (d in datas) {
-            console.log(d);
-            markers.push(L.circle([d.lat, d.long], {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: 10000
-            }).bindPopup(d.brewery));
+            breweries += datas[d].brewery + "<br>"
         }
-    }*/
-    markers_layout = L.layerGroup(markers);
-    markers_layout.addTo(map);
+        let size = Math.floor(25*Math.sqrt(datas.length));
+        if(!size){
+            size = 25;
+        }
+        if(!datas[0].lat || !datas[0].long){
+            continue;
+        }
+
+        const icon=L.icon({
+
+            iconUrl: 'images/brew.png',
+            iconSize:     [size, size], // size of the icon
+        })
+
+        markers_layout.addLayer(L.marker([datas[0].lat, datas[0].long], {icon: icon}).bindPopup(breweries));
+    }
 }
 
 
@@ -307,7 +362,11 @@ function update_breweries_on_map(){
 function whenShowingChange() {
     updateColorScheme();
     changeWordCloud();
-    geojson.setStyle(style);
+    if(world) {
+        geojson.setStyle(style);
+    }else{
+        update_breweries_on_map();
+    }
 }
 
 
@@ -332,24 +391,44 @@ function updateColorScheme() {
 
     let array = [];
     let dat_to_show = get_data_to_show();
-    min_val = datas['US'][dat_to_show];
-    max_val = datas['US'][dat_to_show];
-    for (c in datas) {
+    if(world) {
+        min_val = datas['US'][dat_to_show];
+        max_val = datas['US'][dat_to_show];
+        for (c in datas) {
 
-        let d = datas[c][dat_to_show];
-        if(c === 'null' || !d){
-            continue;
-        }
+            let d = datas[c][dat_to_show];
+            if (c === 'null' || !d) {
+                continue;
+            }
 
-        if(d<min_val){
-            min_val = d;
+            if (d < min_val) {
+                min_val = d;
+            }
+            if (max_val < d) {
+                max_val = d;
+            }
         }
-        if(max_val<d){
-            max_val = d;
+    }else{
+        min_val = 10000;
+        max_val =0;
+        for (c in data_country_per_pos) {
+
+            let d = combineData(data_country_per_pos[c]);
+            if (c === 'null' || !d) {
+                continue;
+            }
+
+            if (d < min_val) {
+                min_val = d;
+            }
+            if (max_val < d) {
+                max_val = d;
+            }
         }
     }
 
     legend.update();
+    info.update();
 }
 
 
@@ -366,8 +445,27 @@ function getColor(d) {
 var legend = L.control({position: 'bottomright'});
 
 legend.update = function () {
+    this._div.innerHTML = "";
+
+    if(!world){
+        this._div.innerHTML+=
+            " <svg height=\"180\" width=\"300\">\n" +
+            "  <circle cx=\"90\" cy=\"148\" r=\"24\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\" />\n" +
+            "   <circle cx=\"90\" cy=\"113\" r=\"59\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\" />\n" +
+            "   <circle cx=\"90\" cy=\"90\" r=\"83\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\"/>\n" +
+            "   <line x1=\"90\" y1=\"7\" x2=\"180\" y2=\"7\" style=\"stroke:black\" stroke-width=1 />\n" +
+            "    <line x1=\"90\" y1=\"124\" x2=\"180\" y2=\"124\" style=\"stroke:black\" stroke-width=1 />\n" +
+            "    <line x1=\"90\" y1=\"54\" x2=\"180\" y2=\"54\" style=\"stroke:black\" stroke-width=1 />\n" +
+            "   <text x=\"183\" y=\"15\">12 Breweries</text>\n" +
+            "   <text x=\"183\" y=\"59\">\n" +
+            "     6 Breweries\n" +
+            "   </text>\n" +
+            "   <text x=\"183\" y=\"129\"> 1 Brewery</text>\n" +
+            "</svg> "
+    }
+
     // loop through our density intervals and generate a label with a colored square for each interval
-    this._div.innerHTML ="<h2><b>" + get_data_text()+"</b>  ("+get_data_unit()+")</h2>";
+    this._div.innerHTML +="<h2><b>" + get_data_text()+"</b>  ("+get_data_unit()+")</h2>";
     this._div.innerHTML +="<div class='gradient'>"
     for(let i = 100; i >= 1; i--){
         this._div.innerHTML +="<span class='grad-step' style='background-color:"+colorScale(i/100.0)+"' ></span>"
@@ -444,18 +542,22 @@ function style(feature) {
  * Goes back to world view
  */
 function returnToWorld() {
+
     data_country =[];
-    update_breweries_on_map()
+
     world = true;
     document.getElementById('closeCountry').style.display = 'none';
     document.getElementById('beer-type').style.display='block';
+
     map.setView([37.8, -20], 3);
+    updateColorScheme();
     geojson.setStyle(style);
     info.update();
     c_properties = "";
     country = "";
     document.getElementById("specific-infos").innerHTML = "GENERIC INFOS";
     //getBeerSelection();
+    update_breweries_on_map()
 }
 
 /**
