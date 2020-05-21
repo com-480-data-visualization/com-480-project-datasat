@@ -608,7 +608,7 @@ function selectCountry(target) {
     country = target.feature.properties.ISO_A2;
     c_properties = target.feature.properties;
     //getBeerSelection();
-
+    document.getElementById('chart-container').innerHTML = ''
     geojson.setStyle(hide);
     target.setStyle(selected);
     info.update(c_properties);
@@ -723,7 +723,7 @@ function get_fun_fact(country) {
     fetch("../data/country_fun_facts/" + country + ".html")
             .then(function(response) {
                 if (!response.ok) {
-                    return "DATA BASED INFORMATION";
+                    return getCountryGenericData(country);
                 }else {
                     return response.text();
                 }
@@ -733,4 +733,22 @@ function get_fun_fact(country) {
             })
             .catch((err) => alert(err));
 
+}
+function getCountryGenericData(country) {
+    if (country in datas){
+        var description = "<ul>";
+        if ("n_beers" in datas[country]) {
+            description += "<li>There are " + datas[country]["n_beers"] + " different craft beers in this country. <br> <br>";
+        }
+        if ("max_abv_beer" in datas[country]) {
+            description += "<li>The beer with the highest ABV is : " + datas[country]["max_abv_beer"] + " with an ABV of " + datas[country]["max_abv"] + "<br><br>";
+        }
+        if ("best_beer" in datas[country]) {
+            description += "<li>The best reviewed beer is : " + datas[country]["best_beer"] + "<br><br>";
+        }
+        description += "</ul>";
+        return description;
+    }else {
+        return "No information about this country...";
+    }
 }
