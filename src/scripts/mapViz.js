@@ -578,7 +578,7 @@ function returnToWorld() {
     world = true;
     document.getElementById('closeCountry').style.display = 'none';
     document.getElementById('beer-type').style.display='block';
-    document.getElementById("btn-gr").style.display='none'
+    document.getElementById("btn-gr").style.display='none';
 
     map.setView([37.8, -20], 3);
     updateColorScheme();
@@ -586,9 +586,9 @@ function returnToWorld() {
     info.update();
     c_properties = "";
     country = "";
-    document.getElementById("specific-infos").innerHTML = "GENERIC INFOS";
+    get_fun_fact('HOME');
     //getBeerSelection();
-    update_breweries_on_map()
+    update_breweries_on_map();
 }
 
 /**
@@ -602,7 +602,7 @@ function selectCountry(target) {
     // TODO remove the 2 lines when type implemented
     document.getElementById('beer-type').style.display='none';
     document.getElementById("beerSelection").selectedIndex = 0;
-    document.getElementById("btn-gr").style.display='block'
+    document.getElementById("btn-gr").style.display='block';
 
 
     country = target.feature.properties.ISO_A2;

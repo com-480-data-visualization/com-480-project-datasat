@@ -35,7 +35,7 @@
 			document.getElementById("beer-btn").click();
 			var dataTypeSelection = document.getElementById("dataSelection");
 			var dataType = dataTypeSelection.options[dataTypeSelection.selectedIndex].value;
-			document.getElementById("most-pop-beers").innerHTML = "Beers with the highest " + dataType + " in the world : ";
+			get_fun_fact('HOME');
 			var buttonWorld = document.getElementById('closeCountry');
 			buttonWorld.style.display = 'none';
 		});
