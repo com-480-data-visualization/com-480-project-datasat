@@ -1,4 +1,4 @@
-<!doctype html>
+	<!doctype html>
 <html lang="en">
 
 <head>
@@ -111,7 +111,7 @@
 			<div class="form-row align-items-center">
 				<div class="col-auto my-1">
 					<label class="mr-sm-2 sr-only" >Data</label>
-					<select class="custom-select mr-sm-2" id="dataSelection" onChange="whenShowingChange()" >
+					<select class="custom-select mr-sm-2" id="dataSelection" onChange="whenShowingChange(0)" >
 						<option selected value="n_beers" data-unit="" >Number of Beers</option>
 						<option value="avg_abv" data-unit="%">Average Alcohol By Volume (ABV)</option>
 						<option value="max_abv" data-beer="max_abv_beer" data-brew="max_abv_brewery" data-unit="%">
@@ -131,7 +131,7 @@
 			<div class="form-row align-items-center">
 				<div class="col-auto my-1" id="beer-type">
 					<label class="mr-sm-2 sr-only">Preference</label>
-					<select class="custom-select mr-sm-2" id="beerSelection" onchange="whenShowingChange()">
+					<select class="custom-select mr-sm-2" id="beerSelection" onchange="whenShowingChange(1)">
 						<option selected value="AllBeer">All Beer Types</option>
 						<option value="IPA" onclick="">Indian Pale Ale</option>
 						<option value="Stout">Stout</option>
@@ -160,6 +160,30 @@
 		<div id="specific-infos">
 			<span id="most-pop-beers"></span>
 		</div>
+		<form class="myform-cloud">
+			<div class="form-row align-items-center">
+				<div class="col-auto my-1" id="beer-type2">
+					<label class="mr-sm-2 sr-only">Preference</label>
+					<select class="custom-select mr-sm-2" id="beerSelection2" onchange="whenShowingChange(2)">
+						<option selected value="AllBeer">All Beer Types</option>
+						<option value="IPA" onclick="">Indian Pale Ale</option>
+						<option value="Stout">Stout</option>
+						<option value="Porter">Porter</option>
+						<option value="Lager">Lager</option>
+						<option value="Barleywine">Barleywine </option>
+						<option value="Ale">Ale </option>
+						<option value="Pilsner">Pilsner </option>
+						<option value="Fruit">Fruit </option>
+						<option value="Roggenbier">Roggenbier </option>
+						<option value="Herb">Herb </option>
+						<option value="Smoke">Smoke </option>
+
+					</select>
+				</div>
+
+			</div>
+		</form>
+
 		<div id="chart-container"></div>
 	</div>
 

@@ -325,7 +325,12 @@ main ul {
     margin-top: 14px;
     z-index: 2;
 }
-
+.myform-cloud {
+    position: absolute;
+    right: 0px;
+    bottom: 225px;
+    z-index: 3;
+}
 .myform_data {
     position: absolute;
     margin-left: 65px;

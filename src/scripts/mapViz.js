@@ -61,6 +61,7 @@ map.options.maxBoundsViscosity = 0.5;
 geojson.on('data:loaded', function () {
     geojson.addTo(map);
 });
+changeWordCloud();
 
 
 
@@ -389,7 +390,18 @@ function update_breweries_on_map(){
 /**
  *
  */
-function whenShowingChange() {
+function whenShowingChange(index) {
+    var beer1 = document.getElementById("beerSelection");
+    var beer2 = document.getElementById("beerSelection2");
+    if(beer1.selectedIndex != beer2.selectedIndex){
+        if(index == 1){
+            beer2.selectedIndex = beer1.selectedIndex;
+        }
+        if(index == 2){
+            beer1.selectedIndex = beer2.selectedIndex;
+        }
+    }
+
     updateColorScheme();
     changeWordCloud();
     if(world) {
@@ -678,22 +690,21 @@ function changeWordCloud(){
     var selected = beer.options[beer.selectedIndex].value;
     if( selected != "AllBeer"){
         var chart = anychart.tagCloud(getDataWords(selected));
-
-        // enable a color range
+    }else{
+        var chart = anychart.tagCloud();
+    }
         var customColorScale = anychart.scales.linearColor();
         customColorScale.colors([ "#DF8D03","#A94E02"]);
-        //chart.title("How beer lovers describe the "+ selected +'s:')
 
         var title = chart.title();
-//enables HTML tags
         title.enabled(true);
 
         title.useHtml(true);
         title.text(
-    
         "<br><a style=\"color:#460000;\">"+
-        "How beer lovers describe the "+ selected +"s:</a>"
+        "How beer lovers describe the   ..........................:</a>"
         );
+
         chart.colorScale(customColorScale);
         chart.bounds(0,0,'100%','100%');
         chart.angles([0])
@@ -701,8 +712,9 @@ function changeWordCloud(){
         // set the color range length
         chart.container("chart-container");
         chart.draw();
+    
 
-    }
+
 }
 
 var word_data = "";
