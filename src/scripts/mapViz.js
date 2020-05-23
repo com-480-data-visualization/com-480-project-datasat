@@ -38,6 +38,12 @@ const noDataStyle = {
     color: "#ffffff",
 };
 
+const searchResultStyle = {
+    fillColor: "#ff0000",
+    fillOpacity: 1,
+    weight: 1,
+    color: "#ffffff",
+};
 /*
  * global variables
  */
@@ -712,7 +718,7 @@ function changeWordCloud(){
         // set the color range length
         chart.container("chart-container");
         chart.draw();
-    
+
 
 
 }
@@ -726,7 +732,7 @@ fetch("../data/word_cloud.json")
 
 function getDataWords(beerSelected){
     return word_data[beerSelected]["words"]
-}   
+}
 
 function get_fun_fact(country) {
     file_path = "../data/country_fun_facts/" + country + ".html";
@@ -763,4 +769,69 @@ function getCountryGenericData(country) {
     }else {
         return "No information about this country...";
     }
+}
+
+function findLayer() {
+    var searchInput = document.getElementById("search-input").value;
+    var countries = getCountriesFromSearch(searchInput);
+    //var countryCode = document.getElementById("search-input").value;
+    var layers = geojson["_layers"];
+    var correctLayers = [];
+    for(e in layers){
+        var code = layers[e]["feature"]["properties"]["ISO_A2"];
+        if (countries.includes(code)) {
+            correctLayers.push(layers[e]);
+        }
+    }
+    if (correctLayers != []) {
+        resetStyles();
+        for(let i = 0 ; i < correctLayers.length ; i++) {
+            correctLayers[i].setStyle(searchResultStyle);
+        }
+    }
+    else {
+        resetStyles();
+    }
+}
+
+function resetStyles() {
+    var layers = geojson["_layers"];
+    for(e in layers) {
+        layers[e].setStyle(style(layers[e]["feature"]));
+    }
+}
+
+var beerSearchData = "";
+fetch("../data/beer_search_data.json")
+    .then(response => response.json())
+    .then(data => {
+        beerSearchData = data;
+    });
+
+var brewerySearchData = "";
+fetch("../data/brewery_search_data.json")
+    .then(response => response.json())
+    .then(data => {
+        brewerySearchData = data;
+    });
+
+function getCountriesFromSearch(searchInput) {
+    var countries = [];
+    for (item in beerSearchData) {
+        if (beerSearchData[item]["beer"] == searchInput) {
+            var c = beerSearchData[item]["country"];
+            if (countries.includes(c) == false) {
+                countries.push(c);
+            }
+        }
+    }
+    for (item in brewerySearchData) {
+        if (brewerySearchData[item]["brewery"] == searchInput) {
+            var c = brewerySearchData[item]["country"];
+            if (countries.includes(c) == false) {
+                countries.push(c);
+            }
+        }
+    }
+    return countries
 }

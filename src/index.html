@@ -99,6 +99,10 @@
 				</li>
 			</ul>
 		</div>
+		<form class="form-inline my-2 my-lg-0" onsubmit="return false">
+      		<input class="form-control mr-sm-2" id="search-input" type="search" placeholder="Beer name or brewery" aria-label="Search" onsearch="findLayer()">
+      		<button class="btn btn-warning my-2 my-sm-0" type="button" onclick="javascript: findLayer()">Search</button>
+    	</form>
 	</nav>
 	<div id="map">
 		<div id="btn-gr" class="btn-group" role="group" aria-label="Basic example">
@@ -115,7 +119,7 @@
 						<option selected value="n_beers" data-unit="" >Number of Beers</option>
 						<option value="avg_abv" data-unit="%">Average Alcohol By Volume (ABV)</option>
 						<option value="max_abv" data-beer="max_abv_beer" data-brew="max_abv_brewery" data-unit="%">
-							Max ABV	
+							Max ABV
 						</option>
 						<option value="best_beer_score" data-beer="best_beer" data-brew="best_brewery" data-unit="/5">
 							Best Rating on BeerAdvocate</option>
