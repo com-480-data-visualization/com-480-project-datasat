@@ -847,96 +847,201 @@ fetch("../data/searchKeys.json")
         //autocomplete(document.getElementById("search-input"), searchKeys);
     });
 */
-var searchData = "";
-fetch("../data/search_data.json")
-    .then(response => response.json())
-    .then(data => {
-        searchData = data;
-        var inp = document.getElementById("search-input");
-        var currentFocus;
-        inp.addEventListener("input", function(e) {
-            var a, b, i, val = this.value;
-            closeAllLists();
-            if (val) {
-                if (val.length >= 3) {
-                    var key = val.slice(0, 3);
-                    var keys = searchData.map(x => x["key"]);
-                    if (keys.includes(key)) {
-                        var beers = searchData.filter(x => x["key"] == key).map(x => x["beer"])[0];
-                        currentFocus = -1;
-                        a = document.createElement("DIV");
-                        a.setAttribute("id", this.id + "autocomplete-list");
-                        a.setAttribute("class", "autocomplete-items");
-                        this.parentNode.appendChild(a);
-                        for(let i = 0 ; i < beers.length; i++) {
-                            //console.log(beers[i]);
-                            if (beers[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                                b = document.createElement("DIV");
-                                b.innerHTML = "<strong>" + beers[i].substr(0, val.length) + "</strong>";
-                                b.innerHTML += beers[i].substr(val.length);
-                                /*insert a input field that will hold the current array item's value:*/
-                                b.innerHTML += "<input type='hidden' value='" + beers[i] + "'>";
-                                b.addEventListener("click", function(e) {
-                                    inp.value = this.getElementsByTagName("input")[0].value;
-                                    closeAllLists();
-                                })
-                                a.appendChild(b);
-                            }
+var searchCategorySelection = document.getElementById("search-cat");
+var searchCategory = searchCategorySelection.options[searchCategorySelection.selectedIndex].value;
+
+function changeSearchCat() {
+    searchCategory = searchCategorySelection.options[searchCategorySelection.selectedIndex].value;
+}
+
+var beerAuto = "";
+fetch("../data/beer_auto.json")
+.then(response => response.json())
+.then(data => {
+    beerAuto = data;
+    var inp = document.getElementById("search-input");
+    var currentFocus;
+    inp.addEventListener("input", function(e) {
+        if (searchCategory == "Beer") {
+        var a, b, i, val = this.value;
+        closeAllLists();
+        if (val) {
+            if (val.length >= 3) {
+                var key = val.slice(0, 3);
+                var keys = beerAuto.map(x => x["beer_key"]);
+                if (keys.includes(key)) {
+                    var beers = beerAuto.filter(x => x["beer_key"] == key).map(x => x["beer"])[0];
+                    currentFocus = -1;
+                    a = document.createElement("DIV");
+                    a.setAttribute("id", this.id + "autocomplete-list");
+                    a.setAttribute("class", "autocomplete-items");
+                    this.parentNode.appendChild(a);
+                    for(let i = 0 ; i < beers.length; i++) {
+                        //console.log(beers[i]);
+                        if (beers[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                            b = document.createElement("DIV");
+                            b.innerHTML = "<strong>" + beers[i].substr(0, val.length) + "</strong>";
+                            b.innerHTML += beers[i].substr(val.length);
+                            /*insert a input field that will hold the current array item's value:*/
+                            b.innerHTML += "<input type='hidden' value='" + beers[i] + "'>";
+                            b.addEventListener("click", function(e) {
+                                inp.value = this.getElementsByTagName("input")[0].value;
+                                closeAllLists();
+                            })
+                            a.appendChild(b);
                         }
                     }
                 }
             }
-        });
-        inp.addEventListener("keydown", function(e) {
-            var x = document.getElementById(this.id + "autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
-            if (e.keyCode == 40) {
-                /*If the arrow DOWN key is pressed,
-                increase the currentFocus variable:*/
-                currentFocus++;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 38) { //up
-                /*If the arrow UP key is pressed,
-                decrease the currentFocus variable:*/
-                currentFocus--;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 13) {
-                /*If the ENTER key is pressed, prevent the form from being submitted,*/
-                e.preventDefault();
-                if (currentFocus > -1) {
-                /*and simulate a click on the "active" item:*/
-                    if (x) x[currentFocus].click();
-                    }
-            }
-        });
-          function addActive(x) {
-            /*a function to classify an item as "active":*/
-            if (!x) return false;
-            /*start by removing the "active" class on all items:*/
-            removeActive(x);
-            if (currentFocus >= x.length) currentFocus = 0;
-            if (currentFocus < 0) currentFocus = (x.length - 1);
-            /*add class "autocomplete-active":*/
-            x[currentFocus].classList.add("autocomplete-active");
-          }
-  function removeActive(x) {
-    /*a function to remove the "active" class from all autocomplete items:*/
-    for (var i = 0; i < x.length; i++) {
-      x[i].classList.remove("autocomplete-active");
+        }
     }
-  }
-        function closeAllLists(elmnt) {
-            var x = document.getElementsByClassName("autocomplete-items");
-            for (var i = 0; i < x.length; i++) {
-                if (elmnt != x[i] && elmnt != inp) {
-                    x[i].parentNode.removeChild(x[i]);
+    });
+    inp.addEventListener("keydown", function(e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+                }
+        }
+    });
+      function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+      }
+function removeActive(x) {
+/*a function to remove the "active" class from all autocomplete items:*/
+for (var i = 0; i < x.length; i++) {
+  x[i].classList.remove("autocomplete-active");
+}
+}
+    function closeAllLists(elmnt) {
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+        }
+    }
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
+
+});
+
+var breweryAuto = "";
+fetch("../data/brewery_auto.json")
+.then(response => response.json())
+.then(data => {
+    breweryAuto = data;
+    var inp = document.getElementById("search-input");
+    var currentFocus;
+    inp.addEventListener("input", function(e) {
+        if (searchCategory == "Brewery") {
+        var a, b, i, val = this.value;
+        closeAllLists();
+        if (val) {
+            if (val.length >= 3) {
+                var key = val.slice(0, 3);
+                var keys = breweryAuto.map(x => x["brewery_key"]);
+                if (keys.includes(key)) {
+                    var breweries = breweryAuto.filter(x => x["brewery_key"] == key).map(x => x["brewery"])[0];
+                    currentFocus = -1;
+                    a = document.createElement("DIV");
+                    a.setAttribute("id", this.id + "autocomplete-list");
+                    a.setAttribute("class", "autocomplete-items");
+                    this.parentNode.appendChild(a);
+                    for(let i = 0 ; i < breweries.length; i++) {
+                        //console.log(beers[i]);
+                        if (breweries[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                            b = document.createElement("DIV");
+                            b.innerHTML = "<strong>" + breweries[i].substr(0, val.length) + "</strong>";
+                            b.innerHTML += breweries[i].substr(val.length);
+                            /*insert a input field that will hold the current array item's value:*/
+                            b.innerHTML += "<input type='hidden' value='" + breweries[i] + "'>";
+                            b.addEventListener("click", function(e) {
+                                inp.value = this.getElementsByTagName("input")[0].value;
+                                closeAllLists();
+                            })
+                            a.appendChild(b);
+                        }
+                    }
                 }
             }
         }
-        document.addEventListener("click", function (e) {
-            closeAllLists(e.target);
-        });
-
+    }
     });
+    inp.addEventListener("keydown", function(e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+                }
+        }
+    });
+      function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+      }
+function removeActive(x) {
+/*a function to remove the "active" class from all autocomplete items:*/
+for (var i = 0; i < x.length; i++) {
+  x[i].classList.remove("autocomplete-active");
+}
+}
+    function closeAllLists(elmnt) {
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
+        }
+    }
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
+
+});

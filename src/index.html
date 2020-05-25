@@ -103,6 +103,19 @@
 			<div class="autocomplete">
       		<input class="form-control mr-sm-2" id="search-input" type="search" placeholder="Beer name or brewery" aria-label="Search" onsearch="findLayer()">
       	</div>
+      	<form class="myform">
+			<div class="form-row align-items-center">
+				<div class="col-auto my-1" id="beer-type">
+					<label class="mr-sm-2 sr-only">Preference</label>
+					<select class="custom-select mr-sm-2" id="search-cat" onchange="changeSearchCat()">
+						<option selected value="Beer">Beer</option>
+						<option value="Brewery" onclick="">Brewery</option>
+
+					</select>
+				</div>
+
+			</div>
+		</form>
       		<button class="btn btn-warning my-2 my-sm-0" type="button" onclick="javascript: findLayer()">Search</button>
     	</form>
 	</nav>
