@@ -9,6 +9,7 @@
  How to use:
  	bg-color: var(--color-p0);
  */
+
 :root {
     --color-p0: #FAFAEA;
     --color-p1: #FFF897;
@@ -216,7 +217,8 @@ main ul {
 }
 
 .info-card {
-
+    font-size: 100%;
+    font-family: Arial;
     background-image:linear-gradient(var(--color-p1), var(--color-p2)); ;
     border-left: 1px solid black;
     position:relative;
@@ -326,9 +328,19 @@ main ul {
     z-index: 2;
 }
 .myform-cloud {
+    font-size: 100%;
+    font-family: Arial;
     position: absolute;
-    right: 0px;
-    bottom: 225px;
+    right: 5%;
+    bottom: 28%;
+    z-index: 3;
+}
+#title-cloud {
+    font-size: 100%;
+    font-family: Arial;
+    position: absolute;
+    bottom: 29%;
+    left:5%;
     z-index: 3;
 }
 .myform_data {
@@ -345,6 +357,17 @@ main ul {
     width: 30%;
 }
 
+ #chart-container {
+    position:absolute;
+    /*height:300px;
+    margin-top:500px;*/
+    width: 100%;
+    height:33%;
+    bottom: -2%;
+    left:0%;
+    z-index : 2;
+}
+
 .fun-fact-emph {
     color: var(--color-p6);
     font-weight: bold;
@@ -355,8 +378,8 @@ main ul {
     /*height:300px;
     margin-top:500px;*/
     width: 100%;
-    height:35%;
-    bottom: -20px;
+    height:33%;
+    bottom: -2%;
     left:0%;
     z-index : 2;
 }

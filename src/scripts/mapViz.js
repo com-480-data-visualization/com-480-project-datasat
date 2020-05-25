@@ -605,6 +605,7 @@ function returnToWorld() {
     c_properties = "";
     country = "";
     get_fun_fact('HOME');
+    changeWordCloud();
     //getBeerSelection();
     update_breweries_on_map();
 }
@@ -617,16 +618,19 @@ function selectCountry(target) {
     world = false;
     document.getElementById('closeCountry').style.display = 'block';
 
-    // TODO remove the 2 lines when type implemented
+    // TODO remove the 4 lines when type implemented
     document.getElementById('beer-type').style.display='none';
     document.getElementById("beerSelection").selectedIndex = 0;
-    document.getElementById("btn-gr").style.display='block';
+    document.getElementById("beerSelection2").selectedIndex = 0;
+    document.getElementById('chart-container').innerHTML = ''
+    /////////////////////////////////////////////////
 
+
+    document.getElementById("btn-gr").style.display='block';
 
     country = target.feature.properties.ISO_A2;
     c_properties = target.feature.properties;
     //getBeerSelection();
-    document.getElementById('chart-container').innerHTML = ''
     geojson.setStyle(hide);
     target.setStyle(selected);
     info.update(c_properties);
@@ -700,16 +704,9 @@ function changeWordCloud(){
         var chart = anychart.tagCloud();
     }
         var customColorScale = anychart.scales.linearColor();
-        customColorScale.colors([ "#DF8D03","#A94E02"]);
+        customColorScale.colors([ "#DF8D03","#A94E02"])
 
-        var title = chart.title();
-        title.enabled(true);
-
-        title.useHtml(true);
-        title.text(
-        "<br><a style=\"color:#460000;\">"+
-        "How beer lovers describe the   ..........................:</a>"
-        );
+        chart.title("  ");
 
         chart.colorScale(customColorScale);
         chart.bounds(0,0,'100%','100%');
