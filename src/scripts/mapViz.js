@@ -1,7 +1,7 @@
 /*
  * STYLES for countries
  */
-
+const searchColor = "#8b0000";
 const defaultStyle = {
     fillColor: "#FFF897",
     fillOpacity: 1,
@@ -39,10 +39,10 @@ const noDataStyle = {
 };
 
 const searchResultStyle = {
-    fillColor: "#ff0000",
+    fillColor: searchColor,
     fillOpacity: 1,
-    weight: 1,
-    color: "#ffffff",
+    weight: 4,
+    color: "#000000",
 };
 /*
  * global variables
@@ -672,7 +672,7 @@ function zoomAndSelect(e) {
 function highlightFeature(e, popupContent) {
     var layer = e.target;
     if (layer.feature.properties.ISO_A2 != country) {
-        if (layer.options.fillColor != "#ff0000") {
+        if (layer.options.fillColor != searchColor) {
           layer.setStyle(hilight);
         }
     }
@@ -691,7 +691,7 @@ function highlightFeature(e, popupContent) {
  */
 function mouseOut(e) {
     var layer = e.target;
-    if (layer.options.fillColor != "#ff0000") {
+    if (layer.options.fillColor != searchColor) {
       layer.setStyle(style(e.target.feature));
     }
     if (world) {
@@ -827,6 +827,7 @@ function resetSearchResults() {
   for(let i = 0 ; i < buttons.length ; i++) {
     buttons[i].click();
   }
+  document.getElementById("search-input").value = "";
 }
 
 var beerSearchData = "";
