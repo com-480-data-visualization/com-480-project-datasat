@@ -15,6 +15,9 @@
 	<script src="https://d3js.org/d3.v5.min.js"></script>
 	<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
 	<script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
+
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -22,6 +25,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
 	<script src="https://kit.fontawesome.com/eed8bd2dca.js" crossorigin="anonymous"></script>
+	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js'></script>
 	<link rel="stylesheet" href="style.css">
 
 </head>
@@ -47,7 +51,8 @@
 			breweries_btn.checked = false;
 			breweries_btn.style.background = default_color;
 			beer_btn.style.background = selected_color;
-			icon_layout.remove();
+			markers_layout.remove();
+			markers_cluster.addTo(map);
 
 		}
 
@@ -58,7 +63,8 @@
 			breweries_btn.style.background = selected_color;
 			beer_btn.checked = false;
 			breweries_btn.checked = true;
-			icon_layout.addTo(map);
+			markers_cluster.remove();
+			markers_layout.addTo(map);
 		}
 	</script>
 	<!--
@@ -125,8 +131,8 @@
 	</nav>
 	<div id="map">
 		<div id="btn-gr" class="btn-group" role="group" aria-label="Basic example">
-			<button type="checkbox" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">None</button>
-			<button type="checkbox" class="btn btn-secondary" id="breweries-btn" onclick="javascript: selectBreweries()"><img src="images/brew.png"></button>
+			<button type="checkbox" class="btn btn-secondary" id="beer-btn" onclick="javascript: selectBeers()">Cluster</button>
+			<button type="checkbox" class="btn btn-secondary" id="breweries-btn" onclick="javascript: selectBreweries()">rawData</button>
 		</div>
 
 

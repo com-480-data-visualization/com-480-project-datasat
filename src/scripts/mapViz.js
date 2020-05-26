@@ -272,9 +272,19 @@ function load_data_country(isoCode){
     fetch("../data/country_data/"+isoCode+".json")
         .then(response => response.json())
         .then(data_c=>{
-            data_country = getRandom(data_c,MAX_SIZE);
+            data_country = data_c;//getRandom(data_c,MAX_SIZE);
+
             data_country.forEach(d=>{d.LatLong = L.latLng([d.lat,d.long]);});
             data_country_per_pos=groupBy(data_country,"LatLong");
+
+            let max = 0;
+            for(let latlong in data_country_per_pos){
+                if(max<data_country_per_pos[latlong].length){
+                    max = data_country_per_pos[latlong].length;
+                }
+            }
+            max_breweries = max;
+            rScale = sqrScale(max);
             whenCountryDataLoaded();
         });
 
@@ -284,7 +294,6 @@ function load_data_country(isoCode){
 function whenCountryDataLoaded() {
     updateColorScheme();
     update_breweries_on_map();
-
 }
 
 function combineData(datas){
@@ -308,35 +317,40 @@ function combineData(datas){
     return 0.0;
 }
 
-function getRandom(arr, n) {
-    let result = new Array(n),
-        len = arr.length,
-        taken = new Array(len);
-    if (n > len)
-        return arr;
-    while (n--) {
-        let x = Math.floor(Math.random() * len);
-        result[n] = arr[x in taken ? taken[x] : x];
-        taken[x] = --len in taken ? taken[len] : len;
-    }
-    return result;
-}
-
 function groupBy(xs, key) {
     return xs.reduce(function(rv, x) {
         (rv[x[key]] = rv[x[key]] || []).push(x);
         return rv;
     }, {});
 }
+
+const MIN_R = 10;
+const MAX_R = 50;
+function sqrScale(max){
+    if(max <= 1.1){
+        return x=> MIN_R;
+    }
+    const factor = (MAX_R*MAX_R) / (MIN_R*MIN_R) -1;
+    return x=> MIN_R*Math.sqrt(1.0 + factor*(x-1)/(max-1));
+}
+
+var rScale = x=> 1.0;
+var max_breweries = 0;
+
 var markers_layout = L.layerGroup();
-markers_layout.addTo(map);
-var icon_layout = L.layerGroup();
+var markers_cluster = L.markerClusterGroup({
+    disableClusteringAtZoom: 10,
+    spiderfyOnMaxZoom:false,
+    maxClusterRadius:50
+});
+markers_cluster.addTo(map);
+markers_cluster.on('animationend',ev => {info.update()});
+
 
 function update_breweries_on_map(){
-    if(markers_layout) {
+    if(markers_cluster) {
+        markers_cluster.clearLayers();
         markers_layout.clearLayers();
-        icon_layout.clearLayers();
-        //markers_layout.remove();
         if(world){
             return;
         }
@@ -355,40 +369,29 @@ function update_breweries_on_map(){
         if(!datas[0].lat || !datas[0].long){
             continue;
         }
+        for (let idx = 0; idx < datas.length-1; idx++){
+
+            const circle= L.circleMarker([datas[idx].lat, datas[idx].long], {
+                color: color,
+                fillColor: color,
+                fillOpacity: 0.,
+                opacity:0,
+                radius: 0
+            });
+            markers_cluster.addLayer(circle);
+        }
         const circle= L.circleMarker([datas[0].lat, datas[0].long], {
             color: color,
             fillColor: color,
             fillOpacity: 0.5,
-            radius: 24*Math.sqrt(datas.length)
+            radius: rScale(datas.length)
         });
         circle.on('mouseover',ev=>{info.update(ev.target)});
         circle.on('mouseout',ev=> {info.update()});
 
+        markers_cluster.addLayer(circle);
         markers_layout.addLayer(circle);
-    }
 
-    for(latlong in data_country_per_pos) {
-
-        let datas = data_country_per_pos[latlong];
-        let breweries = "";
-
-        for (d in datas) {
-            breweries += datas[d].brewery + "<br>"
-        }
-        let size = Math.floor(25*Math.sqrt(datas.length));
-        if(!size){
-            size = 25;
-        }
-        if(!datas[0].lat || !datas[0].long){
-            continue;
-        }
-
-        const icon=L.icon({
-            iconUrl: 'images/brew.png',
-            iconSize:     [size, size], // size of the icon
-        })
-
-        icon_layout.addLayer(L.marker([datas[0].lat, datas[0].long], {icon: icon}).bindPopup(breweries).on('mouseover',ev=>{info.update(ev.target)}));
     }
 }
 
@@ -495,20 +498,27 @@ var legend = L.control({position: 'bottomright'});
 legend.update = function () {
     this._div.innerHTML = "";
 
-    if(!world){
+    if(!world && max_breweries >1){
+        let height = MAX_R * 2 + 20;
+        let cy1 = (height-(MIN_R+10));
+        let middle = Math.floor((max_breweries) / 2);
+        console.log(middle);
+        let r2 = rScale(middle);
+        let cy2 = (height-(r2+10));
+        let cy3 = (height-(MAX_R+10))
         this._div.innerHTML+=
-            " <svg height=\"180\" width=\"300\">\n" +
-            "  <circle cx=\"90\" cy=\"148\" r=\"24\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\" />\n" +
-            "   <circle cx=\"90\" cy=\"113\" r=\"59\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\" />\n" +
-            "   <circle cx=\"90\" cy=\"90\" r=\"83\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\"/>\n" +
-            "   <line x1=\"90\" y1=\"7\" x2=\"180\" y2=\"7\" style=\"stroke:black\" stroke-width=1 />\n" +
-            "    <line x1=\"90\" y1=\"124\" x2=\"180\" y2=\"124\" style=\"stroke:black\" stroke-width=1 />\n" +
-            "    <line x1=\"90\" y1=\"54\" x2=\"180\" y2=\"54\" style=\"stroke:black\" stroke-width=1 />\n" +
-            "   <text x=\"183\" y=\"15\">12 Breweries</text>\n" +
-            "   <text x=\"183\" y=\"59\">\n" +
-            "     6 Breweries\n" +
+            " <svg height=\""+height+"\" width=\"300\">\n" +
+            "  <circle cx=\"90\" cy=\""+cy1+"\" r=\""+MIN_R+"\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\" />\n" +
+            "   <circle cx=\"90\" cy=\""+cy2+"\" r=\""+r2+"\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\" />\n" +
+            "   <circle cx=\"90\" cy=\""+cy3+"\" r=\""+MAX_R+"\" stroke=\"black\" stroke-width=\"2\" fill-opacity=\"0\"/>\n" +
+            "   <line x1=\"90\" y1=\""+(cy2-r2)+"\" x2=\"180\" y2=\""+(cy2-r2)+"\" style=\"stroke:black\" stroke-width=1 />\n" +
+            "    <line x1=\"90\" y1=\""+(cy1-MIN_R) +"\" x2=\"180\" y2=\""+(cy1-MIN_R) +"\" style=\"stroke:black\" stroke-width=1 />\n" +
+            "    <line x1=\"90\" y1=\""+(cy3-MAX_R)+"\" x2=\"180\" y2=\""+(cy3-MAX_R)+"\" style=\"stroke:black\" stroke-width=1 />\n" +
+            "   <text x=\"183\" y=\""+(cy3-MAX_R+4)+"\">"+max_breweries+" Breweries</text>\n" +
+            "   <text x=\"183\" y=\""+(cy2-r2+4)+"\">\n" +
+            "     "+middle+" Breweries\n" +
             "   </text>\n" +
-            "   <text x=\"183\" y=\"129\"> 1 Brewery</text>\n" +
+            "   <text x=\"183\" y=\""+(cy1-MIN_R+4)+"\"> 1 Brewery</text>\n" +
             "</svg> "
     }
 
@@ -643,11 +653,15 @@ function selectCountry(target) {
  * @param e event
  */
 function zoomAndSelect(e) {
-    selectCountry(e.target);
-    map.fitBounds(e.target.getBounds());
-    layer = e.target;
-    country = layer.feature.properties.ISO_A2;
-    get_fun_fact(country);
+    let layer = e.target;
+    if(world || country !== layer.feature.properties.ISO_A2) {
+        selectCountry(e.target);
+        map.fitBounds(e.target.getBounds());
+
+        country = layer.feature.properties.ISO_A2;
+        get_fun_fact(country);
+    }
+
 }
 
 /**
