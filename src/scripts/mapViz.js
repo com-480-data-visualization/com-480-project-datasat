@@ -658,7 +658,9 @@ function zoomAndSelect(e) {
 function highlightFeature(e, popupContent) {
     var layer = e.target;
     if (layer.feature.properties.ISO_A2 != country) {
-        layer.setStyle(hilight);
+        if (layer.options.fillColor != "#ff0000") {
+          layer.setStyle(hilight);
+        }
     }
 
     if (world) {
@@ -675,7 +677,9 @@ function highlightFeature(e, popupContent) {
  */
 function mouseOut(e) {
     var layer = e.target;
-    layer.setStyle(style(e.target.feature));
+    if (layer.options.fillColor != "#ff0000") {
+      layer.setStyle(style(e.target.feature));
+    }
     if (world) {
         info.update();
     }
@@ -815,40 +819,49 @@ fetch("../data/brewery_search_data.json")
         brewerySearchData = data;
     });
 
-function getCountriesFromSearch(searchInput) {
-    var countries = [];
-    for (item in beerSearchData) {
-        if (beerSearchData[item]["beer"] == searchInput) {
-            var c = beerSearchData[item]["country"];
-            if (countries.includes(c) == false) {
-                countries.push(c);
-            }
-        }
-    }
-    for (item in brewerySearchData) {
-        if (brewerySearchData[item]["brewery"] == searchInput) {
-            var c = brewerySearchData[item]["country"];
-            if (countries.includes(c) == false) {
-                countries.push(c);
-            }
-        }
-    }
-    return countries
-}
-/*
-var searchKeys = "";
-fetch("../data/searchKeys.json")
-    .then(response => response.json())
-    .then(data => {
-        searchKeys = data;
-        //autocomplete(document.getElementById("search-input"), searchKeys);
-    });
-*/
 var searchCategorySelection = document.getElementById("search-cat");
 var searchCategory = searchCategorySelection.options[searchCategorySelection.selectedIndex].value;
 
 function changeSearchCat() {
-    searchCategory = searchCategorySelection.options[searchCategorySelection.selectedIndex].value;
+  searchCategory = searchCategorySelection.options[searchCategorySelection.selectedIndex].value;
+  document.getElementById("search-input").placeholder = searchCategory + " name";
+}
+
+function getCountriesFromSearch(searchInput) {
+    var countries = [];
+    if (searchCategory == "Beer") {
+      var infos = beerSearchData.filter(x => (x["beer"] + " (" + x["country"] + ")") == searchInput);
+          for(let i = 0 ; i < infos.length ; i++) {
+              var c = infos[i]["country"];
+              var lat = infos[i]["lat"];
+              var long = infos[i]["long"]
+              var abv = infos[i] ["abv"];
+              if(countries.includes(c) == false) {
+                  countries.push(c);
+              }
+              var content = searchInput + "<br>Brewery : " + infos[i]["brewery"] + "<br>Abv : " + abv;
+              if (lat && long) {
+                  var popup = L.popup(options={autoClose:false}).setLatLng(L.latLng(lat, long)).setContent(content).openOn(map);
+              }
+            }
+    }
+    else {
+      var infos = brewerySearchData.filter(x => x["brewery"] == searchInput);
+        for(let i = 0 ; i < infos.length ; i++) {
+            var c = infos[i]["country"];
+            var lat = infos[i]["lat"];
+            var long = infos[i]["long"];
+            var city = infos[i]["city"];
+            if(countries.includes(c) == false) {
+                countries.push(c);
+            }
+            var content = searchInput + "<br>City : " + city + "<br>Country : " + c;
+            if (lat && long) {
+                var popup = L.popup(options={autoClose:false}).setLatLng(L.latLng(lat, long)).setContent(content).openOn(map);
+            }
+        }
+    }
+    return countries
 }
 
 var beerAuto = "";
