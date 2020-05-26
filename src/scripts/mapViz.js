@@ -784,14 +784,19 @@ function findLayer() {
             correctLayers.push(layers[e]);
         }
     }
-    if (correctLayers != []) {
+    if (correctLayers.length != 0) {
         resetStyles();
         for(let i = 0 ; i < correctLayers.length ; i++) {
             correctLayers[i].setStyle(searchResultStyle);
         }
     }
     else {
-        resetStyles();
+      var buttons = $(".leaflet-popup-close-button");
+      for(let i = 0 ; i < buttons.length ; i++) {
+        buttons[i].click();
+      }
+      //map.closePopup();
+      resetStyles();
     }
 }
 
@@ -871,6 +876,12 @@ fetch("../data/beer_auto.json")
     beerAuto = data;
     var inp = document.getElementById("search-input");
     var currentFocus;
+    inp.addEventListener("keyup", function(e) {
+			if (e.keyCode === 13) {
+				e.preventDefault();
+				document.getElementById("search-btn").click();
+			}
+		});
     inp.addEventListener("input", function(e) {
         if (searchCategory == "Beer") {
         var a, b, i, val = this.value;
