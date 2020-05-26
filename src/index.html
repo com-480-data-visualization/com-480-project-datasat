@@ -99,7 +99,8 @@
 				</li>
 			</ul>
 		</div>
-		<form class="form-inline my-2 my-lg-0" onsubmit="return false">
+
+		<form id="searchGroup" class="form-inline my-2 my-lg-0" onsubmit="return false">
 			<div class="autocomplete">
       		<input class="form-control mr-sm-2" id="search-input" type="search" placeholder="Beer name" aria-label="Search" onsearch="findLayer()">
       	</div>
@@ -113,11 +114,14 @@
 
 					</select>
 				</div>
-
 			</div>
+			<button class="btn btn-warning my-2 my-sm-0" id="search-btn" type="button" onclick="javascript: findLayer()">Search</button>
 		</form>
-      		<button class="btn btn-warning my-2 my-sm-0" id="search-btn" type="button" onclick="javascript: findLayer()">Search</button>
+		<button class="btn btn-warning my-2 my-sm-0" id="clear-search-btn" type="button" onclick="javascript: resetSearchResults()">Clear</button>
+
     	</form>
+
+
 	</nav>
 	<div id="map">
 		<div id="btn-gr" class="btn-group" role="group" aria-label="Basic example">

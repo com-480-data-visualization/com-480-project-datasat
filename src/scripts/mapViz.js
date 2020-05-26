@@ -807,6 +807,14 @@ function resetStyles() {
     }
 }
 
+function resetSearchResults() {
+  resetStyles();
+  var buttons = $(".leaflet-popup-close-button");
+  for(let i = 0 ; i < buttons.length ; i++) {
+    buttons[i].click();
+  }
+}
+
 var beerSearchData = "";
 fetch("../data/beer_search_data.json")
     .then(response => response.json())
