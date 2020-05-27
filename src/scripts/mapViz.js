@@ -343,7 +343,23 @@ var markers_layout = L.layerGroup();
 var markers_cluster = L.markerClusterGroup({
     disableClusteringAtZoom: 10,
     spiderfyOnMaxZoom:false,
-    maxClusterRadius:50
+    maxClusterRadius:50,
+    iconCreateFunction: function (cluster) {
+        var childCount = cluster.getChildCount();
+        var c = ' marker-cluster-';
+        if (childCount < 10) {
+          c += 'small';
+        } 
+        else if (childCount < 100) {
+          c += 'medium';
+        } 
+        else {
+          c += 'large';
+        }
+       
+        return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', 
+         className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+        }
 });
 markers_cluster.addTo(map);
 markers_cluster.on('animationend',ev => {info.update()});
