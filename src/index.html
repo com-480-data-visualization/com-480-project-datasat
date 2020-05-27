@@ -28,9 +28,13 @@
 	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js'></script>
 	<link rel="stylesheet" href="style.css">
 
+
+
 </head>
 
 <body>
+
+
 	<script>
 
 		const default_color = "grey";
@@ -155,11 +159,11 @@
 					<label class="mr-sm-2 sr-only">Preference</label>
 					<select class="custom-select mr-sm-2" id="beerSelection" onchange="whenShowingChange(1)">
 						<option selected value="AllBeer">All Beer Types</option>
-						<option value="IPA" onclick="">Indian Pale Ale</option>
+						<option value="IPA">Indian Pale Ale</option>
 						<option value="Stout">Stout</option>
 						<option value="Porter">Porter</option>
 						<option value="Lager">Lager</option>
-						<option value="Barleywine">Barleywine </option>
+						<option value="Barleywine">Barleywine</option>
 						<option value="Ale">Ale </option>
 						<option value="Pilsner">Pilsner </option>
 						<option value="Fruit">Fruit </option>
@@ -172,6 +176,7 @@
 
 			</div>
 		</form>
+
 
 
 		<button type="button" class="btn btn-secondary" id="closeCountry" onclick="returnToWorld()"><i class="fas fa-arrow-circle-left"></i> <i class="fas fa-globe-europe"></i> </button>
@@ -211,6 +216,10 @@
 
 			</div>
 		</form>
+		<script>
+			document.getElementById("beerSelection").selectedIndex = 0;
+			document.getElementById("beerSelection2").selectedIndex = 0;
+		</script>
 
 		<div class="chart-class" id="chart-container"></div>
 	</div>
