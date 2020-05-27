@@ -18,7 +18,7 @@ For our project, we picked the dataset called "Beers, Breweries, and Beer Review
 The source of the dataset comes from [Beer Advocate](https://www.beeradvocate.com/).
 It contains information about various craft beers from all around the world. The dataset is composed of three CSV files : beers.csv, breweries.csv and reviews.csv.
 
-The beers.csv file contains information about around 358'000 craft beers : 
+The beers.csv file contains information about around 358'000 craft beers :
 * its name
 * its brewery
 * its state
@@ -31,11 +31,11 @@ The beers.csv file contains information about around 358'000 craft beers :
 
 The breweries.csv file contains information about 50'000 breweries :
 * its city
-* state 
+* state
 * country of origin
 * type of brewery ( bar, shop, eatery...)
 
-The reviews.csv file contains around 9 000 000 reviews from users: 
+The reviews.csv file contains around 9 000 000 reviews from users:
 * 'beer_id'
 * 'username'
 *  'date'
@@ -55,8 +55,8 @@ Some pre-processing on the reviews might be needed since the reviews data table 
     * Some beers have too few reviews to get some relevant data. (doing the average score of each beer will not be relevant for beers with only one reviews)
     * Some reviews have NaN values in the look, smell, taste and feel categories.
     * Some reviews have inconsistent scores for categories and overall. (for example a score of  1.0 for all categories but the maximum score for overall and vice-versa)
-    
-    
+
+
 ### Problematic
 
 We want to build a visualization tool that will help fellow craft beer enthusiasts find their next favorite craft beer !
@@ -101,3 +101,8 @@ The code for our prototype is located in the "src" folder.
 
 **80% of the final grade**
 
+To run the website, you need to deploy a local server using the command `python -m http.server` and you can access the website by typing "localhost:8000" in the browser of your choice. Then, select the "src" link. **Please know that our project is meant to be seen fullscreen**.
+
+Once you are on our website, you can pan and zoom the map. You can also click on a country to obtain more information about it (on the right side of the screen) and zoom on this country. To return to a world view, click on the "Return to world view". You can also visualize various information about the beers in our dataset by changing the filters at the top of the map.
+
+Finally, you can use the search bar to search beer or brewery names. The result of these searches or displayed on the map by popups that are located where the beer/brewery is located along some information.
