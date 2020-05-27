@@ -762,7 +762,11 @@ function get_fun_fact(country) {
                 }
             })
             .then(data => {
-                textBox.innerHTML = data;
+                if(world){
+                    textBox.innerHTML = data;
+                }else {
+                    textBox.innerHTML = '<img src="https://www.countryflags.io/' + country + '/flat/64.png">' + data;
+                }
             })
             .catch((err) => alert(err));
 
