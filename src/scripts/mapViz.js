@@ -82,6 +82,10 @@ function show_icon() {
 /**
  * return the data selected by the form at the top right
  */
+function get_data_to_show_no_genre(){
+    const el = document.getElementById("dataSelection");
+    return el.options[el.selectedIndex].value;
+}
 function get_data_to_show() {
     const el = document.getElementById("dataSelection");
     const beer = document.getElementById("beerSelection")
@@ -299,19 +303,21 @@ function whenCountryDataLoaded() {
 }
 
 function combineData(datas){
-    let d_s = get_data_to_show();
+    console.log(datas);
+    let d_s = get_data_to_show_no_genre();
+    let d_s_g = get_data_to_show();
     if(d_s==="n_beers" || d_s =="avg_abv"){
         let sum =0;
         for( d in datas){
-            sum += datas[d][d_s];
+            sum += datas[d][d_s_g];
         }
         return (d_s==="n_beers")? sum: sum/datas.length;
     }
     if(d_s==="max_abv"  || d_s==="best_beer_score" || d_s === "popularity") {
-        let max =datas[0][d_s];
+        let max =datas[0][d_s_g];
         for( d in datas){
-            if(max < datas[d][d_s]){
-                max = datas[d][d_s];
+            if(max < datas[d][d_s_g]){
+                max = datas[d][d_s_g];
             }
         }
         return max;
@@ -477,11 +483,12 @@ function updateColorScheme() {
             }
         }
     }else{
-        min_val = 10000;
+        min_val = 100000;
         max_val =0;
         for (c in data_country_per_pos) {
 
             let d = combineData(data_country_per_pos[c]);
+
             if (c === 'null' || !d) {
                 continue;
             }
@@ -621,7 +628,6 @@ function returnToWorld() {
 
     world = true;
     document.getElementById('closeCountry').style.display = 'none';
-    document.getElementById('beer-type').style.display='block';
     document.getElementById("btn-gr").style.display='none';
 
     map.setView([37.8, -20], 3);
@@ -644,12 +650,6 @@ function selectCountry(target) {
     world = false;
     document.getElementById('closeCountry').style.display = 'block';
 
-    // TODO remove the 4 lines when type implemented
-    document.getElementById('beer-type').style.display='none';
-    document.getElementById("beerSelection").selectedIndex = 0;
-    document.getElementById("beerSelection2").selectedIndex = 0;
-    document.getElementById('chart-container').innerHTML = ''
-    /////////////////////////////////////////////////
 
 
     document.getElementById("btn-gr").style.display='block';
