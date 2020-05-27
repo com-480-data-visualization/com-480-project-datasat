@@ -406,6 +406,8 @@ main ul {
 
 
 #specific-infos {
+    height: 66%;
+    overflow: auto;
     padding: 10px;
 }
 .autocomplete {
