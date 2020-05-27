@@ -1,3 +1,4 @@
+
 /*
  * STYLES for countries
  */
@@ -303,7 +304,6 @@ function whenCountryDataLoaded() {
 }
 
 function combineData(datas){
-    console.log(datas);
     let d_s = get_data_to_show_no_genre();
     let d_s_g = get_data_to_show();
     if(d_s==="n_beers" || d_s =="avg_abv"){
@@ -386,10 +386,11 @@ function update_breweries_on_map(){
         let datas = data_country_per_pos[latlong];
         let breweries = "";
 
-        let color = getColor(combineData(datas));
-        if(!color){
-            color = "white";
+        let d = combineData(datas);
+        if(d === null){
+            continue;
         }
+        let color = d? getColor(d):"gray";
         if(!datas[0].lat || !datas[0].long){
             continue;
         }
@@ -483,12 +484,11 @@ function updateColorScheme() {
             }
         }
     }else{
-        min_val = 100000;
-        max_val =0;
+        min_val = 100000000;
+        max_val =-1;
         for (c in data_country_per_pos) {
 
             let d = combineData(data_country_per_pos[c]);
-
             if (c === 'null' || !d) {
                 continue;
             }
@@ -499,6 +499,14 @@ function updateColorScheme() {
             if (max_val < d) {
                 max_val = d;
             }
+        }
+        if(min_val>max_val){
+            min_val = 0;
+            max_val = 1;
+        }
+        if(min_val==max_val){
+            min_val -=1;
+            max_val+=1;
         }
     }
 
