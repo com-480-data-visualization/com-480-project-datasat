@@ -355,15 +355,15 @@ var markers_cluster = L.markerClusterGroup({
         var c = ' marker-cluster-';
         if (childCount < 10) {
           c += 'small';
-        } 
+        }
         else if (childCount < 100) {
           c += 'medium';
-        } 
+        }
         else {
           c += 'large';
         }
-       
-        return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', 
+
+        return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>',
          className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
         }
 });
@@ -781,7 +781,21 @@ function get_fun_fact(country) {
                 if(world){
                     textBox.innerHTML = data;
                 }else {
-                    textBox.innerHTML = '<img src="https://www.countryflags.io/' + country + '/flat/64.png">' + data;
+                    var countryName = "";
+                    var layers = geojson["_layers"];
+                    for(e in layers) {
+                      var iso = layers[e]["feature"]["properties"]["ISO_A2"];
+                      if (iso == country) {
+                        countryName = layers[e]["feature"]["properties"]["ADMIN"];
+                        break;
+                      }
+                    }
+                    if (countryName != "") {
+                      textBox.innerHTML = '<img src="https://www.countryflags.io/' + country + '/flat/64.png">' + "<span class='fun-fact-emph'>" + countryName + "</span>" + data;
+                    }
+                    else {
+                      textBox.innerHTML = '<img src="https://www.countryflags.io/' + country + '/flat/64.png">' + data;
+                    }
                 }
             })
             .catch((err) => alert(err));
