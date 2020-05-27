@@ -911,10 +911,10 @@ fetch("../data/beer_auto.json")
         closeAllLists();
         if (val) {
             if (val.length >= 3) {
-                var key = val.slice(0, 3);
-                var keys = beerAuto.map(x => x["beer_key"]);
+                var key = val.slice(0, 3).toUpperCase();
+                var keys = beerAuto.map(x => x["beer_key"].toUpperCase());
                 if (keys.includes(key)) {
-                    var beers = beerAuto.filter(x => x["beer_key"] == key).map(x => x["beer"])[0];
+                    var beers = beerAuto.filter(x => x["beer_key"].toUpperCase() == key).map(x => x["beer"])[0];
                     currentFocus = -1;
                     a = document.createElement("DIV");
                     a.setAttribute("id", this.id + "autocomplete-list");
@@ -1007,10 +1007,10 @@ fetch("../data/brewery_auto.json")
         closeAllLists();
         if (val) {
             if (val.length >= 3) {
-                var key = val.slice(0, 3);
-                var keys = breweryAuto.map(x => x["brewery_key"]);
+                var key = val.slice(0, 3).toUpperCase();
+                var keys = breweryAuto.map(x => x["brewery_key"].toUpperCase());
                 if (keys.includes(key)) {
-                    var breweries = breweryAuto.filter(x => x["brewery_key"] == key).map(x => x["brewery"])[0];
+                    var breweries = breweryAuto.filter(x => x["brewery_key"].toUpperCase() == key).map(x => x["brewery"])[0];
                     currentFocus = -1;
                     a = document.createElement("DIV");
                     a.setAttribute("id", this.id + "autocomplete-list");
