@@ -351,20 +351,24 @@ var markers_cluster = L.markerClusterGroup({
     spiderfyOnMaxZoom:false,
     maxClusterRadius:50,
     iconCreateFunction: function (cluster) {
-        var childCount = cluster.getChildCount();
-        var c = ' marker-cluster-';
-        if (childCount < 10) {
-          c += 'small';
-        }
-        else if (childCount < 100) {
-          c += 'medium';
-        }
-        else {
-          c += 'large';
-        }
+        let childCount = cluster.getChildCount();
+        let childs = cluster.getAllChildMarkers();
 
-        return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>',
-         className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+        let dats = []
+        for( idx in childs){
+            dats = dats.concat(data_country_per_pos[childs[idx]._latlng]);
+        }
+        let d = combineData(dats);
+        let color = d? getColor(d):"#A0A0A0";
+        let nColor = color > "#EC7119"? "black":"white";
+
+        let icon = new L.DivIcon({
+            html: '<div style="background-color: '+color+'"><span style="color:'+nColor+'">' + childCount + '</span></div>',
+            className: 'marker-cluster marker-cluster-large',
+            iconSize: new L.Point(40, 40) });
+       // icon._setIconStyles("background-color","#00FF00FF");
+
+        return icon;
         }
 });
 markers_cluster.addTo(map);
@@ -520,6 +524,7 @@ function getColor(d) {
     let x = 1.0- (d-min_val)/(max_val -min_val);
     return colorScale(x);
 }
+
 
 /*
  * LEGEND
