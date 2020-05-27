@@ -303,10 +303,11 @@ function whenCountryDataLoaded() {
     update_breweries_on_map();
 }
 
+
 function combineData(datas){
     let d_s = get_data_to_show_no_genre();
     let d_s_g = get_data_to_show();
-    if(d_s==="n_beers" || d_s =="avg_abv"){
+    if(d_s==="n_beers" || d_s ==="avg_abv"){
         let sum =0;
         for( d in datas){
             sum += datas[d][d_s_g];
@@ -342,6 +343,7 @@ function sqrScale(max){
     return x=> MIN_R*Math.sqrt(1.0 + factor*(x-1)/(max-1));
 }
 
+
 var rScale = x=> 1.0;
 var max_breweries = 0;
 
@@ -352,21 +354,32 @@ var markers_cluster = L.markerClusterGroup({
     maxClusterRadius:50,
     iconCreateFunction: function (cluster) {
         let childCount = cluster.getChildCount();
+
+
+        if(childCount>1000){
+            overload_panel.addTo(map);
+
+            let icon = new L.DivIcon({
+                html: '<div style="background-color: red"><span style="color: white">' + childCount + '</span></div>',
+                className: 'marker-cluster marker-cluster-large',
+                iconSize: new L.Point(40, 40) });
+            return icon;
+        }
         let childs = cluster.getAllChildMarkers();
 
-        let dats = []
-        for( idx in childs){
-            dats = dats.concat(data_country_per_pos[childs[idx]._latlng]);
+        let set_lat_long = new Set(childs.map(x=>x._latlng));
+        let dats = [];
+        for( let latLong of set_lat_long.values()){
+            dats = dats.concat(data_country_per_pos[latLong]);
         }
         let d = combineData(dats);
         let color = d? getColor(d):"#A0A0A0";
-        let nColor = color > "#EC7119"? "black":"white";
 
+        let nColor = color > "#EC7119"? "black":"white";
         let icon = new L.DivIcon({
             html: '<div style="background-color: '+color+'"><span style="color:'+nColor+'">' + childCount + '</span></div>',
             className: 'marker-cluster marker-cluster-large',
             iconSize: new L.Point(40, 40) });
-       // icon._setIconStyles("background-color","#00FF00FF");
 
         return icon;
         }
@@ -384,7 +397,7 @@ function update_breweries_on_map(){
         }
 
     }
-    //let markers = [];
+    let markers = [];
     for(latlong in data_country_per_pos) {
 
         let datas = data_country_per_pos[latlong];
@@ -406,7 +419,8 @@ function update_breweries_on_map(){
                 radius: 0
             });
 
-            markers_cluster.addLayer(circle_hidden);
+            //markers_cluster.addLayer(circle_hidden);
+            markers.push(circle_hidden);
         }
         const circle= L.circleMarker([datas[0].lat, datas[0].long], {
             color: color,
@@ -417,10 +431,11 @@ function update_breweries_on_map(){
         circle.on('mouseover',ev=>{info.update(ev.target)});
         circle.on('mouseout',ev=> {info.update()});
 
-        markers_cluster.addLayer(circle);
+        markers.push(circle)
         markers_layout.addLayer(circle);
 
     }
+    markers_cluster.addLayers(markers);
 }
 
 
@@ -521,9 +536,24 @@ function updateColorScheme() {
 
 const colorScale = chroma.scale(colors);
 function getColor(d) {
+    if(d<min_val){
+        d = min_val;
+    }
+    if(d>max_val){
+        d=max_val;
+    }
     let x = 1.0- (d-min_val)/(max_val -min_val);
     return colorScale(x);
 }
+
+var overload_panel = L.control({position: 'bottomright'});
+overload_panel.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info overload');
+    this._div.innerHTML ="<i style='color: red' class=\"fas fa-exclamation-circle\"></i>" +
+        "Somes cluster contains too many data to be rendered";
+    return this._div;
+};
+
 
 
 /*
@@ -531,6 +561,8 @@ function getColor(d) {
  */
 
 var legend = L.control({position: 'bottomright'});
+
+
 
 legend.update = function () {
     this._div.innerHTML = "";
@@ -636,6 +668,7 @@ function style(feature) {
  * Goes back to world view
  */
 function returnToWorld() {
+    overload_panel.remove();
 
     data_country =[];
 
@@ -660,6 +693,7 @@ function returnToWorld() {
  * @param target the country to select
  */
 function selectCountry(target) {
+    overload_panel.remove();
     world = false;
     document.getElementById('closeCountry').style.display = 'block';
 
@@ -907,32 +941,32 @@ function getCountriesFromSearch(searchInput) {
     if (searchCategory == "Beer") {
       var infos = beerSearchData.filter(x => (x["beer"] + " (" + x["country"] + ")") == searchInput);
           for(let i = 0 ; i < infos.length ; i++) {
-              var c = infos[i]["country"];
-              var lat = infos[i]["lat"];
-              var long = infos[i]["long"]
-              var abv = infos[i] ["abv"];
+              let c = infos[i]["country"];
+              let lat = infos[i]["lat"];
+              let long = infos[i]["long"]
+              let abv = infos[i] ["abv"];
               if(countries.includes(c) == false) {
                   countries.push(c);
               }
-              var content = searchInput + "<br>Brewery : " + infos[i]["brewery"] + "<br>Abv : " + abv;
+              let content = searchInput + "<br>Brewery : " + infos[i]["brewery"] + "<br>Abv : " + abv;
               if (lat && long) {
-                  var popup = L.popup(options={autoClose:false}).setLatLng(L.latLng(lat, long)).setContent(content).openOn(map);
+                  let popup = L.popup(options={autoClose:false}).setLatLng(L.latLng(lat, long)).setContent(content).openOn(map);
               }
             }
     }
     else {
       var infos = brewerySearchData.filter(x => x["brewery"] == searchInput);
         for(let i = 0 ; i < infos.length ; i++) {
-            var c = infos[i]["country"];
-            var lat = infos[i]["lat"];
-            var long = infos[i]["long"];
-            var city = infos[i]["city"];
+            let c = infos[i]["country"];
+            let lat = infos[i]["lat"];
+            let long = infos[i]["long"];
+            let city = infos[i]["city"];
             if(countries.includes(c) == false) {
                 countries.push(c);
             }
             var content = searchInput + "<br>City : " + city + "<br>Country : " + c;
             if (lat && long) {
-                var popup = L.popup(options={autoClose:false}).setLatLng(L.latLng(lat, long)).setContent(content).openOn(map);
+                let popup = L.popup(options={autoClose:false}).setLatLng(L.latLng(lat, long)).setContent(content).openOn(map);
             }
         }
     }
