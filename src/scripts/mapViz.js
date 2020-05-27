@@ -178,9 +178,11 @@ var info = L.control({position: 'bottomleft'});
 
 info.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+
     this.update();
     return this._div;
 };
+
 
 info.update = function (props) {
     if (!props) {
@@ -369,16 +371,15 @@ function update_breweries_on_map(){
         if(!datas[0].lat || !datas[0].long){
             continue;
         }
-        for (let idx = 0; idx < datas.length-1; idx++){
 
-            const circle= L.circleMarker([datas[idx].lat, datas[idx].long], {
-                color: color,
-                fillColor: color,
+        for (let idx = 0; idx < datas.length-1; idx++){
+            const circle_hidden= L.circleMarker([datas[0].lat, datas[0].long], {
                 fillOpacity: 0.,
                 opacity:0,
                 radius: 0
             });
-            markers_cluster.addLayer(circle);
+
+            markers_cluster.addLayer(circle_hidden);
         }
         const circle= L.circleMarker([datas[0].lat, datas[0].long], {
             color: color,
@@ -502,7 +503,6 @@ legend.update = function () {
         let height = MAX_R * 2 + 20;
         let cy1 = (height-(MIN_R+10));
         let middle = Math.floor((max_breweries) / 2);
-        console.log(middle);
         let r2 = rScale(middle);
         let cy2 = (height-(r2+10));
         let cy3 = (height-(MAX_R+10))

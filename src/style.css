@@ -251,6 +251,9 @@ main ul {
     background: rgba(255, 248, 151,0.7);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+    max-height: 800px;
+    overflow: auto;
+
 }
 
 .info h3 {
@@ -265,6 +268,8 @@ main ul {
     background: rgba(217, 217, 217, 0.7);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+    height: auto;
+    overflow: hidden;
 }
 .legend i {
     width: 18px;
@@ -394,9 +399,11 @@ main ul {
     position: absolute;
     left: 10px;
     top: 90px;
+    font-size: 24px;
 
     z-index: 2;
 }
+
 
 #specific-infos {
     padding: 10px;
@@ -434,4 +441,22 @@ main ul {
 
 #searchGroup {
   padding-right: .4%;
+}
+
+.marker-cluster {
+    background-clip: padding-box;
+    border-radius: 20px;
+}
+.marker-cluster div {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+
+    text-align: center;
+    border-radius: 15px;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+.marker-cluster span {
+    line-height: 30px;
 }
