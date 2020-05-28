@@ -308,10 +308,12 @@ function combineData(datas){
     let d_s_g = get_data_to_show();
     if(d_s==="n_beers" || d_s ==="avg_abv"){
         let sum =0;
+        let sum_b = 0;
         for( d in datas){
             sum += datas[d][d_s_g];
+            sum_b += (datas[d][d_s_g])?1:0;
         }
-        return (d_s==="n_beers")? sum: sum/datas.length;
+        return (d_s==="n_beers")? sum: sum/sum_b;
     }
     if(d_s==="max_abv"  || d_s==="best_beer_score" || d_s === "popularity") {
         let max =datas[0][d_s_g];
