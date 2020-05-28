@@ -103,7 +103,7 @@ The code for our prototype is located in the "src" folder.
 
 First of all, unzip the "data" folder.
 
-To run the website, you need to deploy a local server using the command `python -m http.server` and you can access the website by typing "localhost:8000" in the browser of your choice. Then, select the "src" link. **Please know that our project is meant to be seen fullscreen**.
+To run the website, you need to deploy a local server using the command `python -m http.server` and you can access the website by typing "localhost:8000" in the browser of your choice. Then, select the "src" link. **Please know that our project is meant to be seen fullscreen on either Google Chrome, Safari or Opera**.
 
 Once you are on our website, you can pan and zoom the map. You can also click on a country to obtain more information about it (on the right side of the screen) and zoom on this country. To return to a world view, click on the "Return to world view". You can also visualize various information about the beers in our dataset by changing the filters at the top of the map.
 
