@@ -215,28 +215,26 @@ info.update = function (props) {
 
     }else{
         let breweries_data = data_country_per_pos[props._latlng];
-
         this._div.innerHTML=""
 
-        for( b in breweries_data){
+        for (b in breweries_data) {
             let dat = breweries_data[b];
-            let beer = dat[get_data_associated_beer_index()];
-            if(beer){
-                this._div.innerHTML +='<h3><i class=\' fas fa-industry\'></i> <i>'+dat["brewery"]+"</i></h3>";
-                let content = dat[get_data_to_show()];
-                if(content) {
+            let content = dat[get_data_to_show()];
+            if (content) {
+                this._div.innerHTML += '<h3><i class=\' fas fa-industry\'></i> <i>' + dat["brewery"] + "</i></h3>";
 
-                    if(content%1 !== 0){
-                        content = content.toFixed(2);
-                    }
-                    this._div.innerHTML +="<b>"+get_data_text()+": </b>";
-                    this._div.innerHTML += content +" "+ get_data_unit();
-
-                    this._div.innerHTML +="<br><i class='fas fa-beer'></i> "+beer;
+                if (content % 1 !== 0) {
+                    content = content.toFixed(2);
                 }
-                this._div.innerHTML +="<br><br>";
+                this._div.innerHTML += "<b>" + get_data_text() + ": </b>";
+                this._div.innerHTML += content + " " + get_data_unit();
+                let beer = dat[get_data_associated_beer_index()];
+                if (beer) {
+                    this._div.innerHTML += "<br><i class='fas fa-beer'></i> " + beer;
+                }
+                this._div.innerHTML += "<br><br>";
             }
-            
+
         }
 
     }
@@ -416,14 +414,18 @@ function update_breweries_on_map(){
             continue;
         }
 
-        temp = [];
+        let temp = [];
         for( d in datas){
             if(datas[d][d_s_g]!=null){
                 temp.push(datas[d]);
             }
         }
         datas = temp;
-        
+
+        if(datas.length==0){
+            continue;
+        }
+
         for (let idx = 0; idx < datas.length-1; idx++){
             const circle_hidden= L.circleMarker([datas[0].lat, datas[0].long], {
                 fillOpacity: 0.,
@@ -565,7 +567,7 @@ var overload_panel = L.control({position: 'bottomright'});
 overload_panel.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info overload');
     this._div.innerHTML ="<i style='color: red' class=\"fas fa-exclamation-circle\"></i>" +
-        "Somes cluster contains too many data to be rendered";
+        "Some clusters contain too much data to be rendered";
     return this._div;
 };
 
