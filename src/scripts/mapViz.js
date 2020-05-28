@@ -415,6 +415,7 @@ function update_breweries_on_map(){
         if(!datas[0].lat || !datas[0].long){
             continue;
         }
+
         temp = [];
         for( d in datas){
             if(datas[d][d_s_g]!=null){
@@ -422,11 +423,8 @@ function update_breweries_on_map(){
             }
         }
         datas = temp;
-
+        
         for (let idx = 0; idx < datas.length-1; idx++){
-            //if (datas[datas[idx]][d_s_g] == null){
-            //    continue;
-            //}
             const circle_hidden= L.circleMarker([datas[0].lat, datas[0].long], {
                 fillOpacity: 0.,
                 opacity:0,
@@ -447,6 +445,9 @@ function update_breweries_on_map(){
 
         markers.push(circle)
         markers_layout.addLayer(circle);
+        
+        
+        
 
     }
     markers_cluster.addLayers(markers);
