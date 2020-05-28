@@ -475,10 +475,27 @@ main ul {
     .marker-cluster-medium div {
     background-color: rgba(240, 194, 12, 0.6);
     }
-    
+
     .marker-cluster-large {
     background-color: rgba(253, 156, 115, 0.0);
     }
     .marker-cluster-large div {
     background-color: rgba(241, 128, 23, 0.6);
     }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-p5);
+  border-radius: 10px;
+}

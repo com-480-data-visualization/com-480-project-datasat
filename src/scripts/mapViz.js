@@ -863,7 +863,7 @@ function getCountryGenericData(country) {
         description += "</ul>";
         return description;
     }else {
-        return "No information about this country...";
+        return "<br>No information about this country...";
     }
 }
 
