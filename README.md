@@ -108,3 +108,7 @@ To run the website, you need to deploy a local server using the command `python 
 Once you are on our website, you can pan and zoom the map. You can also click on a country to obtain more information about it (on the right side of the screen) and zoom on this country. To return to a world view, click on the "Return to world view". You can also visualize various information about the beers in our dataset by changing the filters at the top of the map.
 
 Finally, you can use the search bar to search beer or brewery names. The result of these searches or displayed on the map by popups that are located where the beer/brewery is located along some information.
+
+
+Our video of presentation can be found at the following link:
+https://www.youtube.com/watch?v=quTHrIjwHS8&feature=youtu.be
