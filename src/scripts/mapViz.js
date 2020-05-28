@@ -443,13 +443,13 @@ function update_breweries_on_map(){
             radius: rScale(datas.length)
         });
         circle.on('mouseover',ev=>{info.update(ev.target)});
-        circle.on('mouseout',ev=> {info.update()});
+        //circle.on('mouseout',ev=> {info.update()});
 
         markers.push(circle)
         markers_layout.addLayer(circle);
-        
-        
-        
+
+
+
 
     }
     markers_cluster.addLayers(markers);
