@@ -236,7 +236,7 @@ info.update = function (props) {
                 }
                 this._div.innerHTML +="<br><br>";
             }
-            
+
         }
 
     }
@@ -564,7 +564,7 @@ var overload_panel = L.control({position: 'bottomright'});
 overload_panel.onAdd = function (map) {
     this._div = L.DomUtil.create('div', 'info overload');
     this._div.innerHTML ="<i style='color: red' class=\"fas fa-exclamation-circle\"></i>" +
-        "Somes cluster contains too many data to be rendered";
+        "Some clusters contain too much data to be rendered";
     return this._div;
 };
 
