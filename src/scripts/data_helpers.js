@@ -7,6 +7,9 @@ function get_data_to_show_no_genre() {
     return el.options[el.selectedIndex].value;
 }
 
+/**
+ * return the key of the data selected
+ */
 function get_data_to_show() {
     const el = document.getElementById("dataSelection");
     const beer = document.getElementById("beerSelection")
@@ -44,12 +47,14 @@ function get_data_associated_beer(props) {
     }
 }
 
+/*
+ * return the unit of the selected data
+ */
 function get_data_unit() {
     const el = document.getElementById("dataSelection");
     return el.options[el.selectedIndex].dataset.unit;
 
 }
-
 
 function get_data_associated_brewery_index() {
     const el = document.getElementById("dataSelection");
@@ -77,19 +82,24 @@ function get_data_associated_brewery(props) {
 }
 
 /**
- * return the value of the filter
+ * return the name of the filter
  */
 function get_filter_text() {
     const el = document.getElementById("beerSelection");
     return el.options[el.selectedIndex].text;
 }
 
+/**
+ * return the name of the filter
+ */
 function get_data_text() {
     const el = document.getElementById("dataSelection");
     return el.options[el.selectedIndex].text;
 }
 
-
+/**
+ * return data selected for a specific country
+ */
 function get_data_for_C(props) {
     let data_C = datas[props.ISO_A2];
     if (data_C) {
