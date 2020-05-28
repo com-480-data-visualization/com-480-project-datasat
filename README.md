@@ -101,7 +101,7 @@ The code for our prototype is located in the "src" folder.
 
 **80% of the final grade**
 
-First of all, unzip the "data" folder.
+First of all, **unzip the "data" folder**.
 
 To run the website, you need to deploy a local server using the command `python -m http.server` and you can access the website by typing "localhost:8000" in the browser of your choice. Then, select the "src" link. **Please know that our project is meant to be seen fullscreen on either Google Chrome, Safari or Opera**.
 
