@@ -10,7 +10,7 @@ const defaultStyle = {
     color: "#604000",
 };
 
-const hilight = {
+const highlight = {
     //fillColor: "#F6C101",
     fillOpacity: 0.8,
     weight: 4,
@@ -736,7 +736,7 @@ function highlightFeature(e, popupContent) {
     var layer = e.target;
     if (layer.feature.properties.ISO_A2 != country) {
         if (layer.options.fillColor != searchColor) {
-          layer.setStyle(hilight);
+          layer.setStyle(highlight);
         }
     }
 
