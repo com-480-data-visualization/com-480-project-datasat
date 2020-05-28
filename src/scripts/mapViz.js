@@ -215,26 +215,24 @@ info.update = function (props) {
 
     }else{
         let breweries_data = data_country_per_pos[props._latlng];
-
         this._div.innerHTML=""
 
-        for( b in breweries_data){
+        for (b in breweries_data) {
             let dat = breweries_data[b];
-            let beer = dat[get_data_associated_beer_index()];
-            if(beer){
-                this._div.innerHTML +='<h3><i class=\' fas fa-industry\'></i> <i>'+dat["brewery"]+"</i></h3>";
-                let content = dat[get_data_to_show()];
-                if(content) {
+            this._div.innerHTML += '<h3><i class=\' fas fa-industry\'></i> <i>' + dat["brewery"] + "</i></h3>";
+            let content = dat[get_data_to_show()];
+            if (content) {
 
-                    if(content%1 !== 0){
-                        content = content.toFixed(2);
-                    }
-                    this._div.innerHTML +="<b>"+get_data_text()+": </b>";
-                    this._div.innerHTML += content +" "+ get_data_unit();
-
-                    this._div.innerHTML +="<br><i class='fas fa-beer'></i> "+beer;
+                if (content % 1 !== 0) {
+                    content = content.toFixed(2);
                 }
-                this._div.innerHTML +="<br><br>";
+                this._div.innerHTML += "<b>" + get_data_text() + ": </b>";
+                this._div.innerHTML += content + " " + get_data_unit();
+                let beer = dat[get_data_associated_beer_index()];
+                if (beer) {
+                    this._div.innerHTML += "<br><i class='fas fa-beer'></i> " + beer;
+                }
+                this._div.innerHTML += "<br><br>";
             }
 
         }
@@ -415,13 +413,16 @@ function update_breweries_on_map(){
         if(!datas[0].lat || !datas[0].long){
             continue;
         }
-        temp = [];
+        let temp = [];
         for( d in datas){
             if(datas[d][d_s_g]!=null){
                 temp.push(datas[d]);
             }
         }
         datas = temp;
+        if(datas.length==0){
+            continue;
+        }
 
         for (let idx = 0; idx < datas.length-1; idx++){
             //if (datas[datas[idx]][d_s_g] == null){
